@@ -8,7 +8,7 @@ const AnimatedButton = ({ children, className, ...props }) => {
             whileHover={{ scale: 1.05, filter: 'brightness(1.1)' }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            className={`px-6 py-3 font-semibold rounded-full shadow-lg bg-brand-accent text-brand-dark-text transition-all ${className}`}
+            className={`px-6 py-3 font-semibold rounded-full shadow-lg bg-brand-dark text-brand-light transition-all ${className}`}
             {...props}
         >
             {children}

@@ -8,10 +8,14 @@ import ScrollToTop from '../common/ScrollToTop';
 const Layout = () => {
     return (
         <>
-            <ScrollToTop /> {/* Ensures navigation to new page scrolls to top */}
+            <ScrollToTop />
             <Navbar />
-            <main className="bg-brand-dark">
-                {/* Outlet renders the current page's component */}
+            {/* 
+              THE FIX IS HERE: By applying overflow-x-hidden to the main container,
+              we ensure that no content from any page can "spill out" horizontally,
+              even during its initial animation state.
+            */}
+            <main className="overflow-x-hidden">
                 <Outlet />
             </main>
             <Footer />

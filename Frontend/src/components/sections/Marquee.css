@@ -1,12 +1,22 @@
+/* src/components/sections/Marquee.css */
 .marquee-content {
-  animation: marquee 30s linear infinite;
+  /* The animation: 'marquee' is the name, 40s is the duration */
+  animation: marquee 40s linear infinite;
 }
 
-.marquee-content:hover {
+/* This pauses the animation when the user hovers over the container */
+.marquee-container:hover .marquee-content {
   animation-play-state: paused;
 }
 
+/* This is the keyframe definition for the marquee animation */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  /* Starts with the element at its original position */
+  from {
+    transform: translateX(0);
+  }
+  /* Ends with the element shifted left by exactly half its width, creating the loop */
+  to {
+    transform: translateX(-50%);
+  }
 }

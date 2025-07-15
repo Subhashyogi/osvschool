@@ -1,70 +1,123 @@
 // src/pages/AcademicsPage.jsx
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { academicPrograms } from '../constants';
+import { FaFlask, FaPaintBrush, FaCode, FaBook, FaCheck, FaTimes, FaArrowRight } from 'react-icons/fa';
 
-const categories = ['All', 'Science', 'Arts', 'Humanities'];
-
-const AcademicsPage = () => {
-    const [activeFilter, setActiveFilter] = useState('All');
-
-    const filteredPrograms = useMemo(() => {
-        if (activeFilter === 'All') return academicPrograms;
-        return academicPrograms.filter(p => p.category === activeFilter);
-    }, [activeFilter]);
+// --- Detail Modal Component ---
+const ProgramModal = ({ program, onClose }) => {
+    if (!program) return null;
+    const { icon: Icon } = program;
 
     return (
-        <div className="bg-brand-light-bg text-brand-dark-text">
-            <div className="pt-32 pb-16 bg-brand-surface text-center">
-                <h1 className="text-5xl font-extrabold text-brand-light">Academic Programs</h1>
-                <p className="mt-4 text-lg text-brand-muted max-w-2xl mx-auto">
-                    Find your passion and shape your future with our diverse range of expert-led programs.
-                </p>
-            </div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-brand-nav/70 backdrop-blur-sm"
+            onClick={onClose}
+        >
+            <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="relative w-[90vw] max-w-2xl bg-brand-white rounded-2xl shadow-2xl p-8 md:p-12"
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+            >
+                <button onClick={onClose} className="absolute top-4 right-4 text-brand-muted hover:text-brand-dark transition-colors"><FaTimes size={20} /></button>
 
-            <div className="container mx-auto px-4 py-16">
-                <div className="flex justify-center flex-wrap gap-2 md:gap-4 mb-12">
-                    {categories.map(category => (
-                        <button
-                            key={category}
-                            onClick={() => setActiveFilter(category)}
-                            className={`px-5 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ${activeFilter === category
-                                ? 'bg-brand-accent text-brand-dark-text'
-                                : 'bg-gray-200 text-brand-dark-text hover:bg-gray-300'
-                                }`}
-                        >
-                            {category}
-                        </button>
+                <div className="text-6xl text-brand-accent mb-4"><Icon /></div>
+                <h2 className="text-3xl font-bold text-brand-dark mb-2">{program.title}</h2>
+                <p className="text-brand-muted mb-6">{program.description}</p>
+
+                <h4 className="font-bold mb-3 text-brand-dark">Key Learning Outcomes:</h4>
+                <ul className="space-y-2 mb-8">
+                    {program.outcomes.map(outcome => (
+                        <li key={outcome} className="flex items-center gap-3 text-brand-muted">
+                            <FaCheck className="text-brand-accent" />
+                            <span>{outcome}</span>
+                        </li>
                     ))}
-                </div>
+                </ul>
 
-                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <AnimatePresence>
-                        {filteredPrograms.map(program => {
-                            const IconComponent = program.icon;
-                            return (
-                                <motion.div
-                                    key={program.title}
-                                    layout
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
-                                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                                    className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
-                                >
-                                    <div className="p-8 text-center">
-                                        <div className="inline-block p-4 bg-brand-accent/10 rounded-full mb-4">
-                                            <div className="text-4xl text-brand-accent"><IconComponent /></div>
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-brand-dark-text mb-2">{program.title}</h3>
-                                        <p className="text-gray-600 leading-relaxed">{program.description}</p>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </AnimatePresence>
-                </motion.div>
-            </div>
+                <div className="pt-6 border-t border-gray-200">
+                    <div className="flex items-center gap-4">
+                        <img src={program.departmentHead.image} alt={program.departmentHead.name} className="w-14 h-14 rounded-full object-cover" />
+                        <div>
+                            <p className="text-sm text-brand-muted">Department Head</p>
+                            <p className="font-semibold text-brand-dark">{program.departmentHead.name}</p>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+};
+
+// --- Main Academics Page Component ---
+const AcademicsPage = () => {
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [selectedProgram, setSelectedProgram] = useState(null);
+
+    return (
+        <div className="bg-brand-light">
+            {/* Header Section */}
+            <header className="pt-32 pb-16 md:pb-20 bg-gray-50 text-center px-4">
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl md:text-5xl font-extrabold text-brand-dark">Our Academic Programs</motion.h1>
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-4 text-lg text-brand-muted max-w-2xl mx-auto">
+                    A curriculum designed not just to educate, but to inspire. Find your passion and forge your future with us.
+                </motion.p>
+            </header>
+
+            {/* The "Focus Card" Grid */}
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+                <div
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                    onMouseLeave={() => setHoveredIndex(null)}
+                >
+                    {academicPrograms.map((program, index) => {
+                        const { icon: Icon } = program;
+                        const isHovered = index === hoveredIndex;
+                        const isDimmed = hoveredIndex !== null && !isHovered;
+
+                        return (
+                            <motion.div
+                                key={program.title}
+                                className="relative p-6 bg-brand-white rounded-2xl shadow-lg cursor-pointer overflow-hidden"
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onClick={() => setSelectedProgram(program)}
+                                animate={{ filter: isDimmed ? 'blur(10px)' : 'blur(0px)', opacity: isDimmed ? 0.5 : 1 }}
+                                transition={{ duration: 0.4, ease: 'easeOut' }}
+                                layout
+                            >
+                                <div className="relative z-10">
+                                    <motion.div
+                                        className="text-5xl text-brand-accent mb-4"
+                                        animate={{ scale: isHovered ? 1.1 : 1 }}
+                                    >
+                                        <Icon />
+                                    </motion.div>
+                                    <h3 className="text-xl font-bold text-brand-dark mb-2">{program.title}</h3>
+                                    <p className="text-sm text-brand-muted h-12">{program.description.substring(0, 70)}...</p>
+                                    <motion.div
+                                        className="mt-4 font-semibold text-brand-dark flex items-center gap-2"
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
+                                    >
+                                        Learn More <FaArrowRight />
+                                    </motion.div>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            </main>
+
+            {/* The Detail Modal */}
+            <AnimatePresence>
+                {selectedProgram && <ProgramModal program={selectedProgram} onClose={() => setSelectedProgram(null)} />}
+            </AnimatePresence>
         </div>
     );
 };

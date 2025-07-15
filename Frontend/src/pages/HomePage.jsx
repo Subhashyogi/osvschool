@@ -5,7 +5,7 @@ import Pillars from '../components/sections/Pillars';
 import PrincipalWelcome from '../components/sections/PrincipalWelcome';
 import Achievers from '../components/sections/Achievers';
 import Testimonials from '../components/sections/Testimonials';
-import GalleryPreview from '../components/sections/GalleryPreview'; // Renamed
+import GalleryPreview from '../components/sections/GalleryPreview';
 
 const HomePage = () => {
     return (

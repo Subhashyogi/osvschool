@@ -1,55 +1,123 @@
 // src/pages/AboutPage.jsx
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaRegEye, FaRocket, FaHandshake } from 'react-icons/fa';
-
-const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { timelineEvents } from '../constants';
+import { FaBookReader, FaUsers, FaAward } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import AnimatedButton from '../components/common/AnimatedButton';
 
 const AboutPage = () => {
-    return (
-        <div className="bg-brand-light-bg text-brand-dark-text">
-            <div className="relative pt-32 pb-16 md:pb-20 bg-brand-surface text-center px-4">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-brand-light">Our Story & Mission</h1>
-                <p className="mt-4 text-lg text-brand-muted">A Tradition of Excellence Since 1985</p>
-            </div>
+    // --- Hooks for Animations ---
+    const timelineRef = useRef(null);
+    const { scrollYProgress: timelineScroll } = useScroll({
+        target: timelineRef,
+        offset: ["start center", "end center"]
+    });
 
+    const headerRef = useRef(null);
+    const { scrollYProgress: headerScroll } = useScroll({
+        target: headerRef,
+        offset: ["start start", "end start"]
+    });
+    const parallaxY = useTransform(headerScroll, [0, 1], ["0%", "50%"]);
+
+    // --- Animation Variants ---
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+    };
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+    };
+
+    return (
+        <div className="bg-brand-light text-brand-dark">
+            {/* 1. Immersive Parallax Header */}
+            <header ref={headerRef} className="relative h-[60vh] overflow-hidden">
+                <motion.div
+                    className="absolute inset-0 z-0"
+                    style={{ y: parallaxY, backgroundImage: `url('https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                />
+                <div className="absolute inset-0 bg-brand-dark/50 z-10" />
+                <div className="relative z-20 h-full flex flex-col justify-center items-center text-center text-brand-nav-text px-4">
+                    <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-4xl md:text-6xl font-extrabold">Our Story of Excellence</motion.h1>
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="mt-4 text-lg md:text-xl max-w-2xl">A tradition of nurturing talent and fostering innovation since 1985.</motion.p>
+                </div>
+            </header>
+
+            {/* 2. Narrative-Driven "Our Philosophy" Section */}
             <section className="py-16 md:py-24">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} variants={fadeIn}>
-                        <FaRegEye className="text-4xl md:text-5xl text-brand-accent mb-4" />
-                        <h2 className="text-2xl md:text-3xl font-bold text-brand-dark-text mb-4">Our Vision</h2>
-                        <p className="text-gray-600">To be a leading educational institution that inspires students to achieve their full potential and become compassionate, responsible global citizens.</p>
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.6 }} className="w-full h-80 rounded-2xl overflow-hidden shadow-xl">
+                        <img src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Our Philosophy" className="w-full h-full object-cover" />
                     </motion.div>
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} variants={fadeIn}>
-                        <FaRocket className="text-4xl md:text-5xl text-brand-accent mb-4" />
-                        <h2 className="text-2xl md:text-3xl font-bold text-brand-dark-text mb-4">Our Mission</h2>
-                        <p className="text-gray-600">To provide a challenging and supportive learning environment that fosters intellectual curiosity, critical thinking, and a lifelong love of learning.</p>
+                    <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+                        <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-6">Our Philosophy</motion.h2>
+                        <motion.div variants={fadeInUp} className="space-y-4 text-brand-muted">
+                            <p><strong className="text-brand-dark">Our Vision:</strong> To be a leading educational institution that inspires students to achieve their full potential and become compassionate, responsible global citizens.</p>
+                            <p><strong className="text-brand-dark">Our Mission:</strong> To provide a challenging and supportive learning environment that fosters intellectual curiosity, critical thinking, and a lifelong love of learning.</p>
+                        </motion.div>
                     </motion.div>
                 </div>
             </section>
 
-            <section className="py-16 md:py-24 bg-white">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-brand-dark-text mb-12">Our Core Values</h2>
+            {/* 3. The Interactive Timeline */}
+            <section ref={timelineRef} className="py-16 md:py-24 bg-gray-50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Our Journey Through Time</h2>
+                    <div className="relative max-w-2xl mx-auto">
+                        <div className="absolute left-1/2 top-0 h-full w-1 bg-gray-200 -translate-x-1/2"></div>
+                        <motion.div style={{ scaleY: timelineScroll }} className="absolute left-1/2 top-0 h-full w-1 bg-brand-accent -translate-x-1/2 origin-top" />
+
+                        {timelineEvents.map((event, index) => (
+                            <div key={index} className="mb-16 flex items-center w-full">
+                                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true, amount: 'all' }} transition={{ duration: 0.5 }} className="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-brand-white border-4 border-brand-accent rounded-full z-10" />
+                                <motion.div initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.6 }} className={`w-1/2 p-6 bg-brand-white shadow-lg rounded-2xl ${index % 2 === 0 ? 'pr-12' : 'ml-auto pl-12'}`}>
+                                    <p className="text-brand-accent font-bold text-lg">{event.year}</p>
+                                    <h3 className="text-xl font-bold mt-1">{event.title}</h3>
+                                    <p className="text-sm text-brand-muted mt-2">{event.description}</p>
+                                </motion.div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. "Values in Action" Showcase */}
+            <section className="py-16 md:py-24">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Values in Action</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {['Integrity', 'Community', 'Excellence'].map((value, index) => (
-                            <motion.div
-                                key={value}
-                                className="p-8 bg-brand-light-bg rounded-xl shadow-lg border-t-4 border-brand-accent"
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, amount: 0.5 }}
-                                variants={fadeIn}
-                                custom={index}
-                                transition={{ delay: index * 0.2 }}
-                            >
-                                <FaHandshake className="text-4xl text-brand-accent mx-auto mb-4" />
-                                <h3 className="text-2xl font-bold text-brand-dark-text">{value}</h3>
+                        {[
+                            { icon: <FaBookReader />, value: "Excellence", image: "https_images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+                            { icon: <FaUsers />, value: "Community", image: "https_images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+                            { icon: <FaAward />, value: "Integrity", image: "https_images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+                        ].map((item, index) => (
+                            <motion.div key={index} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: index * 0.1 }} viewport={{ once: true }} className="relative h-80 rounded-2xl overflow-hidden shadow-xl group">
+                                <div className="absolute inset-0 z-0">
+                                    <img src={item.image.replace("_", "://")} alt={item.value} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                </div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent z-10" />
+                                <div className="relative z-20 flex flex-col justify-end h-full p-6 text-brand-nav-text">
+                                    <div className="text-4xl mb-2 text-brand-accent">{item.icon}</div>
+                                    <h3 className="text-2xl font-bold">{item.value}</h3>
+                                </div>
                             </motion.div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 5. A Clear Call to Action */}
+            <section className="bg-gray-50 py-16 text-center">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-2xl md:text-3xl font-bold">Join Our Legacy</h2>
+                    <p className="mt-4 text-brand-muted max-w-xl mx-auto">Become a part of a community dedicated to shaping the future. Explore our admissions process to start your journey.</p>
+                    <div className="mt-8">
+                        <Link to="/admissions">
+                            <AnimatedButton>Begin Application</AnimatedButton>
+                        </Link>
                     </div>
                 </div>
             </section>
