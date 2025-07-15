@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-brand-dark text-brand-light;
+    @apply overflow-x-hidden;
+    font-family: 'Roboto', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    /* On dark backgrounds, headings are light. On light backgrounds, they will be specified as dark. */
+    @apply text-brand-light; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+  }
+  a {
+    @apply text-brand-accent hover:opacity-90 transition-opacity;
+  }
+  /* Custom scrollbar for a more modern look */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-brand-surface;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-accent rounded-full;
+  }
+}
+
+/* Add this helper class to index.css or a new CSS file */
+ .mask-gradient {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+ }
