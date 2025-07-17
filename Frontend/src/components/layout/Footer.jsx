@@ -1,118 +1,114 @@
 // src/components/layout/Footer.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     FaFacebookF, FaTwitter, FaInstagram, FaArrowRight,
     FaUniversity, FaBookOpen, FaUserFriends, FaInfoCircle
 } from 'react-icons/fa';
 
-// This is the component for the interactive brand zone with the spotlight effect
-const BrandZone = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    };
-
-    return (
-        <div
-            onMouseMove={handleMouseMove}
-            className="relative col-span-12 lg:col-span-3 p-8 rounded-2xl bg-brand-nav-muted/5 group"
-        >
-            {/* The spotlight effect */}
-            <div
-                className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{
-                    background: `radial-gradient(300px at ${mousePosition.x}px ${mousePosition.y}px, rgba(183, 183, 164, 0.1), transparent 80%)`,
-                }}
-            ></div>
-
-            <div className="relative">
-                <h2 className="text-2xl font-bold text-brand-nav-text mb-2">OSVSR School</h2>
-                <p className="text-sm">Nurturing Tomorrow's Leaders.</p>
-
-                <div className="mt-8 flex space-x-4">
-                    <a href="#" className="text-brand-nav-muted hover:text-brand-accent transition-colors" aria-label="Facebook"><FaFacebookF size={20} /></a>
-                    <a href="#" className="text-brand-nav-muted hover:text-brand-accent transition-colors" aria-label="Twitter"><FaTwitter size={20} /></a>
-                    <a href="#" className="text-brand-nav-muted hover:text-brand-accent transition-colors" aria-label="Instagram"><FaInstagram size={20} /></a>
-                </div>
-            </div>
-        </div>
-    );
-};
+// --- Data for the Sitemap Links (Easier to manage) ---
+const sitemapData = [
+    {
+        title: "About Us",
+        icon: <FaInfoCircle className="text-brand-accent" />,
+        links: [
+            { label: "Our Story", to: "/about" },
+            { label: "Faculty", to: "/faculty" },
+            { label: "Careers", to: "#" },
+            { label: "Contact", to: "/contact" },
+        ]
+    },
+    {
+        title: "Academics",
+        icon: <FaBookOpen className="text-brand-accent" />,
+        links: [
+            { label: "Programs", to: "/academics" },
+            { label: "Curriculum", to: "#" },
+            { label: "Campus Life", to: "/gallery" },
+        ]
+    },
+    {
+        title: "Admissions",
+        icon: <FaUniversity className="text-brand-accent" />,
+        links: [
+            { label: "How to Apply", to: "/admissions" },
+            { label: "Tuition & Fees", to: "#" },
+            { label: "Visit Us", to: "#" },
+        ]
+    }
+];
 
 
 const Footer = () => {
     return (
-        <footer className="bg-brand-nav text-brand-nav-muted">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <footer className="bg-brand-dark text-brand-muted border-t border-brand-surface">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
 
-                {/* 1. Clear Visual Zoning with a parent grid */}
-                <div className="grid grid-cols-12 gap-8">
+                {/* Main grid: Stacks on mobile, becomes 3-col on large screens */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12">
 
-                    {/* 2. Interactive Brand Zone */}
-                    <BrandZone />
-
-                    {/* Sitemap & Newsletter Zone */}
-                    <div className="col-span-12 lg:col-span-9 grid grid-cols-2 sm:grid-cols-4 gap-8">
-
-                        {/* 3. Sitemap with Icons */}
-                        <div>
-                            <h4 className="font-semibold text-brand-nav-text mb-4 flex items-center gap-2"><FaInfoCircle className="text-brand-accent" /> About Us</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><Link to="/about">Our Story</Link></li>
-                                <li><Link to="/faculty">Faculty</Link></li>
-                                <li><Link to="#">Careers</Link></li>
-                                <li><Link to="/contact">Contact</Link></li>
-                            </ul>
+                    {/* Zone 1: Brand Info & Socials */}
+                    <div className="lg:col-span-1">
+                        <h2 className="text-xl md:text-2xl font-bold text-brand-light mb-2">OSVSR School</h2>
+                        <p className="text-sm max-w-xs">Nurturing Tomorrow's Leaders with a blend of tradition and innovation.</p>
+                        <div className="mt-6 flex space-x-4">
+                            <a href="#" className="text-brand-muted hover:text-brand-accent transition-colors" aria-label="Facebook"><FaFacebookF size={20} /></a>
+                            <a href="#" className="text-brand-muted hover:text-brand-accent transition-colors" aria-label="Twitter"><FaTwitter size={20} /></a>
+                            <a href="#" className="text-brand-muted hover:text-brand-accent transition-colors" aria-label="Instagram"><FaInstagram size={20} /></a>
                         </div>
-                        <div>
-                            <h4 className="font-semibold text-brand-nav-text mb-4 flex items-center gap-2"><FaBookOpen className="text-brand-accent" /> Academics</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><Link to="/academics">Programs</Link></li>
-                                <li><Link to="#">Curriculum</Link></li>
-                                <li><Link to="/gallery">Campus Life</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold text-brand-nav-text mb-4 flex items-center gap-2"><FaUniversity className="text-brand-accent" /> Admissions</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><Link to="/admissions">How to Apply</Link></li>
-                                <li><Link to="#">Tuition & Fees</Link></li>
-                                <li><Link to="#">Visit Us</Link></li>
-                            </ul>
-                        </div>
+                    </div>
 
-                        {/* 4. Integrated Newsletter Form */}
-                        <div className="col-span-2 sm:col-span-1">
-                            <h4 className="font-semibold text-brand-nav-text mb-4 flex items-center gap-2"><FaUserFriends className="text-brand-accent" /> Community</h4>
-                            <ul className="space-y-2 text-sm mb-6">
-                                <li><Link to="#">News & Events</Link></li>
-                                <li><a href="#">Student Portal</a></li>
-                            </ul>
-
-                            <h4 className="font-semibold text-brand-nav-text mb-2">Newsletter</h4>
-                            <form className="flex gap-2">
-                                <input
-                                    type="email"
-                                    placeholder="your@email.com"
-                                    className="w-full text-sm px-3 py-2 bg-brand-nav-muted/20 text-brand-nav-text rounded-md focus:ring-2 focus:ring-brand-accent focus:outline-none"
-                                />
-                                <button type="submit" className="p-3 bg-brand-accent text-brand-dark rounded-md hover:bg-brand-accent/90" aria-label="Subscribe">
-                                    <FaArrowRight size={12} />
-                                </button>
-                            </form>
+                    {/* Zone 2: Sitemap Links */}
+                    <div className="lg:col-span-2">
+                        {/* Nested grid for the links themselves: 2 cols on mobile, 3 on tablet+ */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                            {sitemapData.map((section) => (
+                                <div key={section.title}>
+                                    <h4 className="font-semibold text-brand-light mb-4 flex items-center gap-2">{section.icon} {section.title}</h4>
+                                    <ul className="space-y-3 text-sm">
+                                        {section.links.map(link => (
+                                            <li key={link.label}>
+                                                <Link to={link.to} className="hover:text-brand-accent transition-colors">{link.label}</Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
+
+                {/* Divider and Newsletter for mobile */}
+                <hr className="my-10 border-brand-surface/50 lg:hidden" />
+
+                {/* Zone 3: Newsletter (Full width on mobile, integrated on desktop) */}
+                <div className="mt-8 lg:mt-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h4 className="font-semibold text-brand-light flex items-center gap-2"><FaUserFriends className="text-brand-accent" /> Stay Connected</h4>
+                            <p className="text-sm mt-2">Subscribe to our newsletter for the latest news and updates.</p>
+                        </div>
+                        <form className="flex flex-col sm:flex-row gap-2 w-full max-w-md md:ml-auto">
+                            <input
+                                type="email"
+                                placeholder="your@email.com"
+                                className="w-full text-sm px-3 py-2 bg-brand-surface/80 text-brand-light rounded-md focus:ring-2 focus:ring-brand-accent focus:outline-none placeholder:text-brand-muted"
+                                aria-label="Email for newsletter"
+                            />
+                            <button type="submit" className="flex-shrink-0 p-3 bg-brand-accent text-brand-dark-text rounded-md hover:bg-brand-accent/90" aria-label="Subscribe">
+                                <FaArrowRight size={12} />
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
 
-            {/* 5. Refined Sub-Footer */}
-            <div className="border-t border-brand-nav-muted/20">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-brand-nav-muted/70">
-                    <p className="mb-2 sm:mb-0">© {new Date().getFullYear()} OSVSR School. All Rights Reserved.</p>
-                    <div className="flex space-x-4">
+            {/* Sub-Footer */}
+            <div className="border-t border-brand-surface/50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center text-sm text-brand-muted/70">
+                    <p className="mb-4 sm:mb-0 text-center sm:text-left">© {new Date().getFullYear()} OSVSR School. All Rights Reserved.</p>
+                    <div className="flex items-center space-x-4">
                         <Link to="/privacy-policy" className="hover:text-brand-accent">Privacy Policy</Link>
                         <span className="opacity-50">|</span>
                         <Link to="/terms" className="hover:text-brand-accent">Terms of Use</Link>

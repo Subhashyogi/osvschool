@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { academicPrograms } from '../constants';
 import { FaTimes, FaCheck, FaArrowRight } from 'react-icons/fa';
 
-// --- Detail Modal Component (Self-contained and fixed) ---
+// --- Modal Component (Already responsive with vw units) ---
 const ProgramModal = ({ program, onClose }) => {
     if (!program) return null;
     const { icon: Icon } = program;
@@ -14,7 +14,7 @@ const ProgramModal = ({ program, onClose }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-brand-dark/70 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/70 backdrop-blur-sm"
             onClick={onClose}
         >
             <motion.div
@@ -22,18 +22,18 @@ const ProgramModal = ({ program, onClose }) => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="relative w-[90vw] max-w-2xl bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-brand-dark-text"
+                className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-6 md:p-12 text-brand-dark-text overflow-y-auto max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
             >
                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-brand-dark-text transition-colors"><FaTimes size={20} /></button>
-                <div className="text-6xl text-brand-accent mb-4">{Icon ? <Icon /> : ''}</div>
-                <h2 className="text-3xl font-bold text-brand-dark-text mb-2">{program.title}</h2>
+                <div className="text-5xl md:text-6xl text-brand-accent mb-4">{Icon ? <Icon /> : ''}</div>
+                <h2 className="text-2xl md:text-3xl font-bold text-brand-dark-text mb-2">{program.title}</h2>
                 <p className="text-gray-600 mb-6">{program.description}</p>
                 <h4 className="font-bold mb-3 text-brand-dark-text">Key Learning Outcomes:</h4>
                 <ul className="space-y-2 mb-8">
                     {program.outcomes.map((outcome, index) => (
-                        <li key={index} className="flex items-center gap-3 text-gray-600">
-                            <FaCheck className="text-brand-accent flex-shrink-0" />
+                        <li key={index} className="flex items-start gap-3 text-gray-600">
+                            <FaCheck className="text-brand-accent flex-shrink-0 mt-1" />
                             <span>{outcome}</span>
                         </li>
                     ))}
@@ -52,7 +52,8 @@ const ProgramModal = ({ program, onClose }) => {
     );
 };
 
-// --- Main Academics Page Component (Fixed) ---
+
+// --- Main Academics Page Component (Responsive) ---
 const AcademicsPage = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [selectedProgram, setSelectedProgram] = useState(null);
@@ -66,10 +67,9 @@ const AcademicsPage = () => {
                 </motion.p>
             </header>
 
-            {/* FIX: Reduced padding from py-16/py-24 to py-20 */}
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
                 <div
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
                     onMouseLeave={() => setHoveredIndex(null)}
                 >
                     {academicPrograms.map((program, index) => {
@@ -85,7 +85,7 @@ const AcademicsPage = () => {
                                 layout
                             >
                                 <div className="relative z-10">
-                                    <motion.div className="text-5xl text-brand-accent mb-4" animate={{ scale: isHovered ? 1.1 : 1 }}>
+                                    <motion.div className="text-4xl md:text-5xl text-brand-accent mb-4" animate={{ scale: isHovered ? 1.1 : 1 }}>
                                         {Icon ? <Icon /> : ''}
                                     </motion.div>
                                     <h3 className="text-xl font-bold text-brand-dark-text mb-2">{program.title}</h3>

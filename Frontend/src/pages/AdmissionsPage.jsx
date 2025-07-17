@@ -1,111 +1,115 @@
-// src/pages/AdmissionsPage.jsx
+// src/pages/AcademicsPage.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCalendarAlt, FaPencilAlt, FaCheckCircle, FaChevronDown } from 'react-icons/fa';
-import AnimatedButton from '../components/common/AnimatedButton';
-import { Link } from 'react-router-dom';
+import { academicPrograms } from '../constants';
+import { FaTimes, FaCheck, FaArrowRight } from 'react-icons/fa';
 
-const timelineSteps = [
-    { icon: <FaPencilAlt />, title: "Step 1: Submit Application", description: "Begin by completing our comprehensive online application form. Ensure all required documents are uploaded before the deadline." },
-    { icon: <FaCalendarAlt />, title: "Step 2: Entrance Exam & Interview", description: "Qualified applicants will be invited for an entrance examination and a personal interview with our admissions committee." },
-    { icon: <FaCheckCircle />, title: "Step 3: Admission & Enrollment", description: "Successful candidates receive a formal admission offer. Complete the enrollment process to secure your place." },
-];
-const importantDates = [
-    { date: "Oct 1, 2024", event: "Application Opens" },
-    { date: "Jan 15, 2025", event: "Application Deadline" },
-    { date: "Feb 10, 2025", event: "Entrance Exam Day" },
-    { date: "Mar 1, 2025", event: "Decision Notification" },
-];
-const faqs = [
-    { question: "What are the key admission requirements?", answer: "We require the completed application form, official transcripts, two letters of recommendation, and a personal essay. An entrance exam and interview are also part of the process." },
-    { question: "Is there an application fee?", answer: "Yes, there is a non-refundable application fee of ₹5000 to cover administrative processing costs." },
-    { question: "Do you offer scholarships or financial aid?", answer: "Yes, we offer a range of need-based financial aid and merit-based scholarships. Please visit our 'Financial Aid' section for details." },
-];
+// --- Modal Component (Already responsive with vw units) ---
+const ProgramModal = ({ program, onClose }) => {
+    if (!program) return null;
+    const { icon: Icon } = program;
 
-const FAQItem = ({ faq }) => {
-    const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="border-b border-gray-200">
-            <button onClick={() => setIsOpen(!isOpen)} className="flex justify-between items-center w-full py-5 text-left">
-                <span className="text-lg font-medium text-brand-dark-text">{faq.question}</span>
-                <FaChevronDown className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180 text-brand-accent' : 'text-gray-500'}`} />
-            </button>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/70 backdrop-blur-sm"
+            onClick={onClose}
+        >
+            <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-6 md:p-12 text-brand-dark-text overflow-y-auto max-h-[90vh]"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-brand-dark-text transition-colors"><FaTimes size={20} /></button>
+                <div className="text-5xl md:text-6xl text-brand-accent mb-4">{Icon ? <Icon /> : ''}</div>
+                <h2 className="text-2xl md:text-3xl font-bold text-brand-dark-text mb-2">{program.title}</h2>
+                <p className="text-gray-600 mb-6">{program.description}</p>
+                <h4 className="font-bold mb-3 text-brand-dark-text">Key Learning Outcomes:</h4>
+                <ul className="space-y-2 mb-8">
+                    {program.outcomes.map((outcome, index) => (
+                        <li key={index} className="flex items-start gap-3 text-gray-600">
+                            <FaCheck className="text-brand-accent flex-shrink-0 mt-1" />
+                            <span>{outcome}</span>
+                        </li>
+                    ))}
+                </ul>
+                <div className="pt-6 border-t border-gray-200">
+                    <div className="flex items-center gap-4">
+                        <img src={program.departmentHead.image} alt={program.departmentHead.name} className="w-14 h-14 rounded-full object-cover" />
+                        <div>
+                            <p className="text-sm text-gray-500">Department Head</p>
+                            <p className="font-semibold text-brand-dark-text">{program.departmentHead.name}</p>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+};
+
+
+// --- Main Academics Page Component (Responsive) ---
+const AcademicsPage = () => {
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [selectedProgram, setSelectedProgram] = useState(null);
+
+    return (
+        <div className="bg-brand-light-bg">
+            <header className="pt-32 pb-16 bg-gray-50 text-center px-4">
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl md:text-5xl font-extrabold text-brand-dark-text">Our Academic Programs</motion.h1>
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                    A curriculum designed not just to educate, but to inspire. Find your passion and forge your future with us.
+                </motion.p>
+            </header>
+
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+                <div
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+                    onMouseLeave={() => setHoveredIndex(null)}
+                >
+                    {academicPrograms.map((program, index) => {
+                        const { icon: Icon } = program;
+                        const isHovered = index === hoveredIndex;
+
+                        return (
+                            <motion.div
+                                key={program.title}
+                                className="relative p-6 bg-white rounded-2xl shadow-lg cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onClick={() => setSelectedProgram(program)}
+                                layout
+                            >
+                                <div className="relative z-10">
+                                    <motion.div className="text-4xl md:text-5xl text-brand-accent mb-4" animate={{ scale: isHovered ? 1.1 : 1 }}>
+                                        {Icon ? <Icon /> : ''}
+                                    </motion.div>
+                                    <h3 className="text-xl font-bold text-brand-dark-text mb-2">{program.title}</h3>
+                                    <p className="text-sm text-gray-600 h-16">{program.description}</p>
+                                    <motion.div
+                                        className="mt-4 font-semibold text-brand-accent flex items-center gap-2"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: isHovered ? 1 : 0 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        Learn More <FaArrowRight />
+                                    </motion.div>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            </main>
+
             <AnimatePresence>
-                {isOpen && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }} className="overflow-hidden">
-                        <p className="pb-5 pr-4 text-gray-600">{faq.answer}</p>
-                    </motion.div>
-                )}
+                {selectedProgram && <ProgramModal program={selectedProgram} onClose={() => setSelectedProgram(null)} />}
             </AnimatePresence>
         </div>
     );
 };
 
-const AdmissionsPage = () => {
-    return (
-        <div className="bg-brand-light-bg text-brand-dark-text">
-            <div className="relative pt-40 pb-24 text-center bg-cover bg-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/8617830/pexels-photo-8617830.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}>
-                <div className="absolute inset-0 bg-brand-dark/80"></div>
-                <div className="relative container mx-auto px-4">
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-brand-light">Admissions</h1>
-                    <p className="mt-4 text-lg md:text-xl text-brand-muted max-w-3xl mx-auto">Your journey to excellence starts here. Discover our process and begin your application today.</p>
-                </div>
-            </div>
-
-            <section className="py-20">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-4xl font-bold text-center mb-16 text-brand-dark-text">The Application Process</h2>
-                    <div className="relative max-w-3xl mx-auto">
-                        <div className="absolute left-4 top-4 h-full w-0.5 bg-gray-200"></div>
-                        {timelineSteps.map((step, index) => (
-                            <motion.div key={index} className="relative pl-12 pb-12" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.6, delay: index * 0.2 }}>
-                                <div className="absolute left-0 top-4 w-8 h-8 bg-brand-accent rounded-full border-4 border-brand-light-bg flex items-center justify-center text-brand-dark-text font-bold">{index + 1}</div>
-                                <h3 className="text-xl font-bold text-brand-dark-text mb-2">{step.title}</h3>
-                                <p className="text-gray-600">{step.description}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-20 bg-white">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-4xl font-bold text-center mb-16 text-brand-dark-text">Key Dates & Deadlines</h2>
-                    <div className="max-w-4xl mx-auto">
-                        {importantDates.map((item, index) => (
-                            <motion.div key={index} className="flex items-center p-4 rounded-lg mb-4" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                                <div className="flex-shrink-0 text-center mr-6 bg-brand-accent text-brand-dark-text rounded-lg p-3 w-24">
-                                    <p className="text-3xl font-bold">{item.date.split(' ')[0]}</p>
-                                    <p className="text-sm">{item.date.split(' ')[1]}, {item.date.split(' ')[2]}</p>
-                                </div>
-                                <p className="font-semibold text-xl text-brand-dark-text">{item.event}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-20">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-                    <h2 className="text-4xl font-bold text-center mb-16 text-brand-dark-text">Frequently Asked Questions</h2>
-                    <div className="space-y-2">
-                        {faqs.map((faq, index) => <FAQItem key={index} faq={faq} />)}
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-20 bg-brand-surface">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold text-brand-light mb-4">Ready to Join the Legacy?</h2>
-                    <p className="max-w-2xl mx-auto text-brand-muted mb-8">Our admissions team is here to help you every step of the way. Don't hesitate to reach out.</p>
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <Link to="/contact"><AnimatedButton>Contact Admissions</AnimatedButton></Link>
-                        <a href="/application-form.pdf" target="_blank" rel="noopener noreferrer"><AnimatedButton className="bg-brand-dark text-brand-light hover:bg-brand-dark/20">Download Form</AnimatedButton></a>
-                    </div>
-                </div>
-            </section>
-        </div>
-    );
-};
-
-export default AdmissionsPage;
+export default AcademicsPage;
