@@ -11,7 +11,7 @@ const featuresData = [
 
 const Pillars = () => {
     return (
-        <div className="py-16 md:py-24 bg-brand-light">
+        <div className="py-16 md:py-20 bg-brand-light">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Enhanced Section Header */}
                 <div className="text-center mb-12 md:mb-16">

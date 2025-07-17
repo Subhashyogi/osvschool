@@ -80,7 +80,7 @@ const GalleryPreview = () => {
     };
 
     return (
-        <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
+        <section className="py-16 md:py-20 bg-gray-50 relative overflow-hidden">
             {/* Subtle background pattern for texture */}
             <div
                 className="absolute inset-0 bg-repeat opacity-5"

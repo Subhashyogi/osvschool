@@ -32,7 +32,7 @@ const PrincipalWelcome = () => {
     return (
         <section
             ref={sectionRef} // Attach ref for scroll tracking
-            className="py-16 md:py-24 bg-gray-50 relative overflow-hidden"
+            className="py-16 md:py-20 bg-gray-50 relative overflow-hidden"
         >
             {/* 2. Thematic Background Quotation Mark */}
             <span
