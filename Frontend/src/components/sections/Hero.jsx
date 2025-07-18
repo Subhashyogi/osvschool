@@ -66,7 +66,7 @@ const Hero = () => {
                     variants={titleVariants}
                     initial="hidden"
                     animate={controls}
-                    className="text-2xl sm:text-4xl md:text-6xl font-extrabold tracking-tight uppercase text-brand-light"
+                    className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase text-brand-light"
                     aria-label={title}
                 >
                     {title.split('').map((char, index) => (
