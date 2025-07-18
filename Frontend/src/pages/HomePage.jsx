@@ -1,4 +1,3 @@
-// src/pages/HomePage.jsx
 import React from 'react';
 import Hero from '../components/sections/Hero';
 import Pillars from '../components/sections/Pillars';

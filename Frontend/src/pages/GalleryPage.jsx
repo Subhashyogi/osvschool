@@ -1,4 +1,3 @@
-// src/pages/GalleryPage.jsx
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay, FaImage } from 'react-icons/fa';
@@ -15,25 +14,24 @@ const GalleryPage = () => {
 
     const filteredItems = useMemo(() => {
         if (activeFilter === 'All') return galleryItems;
-        if (activeFilter === 'Photos') return galleryItems.filter(item => item.type === 'image');
-        if (activeFilter === 'Videos') return galleryItems.filter(item => item.type === 'video');
-        return [];
+        const type = activeFilter === 'Photos' ? 'image' : 'video';
+        return galleryItems.filter(item => item.type === type);
     }, [activeFilter]);
 
     const openLightbox = (clickedItem) => {
-        const originalIndex = galleryItems.findIndex(item => (item.src && item.src === clickedItem.src) || (item.sources && clickedItem.sources && item.sources[0].src === clickedItem.sources[0].src));
+        const originalIndex = galleryItems.findIndex(item => item.src === clickedItem.src || (item.sources && clickedItem.sources && item.sources[0].src === clickedItem.sources[0].src));
         if (originalIndex > -1) setLightboxIndex(originalIndex);
     };
 
     return (
-        <div className="bg-brand-light-bg">
+        <div className="bg-brand-light">
             <div className="relative pt-32 md:pt-40 pb-20 md:pb-24 text-center bg-cover bg-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/1001914/pexels-photo-1001914.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}>
                 <div className="absolute inset-0 bg-brand-dark/80"></div>
                 <div className="relative container mx-auto px-4">
                     <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-4xl md:text-5xl font-extrabold text-brand-light">
                         Campus Gallery
                     </motion.h1>
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="mt-4 text-base md:text-lg max-w-2xl mx-auto text-brand-light/80">
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="mt-4 text-base md:text-lg max-w-2xl mx-auto text-brand-nav-muted">
                         Explore the moments that define the OSVSR experience.
                     </motion.p>
                 </div>
@@ -42,9 +40,9 @@ const GalleryPage = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
                 <div className="flex justify-center flex-wrap gap-3 md:gap-6 mb-12">
                     {filters.map(filter => (
-                        <button key={filter} onClick={() => setActiveFilter(filter)} className={`px-4 py-2 md:px-5 text-sm md:text-md font-semibold rounded-full transition-colors duration-300 relative focus:outline-none ${activeFilter === filter ? 'text-brand-dark-text' : 'text-gray-500 hover:text-brand-dark-text'}`}>
+                        <button key={filter} onClick={() => setActiveFilter(filter)} className={`px-5 py-2 text-sm md:text-md font-semibold rounded-full transition-colors duration-300 relative focus:outline-none ${activeFilter === filter ? 'text-brand-dark' : 'text-brand-muted hover:text-brand-dark'}`}>
                             {filter}
-                            {activeFilter === filter && (<motion.div className="absolute bottom-[-4px] left-0 right-0 h-1 bg-brand-accent rounded-full" layoutId="underline" />)}
+                            {activeFilter === filter && (<motion.div className="absolute bottom-[-4px] left-0 right-0 h-1 bg-brand-accent rounded-full" layoutId="gallery-underline" />)}
                         </button>
                     ))}
                 </div>

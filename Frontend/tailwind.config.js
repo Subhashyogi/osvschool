@@ -4,7 +4,6 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Add this new section
         signature: ['"Dancing Script"', "cursive"],
       },
       colors: {
@@ -17,6 +16,7 @@ export default {
         "brand-muted": "#6c757d", // Muted gray for secondary text
         "brand-nav-text": "#f8f9fa", // Light text for use on the dark nav/footer
         "brand-nav-muted": "#adb5bd", // Muted light text for use on the dark nav/footer
+        "brand-surface": "#343a40", // Added for consistency on dark backgrounds
       },
       backgroundImage: {
         "grid-pattern":
@@ -30,5 +30,20 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".scrollbar-hide": {
+          /* IE and Edge */
+          "-ms-overflow-style": "none",
+          /* Firefox */
+          "scrollbar-width": "none",
+          /* Safari and Chrome */
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+        },
+      });
+    },
+  ],
 };

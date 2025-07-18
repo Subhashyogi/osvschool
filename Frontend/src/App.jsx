@@ -10,19 +10,42 @@ import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
 import AdmissionsPage from './pages/AdmissionsPage';
 
+// --- Import Admin Panel Components ---
+import { AuthProvider } from './admin/context/AuthContext';
+import AdminLogin from './admin/pages/AdminLogin';
+import AdminLayout from './admin/components/AdminLayout';
+import AdminDashboard from './admin/pages/AdminDashboard';
+import ManageFaculty from './admin/pages/ManageFaculty';
+import ManageGallery from './admin/pages/ManageGallery';
+import ManageAchievements from './admin/pages/ManageAchievements';
+import ManageTestimonials from './admin/pages/ManageTestimonials';
+
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="academics" element={<AcademicsPage />} />
-        <Route path="admissions" element={<AdmissionsPage />} />
-        <Route path="faculty" element={<FacultyPage />} />
-        <Route path="gallery" element={<GalleryPage />} />
-        <Route path="contact" element={<ContactPage />} />
-      </Route>
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        {/* --- Public School Website Routes --- */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="academics" element={<AcademicsPage />} />
+          <Route path="admissions" element={<AdmissionsPage />} />
+          <Route path="faculty" element={<FacultyPage />} />
+          <Route path="gallery" element={<GalleryPage />} />
+          <Route path="contact" element={<ContactPage />} />
+        </Route>
+
+        {/* --- Admin Panel Routes --- */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="faculty" element={<ManageFaculty />} />
+          <Route path="gallery" element={<ManageGallery />} /> 
+          <Route path="achievements" element={<ManageAchievements />} />
+          <Route path="testimonials" element={<ManageTestimonials />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
   );
 };
 
