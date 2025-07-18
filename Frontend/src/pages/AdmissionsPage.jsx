@@ -98,7 +98,7 @@ const AdmissionsPage = () => {
                     <div className="flex flex-wrap justify-center gap-4">
                         <Link to="/contact"><AnimatedButton>Contact Admissions</AnimatedButton></Link>
                         <a href="/application-form.pdf" target="_blank" rel="noopener noreferrer">
-                            <AnimatedButton className="bg-brand-light text-brand-dark hover:bg-opacity-90 inline-flex items-center gap-2">
+                            <AnimatedButton className="bg-brand-dark text-brand-light hover:bg-opacity-90 inline-flex items-center gap-2">
                                 <FaFileDownload /> Download Form
                             </AnimatedButton>
                         </a>
