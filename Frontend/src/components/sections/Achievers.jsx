@@ -1,61 +1,79 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaTrophy } from 'react-icons/fa';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import AnimatedButton from '../common/AnimatedButton';
 import { achievers } from '../../constants';
+import { FaTrophy } from 'react-icons/fa';
 
-const AchieverCard = ({ achiever, index, hoveredIndex, setHoveredIndex }) => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+// --- Swiper Imports ---
+// We only need the Autoplay module for this effect
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 
-    const handleMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    };
-
-    const isAnotherHovered = hoveredIndex !== null && hoveredIndex !== index;
-
+const AchieverCard = ({ achiever }) => {
+    // This component is unchanged
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative rounded-2xl overflow-hidden group"
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseMove={handleMouseMove}
-        >
-            <motion.div
-                className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={{ background: `radial-gradient(300px at ${mousePosition.x}px ${mousePosition.y}px, rgba(183, 183, 164, 0.2), transparent 80%)` }}
-            />
-            <div className={`relative bg-white/70 backdrop-blur-md border border-brand-accent/30 rounded-2xl p-6 text-center transition-all duration-300 ${isAnotherHovered ? 'opacity-60 scale-95' : 'opacity-100 scale-100'}`}>
-                <img src={achiever.image} alt={achiever.name} className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-brand-accent/50" />
+        <div className="relative rounded-2xl overflow-hidden group w-64 md:w-72 h-full">
+            <div className="relative bg-white/70 backdrop-blur-md border border-brand-accent/30 rounded-2xl p-6 text-center h-full">
+                <img
+                    src={achiever.image}
+                    alt={achiever.name}
+                    className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-brand-accent/50"
+                />
                 <h3 className="text-xl font-bold text-brand-dark">{achiever.name}</h3>
-                <p className="text-brand-muted text-sm mb-4">{achiever.achievement}</p>
+                <p className="text-brand-muted text-sm mb-4 h-10">{achiever.achievement}</p>
                 <div className="bg-brand-accent/20 text-brand-dark font-semibold py-1 px-3 rounded-full inline-flex items-center gap-2">
                     <FaTrophy className="text-brand-accent" />
                     <span>{achiever.award}</span>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 };
 
+
 const Achievers = () => {
-    const [hoveredIndex, setHoveredIndex] = useState(null);
+    // To ensure a seamless loop on all screen sizes, we duplicate the content multiple times.
+    const duplicatedAchievers = [...achievers, ...achievers, ...achievers, ...achievers];
 
     return (
-        <section className="py-16 md:py-20 bg-gray-50" onMouseLeave={() => setHoveredIndex(null)}>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12 md:mb-16">
+        <section className="py-16 md:py-20 bg-gray-50 overflow-hidden">
+            <div className="container mx-auto">
+                <div className="text-center mb-12 md:mb-16 px-4">
                     <h2 className="text-3xl md:text-4xl font-bold text-brand-dark">Our Legacy of Achievement</h2>
                     <p className="mt-4 text-lg text-brand-muted max-w-2xl mx-auto">
-                        We celebrate the brilliant minds and talented individuals who have excelled on national and international stages.
+                        We celebrate the brilliant minds who have excelled on national and international stages.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {achievers.map((achiever, index) => (
-                        <AchieverCard key={index} achiever={achiever} index={index} hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} />
+            </div>
+
+            {/* --- THE DEFINITIVE SWIPER IMPLEMENTATION --- */}
+            <div className="cursor-grab">
+                <Swiper
+                    className="continuous-slider py-4"
+                    modules={[Autoplay]}
+                    loop={true}
+                    slidesPerView="auto"
+                    spaceBetween={30}
+                    // --- THE DEFINITIVE AUTOPLAY CONFIGURATION ---
+                    autoplay={{
+                        delay: 0,
+                        disableOnInteraction: true, // Let user take control permanently if they interact
+                    }}
+                    speed={8000} // Increase speed for a slower, more graceful scroll
+                >
+                    {duplicatedAchievers.map((achiever, index) => (
+                        <SwiperSlide key={index} style={{ width: 'auto' }}>
+                            <AchieverCard achiever={achiever} />
+                        </SwiperSlide>
                     ))}
-                </div>
+                </Swiper>
+            </div>
+
+            <div className="text-center mt-12">
+                <Link to="/achievements">
+                    <AnimatedButton>View All Achievers</AnimatedButton>
+                </Link>
             </div>
         </section>
     );

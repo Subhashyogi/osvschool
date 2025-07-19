@@ -36,6 +36,23 @@ export const testimonials = [
     avatar:
       "https://images.pexels.com/photos/927451/pexels-photo-927451.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
+   {
+    quote:
+      "This school didn't just teach me subjects; it taught me how to think. The supportive community and dedicated teachers were instrumental in my success.",
+    name: "Priya Sharma",
+    title: "Class of 2022, IIT Bombay",
+    avatar:
+      "https://images.pexels.com/photos/935756/pexels-photo-935756.jpeg?auto=compress&cs=tinysrgb&w=400",
+  },
+  {
+    quote:
+      "The extracurricular activities, especially the science fair and coding club, sparked my passion for technology. I'm forever grateful.",
+    name: "Rohan Verma",
+    title: "Class of 2021, Software Engineer at Infosys",
+    avatar:
+      "https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg?auto=compress&cs=tinysrgb&w=400",
+  },
+  
 ];
 
 export const principal = {
@@ -54,6 +71,20 @@ export const achievers = [
       "https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg?auto=compress&cs=tinysrgb&w=400",
     achievement: "National Science Olympiad",
     award: "Gold Medalist",
+  },
+  {
+    name: "Mohammed Khan",
+    image:
+      "https://images.pexels.com/photos/8618025/pexels-photo-8618025.jpeg?auto=compress&cs=tinysrgb&w=400",
+    achievement: "State-Level Art Competition",
+    award: "First Place",
+  },
+  {
+    name: "Isha Sharma",
+    image:
+      "https://images.pexels.com/photos/8617973/pexels-photo-8617973.jpeg?auto=compress&cs=tinysrgb&w=400",
+    achievement: "National Robotics Challenge",
+    award: "Innovation Award",
   },
   {
     name: "Saanvi Patel",

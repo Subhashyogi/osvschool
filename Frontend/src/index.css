@@ -32,3 +32,8 @@
     @apply bg-brand-accent rounded-full;
   }
 }
+
+.continuous-slider .swiper-wrapper {
+  transition-timing-function: linear !important;
+
+}
