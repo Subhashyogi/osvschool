@@ -24,7 +24,7 @@ const itemVariants = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
-const title = "OSVSR SCHOOL";
+const title = "O.S.V. SCHOOL";
 
 const Hero = () => {
   return (

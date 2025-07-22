@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fa';
 
 // Import the logo from your assets folder
-import siteLogo from '../../assets/logo.svg';
+import siteLogo from '../../assets/OSV-logo.svg';
 
 const navLinks = [
     { title: 'Home', to: '/', icon: <FaHome /> },
@@ -44,7 +44,7 @@ const Navbar = () => {
                         <img
                             src={siteLogo}
                             alt="OSVSR School Logo"
-                            className="h-10 w-auto filter brightness-0 invert"
+                            className="h-40 w-auto "
                         // The "filter brightness-0 invert" classes turn the black SVG to white.
                         />
                     </Link>
