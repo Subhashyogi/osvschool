@@ -36,7 +36,7 @@ export const testimonials = [
     avatar:
       "https://images.pexels.com/photos/927451/pexels-photo-927451.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
-   {
+  {
     quote:
       "This school didn't just teach me subjects; it taught me how to think. The supportive community and dedicated teachers were instrumental in my success.",
     name: "Priya Sharma",
@@ -52,7 +52,6 @@ export const testimonials = [
     avatar:
       "https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
-  
 ];
 
 export const principal = {
