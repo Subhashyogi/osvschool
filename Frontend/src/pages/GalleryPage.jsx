@@ -20,7 +20,9 @@ const GalleryPage = () => {
     const fetchGalleryItems = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:4000/api/gallery");
+        const response = await fetch(
+          "https://osvschool-backend.onrender.comapi/gallery"
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch gallery items");
@@ -30,7 +32,7 @@ const GalleryPage = () => {
 
         // Transform API data to match lightbox format
         const transformedItems = data.map((item) => {
-          const baseUrl = "http://localhost:4000/";
+          const baseUrl = "https://osvschool-backend.onrender.com";
           const fullMediaUrl = item.mediaUrl.startsWith("http")
             ? item.mediaUrl
             : `${baseUrl}${item.mediaUrl}`;

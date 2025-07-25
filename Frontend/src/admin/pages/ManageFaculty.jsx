@@ -50,7 +50,7 @@ const ManageFaculty = () => {
       }
 
       const response = await authenticatedFetch(
-        `http://localhost:4000/api/faculty?${queryParams}`
+        `https://osvschool-backend.onrender.comapi/faculty?${queryParams}`
       );
 
       if (response.ok) {
@@ -77,7 +77,7 @@ const ManageFaculty = () => {
   const fetchDepartments = async () => {
     try {
       const response = await authenticatedFetch(
-        "http://localhost:4000/api/faculty/departments"
+        "https://osvschool-backend.onrender.comapi/faculty/departments"
       );
 
       if (response.ok) {
@@ -107,7 +107,7 @@ const ManageFaculty = () => {
     ) {
       try {
         const response = await authenticatedFetch(
-          `http://localhost:4000/api/faculty/${facultyToDelete.id}`,
+          `https://osvschool-backend.onrender.comapi/faculty/${facultyToDelete.id}`,
           {
             method: "DELETE",
           }
@@ -129,8 +129,8 @@ const ManageFaculty = () => {
     try {
       const method = editingFaculty ? "PUT" : "POST";
       const url = editingFaculty
-        ? `http://localhost:4000/api/faculty/${editingFaculty.id}`
-        : "http://localhost:4000/api/faculty";
+        ? `https://osvschool-backend.onrender.comapi/faculty/${editingFaculty.id}`
+        : "https://osvschool-backend.onrender.comapi/faculty";
 
       // Determine if we're sending FormData or regular JSON
       const isFormData = facultyData instanceof FormData;

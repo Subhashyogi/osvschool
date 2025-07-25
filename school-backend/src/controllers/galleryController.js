@@ -68,7 +68,7 @@ class GalleryController {
         if (galleryData.mediaUrl) {
           // Add full URL if it's just a relative path
           if (!galleryData.mediaUrl.startsWith("http")) {
-            galleryData.mediaUrl = `http://localhost:4000/${galleryData.mediaUrl}`;
+            galleryData.mediaUrl = `https://osvschool-backend.onrender.com${galleryData.mediaUrl}`;
           }
         }
         return galleryData;
@@ -117,7 +117,7 @@ class GalleryController {
 
       const galleryData = gallery.toJSON();
       if (galleryData.mediaUrl && !galleryData.mediaUrl.startsWith("http")) {
-        galleryData.mediaUrl = `http://localhost:4000/${galleryData.mediaUrl}`;
+        galleryData.mediaUrl = `https://osvschool-backend.onrender.com${galleryData.mediaUrl}`;
       }
 
       console.log("✅ Successfully retrieved gallery");

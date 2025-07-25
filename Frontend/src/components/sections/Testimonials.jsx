@@ -16,7 +16,7 @@ const Testimonials = () => {
         console.log("Fetching testimonials from API...");
 
         const response = await fetch(
-          "http://localhost:4000/api/testimonials/public"
+          "https://osvschool-backend.onrender.comapi/testimonials/public"
         );
 
         if (!response.ok) {
