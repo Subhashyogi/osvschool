@@ -22,7 +22,7 @@ const ManageGallery = () => {
       setLoading(true);
       const token = getToken();
       const response = await fetch(
-        "https://osvschool-backend.onrender.comapi/gallery",
+        "https://osvschool-backend.onrender.com/api/gallery",
         {
           method: "GET",
           headers: {
@@ -63,7 +63,7 @@ const ManageGallery = () => {
       try {
         const token = getToken();
         const response = await fetch(
-          `https://osvschool-backend.onrender.comapi/gallery/${itemToDelete.id}`,
+          `https://osvschool-backend.onrender.com/api/gallery/${itemToDelete.id}`,
           {
             method: "DELETE",
             headers: {
@@ -90,8 +90,8 @@ const ManageGallery = () => {
       const token = getToken();
       const method = editingItem ? "PUT" : "POST";
       const url = editingItem
-        ? `https://osvschool-backend.onrender.comapi/gallery/${editingItem.id}`
-        : "https://osvschool-backend.onrender.comapi/gallery";
+        ? `https://osvschool-backend.onrender.com/api/gallery/${editingItem.id}`
+        : "https://osvschool-backend.onrender.com/api/gallery";
 
       // Check if itemData is FormData (contains file) or regular object
       const isFormData = itemData instanceof FormData;
@@ -162,7 +162,7 @@ const ManageGallery = () => {
             >
               <div className="relative">
                 <img
-                  src={`https://osvschool-backend.onrender.com${item.mediaUrl}`}
+                  src={`https://osvschool-backend.onrender.com/${item.mediaUrl}`}
                   alt={item.title}
                   className="h-48 w-full object-cover"
                 />
@@ -223,7 +223,7 @@ const GalleryForm = ({ item, onSave, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(
     item?.mediaUrl
-      ? `https://osvschool-backend.onrender.com${item.mediaUrl}`
+      ? `https://osvschool-backend.onrender.com/${item.mediaUrl}`
       : ""
   );
   const [uploading, setUploading] = useState(false);

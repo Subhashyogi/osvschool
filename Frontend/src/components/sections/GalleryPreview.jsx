@@ -18,7 +18,7 @@ const GalleryPreview = () => {
         console.log("Fetching gallery items from API...");
 
         const response = await fetch(
-          "https://osvschool-backend.onrender.comapi/gallery"
+          "https://osvschool-backend.onrender.com/api/gallery"
         );
 
         if (!response.ok) {

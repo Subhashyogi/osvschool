@@ -21,7 +21,7 @@ const GalleryPage = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://osvschool-backend.onrender.comapi/gallery"
+          "https://osvschool-backend.onrender.com/api/gallery"
         );
 
         if (!response.ok) {
@@ -32,7 +32,7 @@ const GalleryPage = () => {
 
         // Transform API data to match lightbox format
         const transformedItems = data.map((item) => {
-          const baseUrl = "https://osvschool-backend.onrender.com";
+          const baseUrl = "https://osvschool-backend.onrender.com/";
           const fullMediaUrl = item.mediaUrl.startsWith("http")
             ? item.mediaUrl
             : `${baseUrl}${item.mediaUrl}`;

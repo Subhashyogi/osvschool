@@ -51,7 +51,7 @@ class TestimonialController {
       const processedTestimonials = rows.map((testimonial) => {
         const testimonialData = testimonial.toJSON();
         if (testimonialData.avtar) {
-          testimonialData.avtar = `https://osvschool-backend.onrender.comuploads/testimonials/${testimonialData.avtar}`;
+          testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
         }
         return testimonialData;
       });
@@ -91,7 +91,7 @@ class TestimonialController {
 
       const testimonialData = testimonial.toJSON();
       if (testimonialData.avtar) {
-        testimonialData.avtar = `https://osvschool-backend.onrender.comuploads/testimonials/${testimonialData.avtar}`;
+        testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
       }
 
       console.log("✅ Successfully retrieved testimonial");
@@ -120,7 +120,7 @@ class TestimonialController {
       const processedTestimonials = testimonials.map((testimonial) => {
         const testimonialData = testimonial.toJSON();
         if (testimonialData.avtar) {
-          testimonialData.avtar = `https://osvschool-backend.onrender.comuploads/testimonials/${testimonialData.avtar}`;
+          testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
         }
         return testimonialData;
       });
@@ -175,7 +175,7 @@ class TestimonialController {
 
       const responseData = testimonial.toJSON();
       if (responseData.avtar) {
-        responseData.avtar = `https://osvschool-backend.onrender.comuploads/testimonials/${responseData.avtar}`;
+        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
       }
 
       console.log(
@@ -271,7 +271,7 @@ class TestimonialController {
 
       const responseData = testimonial.toJSON();
       if (responseData.avtar) {
-        responseData.avtar = `https://osvschool-backend.onrender.comuploads/testimonials/${responseData.avtar}`;
+        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
       }
 
       console.log("✅ Testimonial updated successfully");
@@ -346,7 +346,7 @@ class TestimonialController {
 
       const responseData = testimonial.toJSON();
       if (responseData.avtar) {
-        responseData.avtar = `https://osvschool-backend.onrender.comuploads/testimonials/${responseData.avtar}`;
+        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
       }
 
       console.log("✅ Testimonial restored successfully");

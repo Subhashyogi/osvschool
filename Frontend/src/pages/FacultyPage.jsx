@@ -36,7 +36,7 @@ const FacultyPage = () => {
 
         // Fetch all faculty members
         const facultyResponse = await fetch(
-          "https://osvschool-backend.onrender.comapi/faculty?limit=100"
+          "https://osvschool-backend.onrender.com/api/faculty?limit=100"
         );
         if (!facultyResponse.ok) {
           throw new Error("Failed to fetch faculty members");

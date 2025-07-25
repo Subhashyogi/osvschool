@@ -50,7 +50,7 @@ const ManageFaculty = () => {
       }
 
       const response = await authenticatedFetch(
-        `https://osvschool-backend.onrender.comapi/faculty?${queryParams}`
+        `https://osvschool-backend.onrender.com/api/faculty?${queryParams}`
       );
 
       if (response.ok) {
@@ -77,7 +77,7 @@ const ManageFaculty = () => {
   const fetchDepartments = async () => {
     try {
       const response = await authenticatedFetch(
-        "https://osvschool-backend.onrender.comapi/faculty/departments"
+        "https://osvschool-backend.onrender.com/api/faculty/departments"
       );
 
       if (response.ok) {
@@ -107,7 +107,7 @@ const ManageFaculty = () => {
     ) {
       try {
         const response = await authenticatedFetch(
-          `https://osvschool-backend.onrender.comapi/faculty/${facultyToDelete.id}`,
+          `https://osvschool-backend.onrender.com/api/faculty/${facultyToDelete.id}`,
           {
             method: "DELETE",
           }
@@ -129,8 +129,8 @@ const ManageFaculty = () => {
     try {
       const method = editingFaculty ? "PUT" : "POST";
       const url = editingFaculty
-        ? `https://osvschool-backend.onrender.comapi/faculty/${editingFaculty.id}`
-        : "https://osvschool-backend.onrender.comapi/faculty";
+        ? `https://osvschool-backend.onrender.com/api/faculty/${editingFaculty.id}`
+        : "https://osvschool-backend.onrender.com/api/faculty";
 
       // Determine if we're sending FormData or regular JSON
       const isFormData = facultyData instanceof FormData;

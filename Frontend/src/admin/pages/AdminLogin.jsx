@@ -77,7 +77,7 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch(
-        "https://osvschool-backend.onrender.comapi/auth/login",
+        "https://osvschool-backend.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {
