@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
-const sequelize = new Sequelize("osvsr", "root", "", {
-  host: "localhost",
+const sequelize = new Sequelize("osvschool", "osvschool", "oSvScH#15@14", {
+  host: "148.66.138.203",
   dialect: "mysql",
   logging: false, // Set to true for SQL query logging
 });
