@@ -1,22 +1,34 @@
-import React from 'react';
-import Hero from '../components/sections/Hero';
-import Pillars from '../components/sections/Pillars';
-import PrincipalWelcome from '../components/sections/PrincipalWelcome';
-import Achievers from '../components/sections/Achievers';
-import Testimonials from '../components/sections/Testimonials';
-import GalleryPreview from '../components/sections/GalleryPreview';
+import React from "react";
+import Hero from "../components/sections/Hero";
+import Pillars from "../components/sections/Pillars";
+import PrincipalWelcome from "../components/sections/PrincipalWelcome";
+import Achievers from "../components/sections/Achievers";
+import Statistics from "../components/sections/Statistics";
+import Programs from "../components/sections/Programs";
+import CampusLife from "../components/sections/CampusLife";
+import Testimonials from "../components/sections/Testimonials";
+import GalleryPreview from "../components/sections/GalleryPreview";
+import NewsEvents from "../components/sections/NewsEvents";
+import InstagramFeed from "../components/sections/InstagramFeed";
+import AdmissionsCTA from "../components/sections/AdmissionsCTA";
 
 const HomePage = () => {
-    return (
-        <>
-            <Hero />
-            <Pillars />
-            <PrincipalWelcome />
-            <Achievers />
-            <Testimonials />
-            <GalleryPreview />
-        </>
-    );
+  return (
+    <>
+      <Hero />
+      <Pillars />
+      <Statistics />
+      <PrincipalWelcome />
+      <Programs />
+      <CampusLife />
+      {/* <Achievers /> */}
+      <Testimonials />
+      <GalleryPreview />
+      <NewsEvents />
+      <InstagramFeed />
+      <AdmissionsCTA />
+    </>
+  );
 };
 
 export default HomePage;

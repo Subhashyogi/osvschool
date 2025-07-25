@@ -108,8 +108,6 @@ class TestimonialController {
   // Get all active testimonials for public display (no authentication required)
   getPublicTestimonials = async (req, res) => {
     try {
-      console.log("📋 Getting public testimonials...");
-
       // Get all active (non-deleted) testimonials, ordered by creation date
       const testimonials = await this.testimonialModel.findAll({
         where: {
@@ -117,10 +115,6 @@ class TestimonialController {
         },
         order: [["created_at", "DESC"]],
       });
-
-      console.log(
-        `Found ${testimonials.length} active testimonials for public display`
-      );
 
       // Process testimonials to include full avatar URLs
       const processedTestimonials = testimonials.map((testimonial) => {
@@ -131,7 +125,6 @@ class TestimonialController {
         return testimonialData;
       });
 
-      console.log("✅ Successfully retrieved public testimonials");
       res.json(processedTestimonials);
     } catch (error) {
       console.error("❌ Error getting public testimonials:", error);
