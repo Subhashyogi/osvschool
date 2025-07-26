@@ -19,34 +19,38 @@ export default {
       //   "brand-surface": "#343a40", // Added for consistency on dark backgrounds
       // },
       colors: {
-        // --- Enhanced "Academic Excellence" Palette ---
-        // Richer, more sophisticated colors with depth and warmth
+        // --- Modern Educational Excellence Palette ---
+        // Fresh, modern colors with elegance and professionalism
 
-        "brand-light": "#f7f5f3", // Warmer, creamier background (less stark white)
-        "brand-white": "#ffffff", // Pure white for contrast when needed
-        "brand-dark": "#2c2c2c", // Deeper, richer dark for text (less harsh than black)
-        "brand-nav": "#1a365d", // Deep navy blue for navigation (professional and trustworthy)
-        "brand-accent": "#e67e22", // Vibrant orange-red for CTAs and highlights
-        "brand-secondary": "#3182ce", // Rich blue for secondary elements
-        "brand-muted": "#4a5568", // Sophisticated gray for secondary text
-        "brand-nav-text": "#ffffff", // Clean white text for dark nav
-        "brand-nav-muted": "#a0aec0", // Soft blue-gray for muted nav text
-        "brand-surface": "#edf2f7", // Light gray-blue for card backgrounds
-        "brand-warm": "#fed7aa", // Warm peach for accent backgrounds
-        "brand-cool": "#bee3f8", // Cool blue for alternate sections
-        "brand-success": "#38a169", // Green for success states
-        "brand-warning": "#d69e2e", // Amber for warnings
-        "brand-error": "#e53e3e", // Red for errors
+        "brand-light": "#fafbfc", // Very light blue-gray background
+        "brand-white": "#ffffff", // Pure white for contrast
+        "brand-dark": "#1e293b", // Slate dark for text (modern and readable)
+        "brand-nav": "#0f172a", // Deep slate for navigation (sophisticated)
+        "brand-accent": "#3b82f6", // Modern blue for CTAs and highlights
+        "brand-secondary": "#10b981", // Fresh green for secondary elements
+        "brand-muted": "#64748b", // Modern gray for secondary text
+        "brand-nav-text": "#f8fafc", // Light text for dark nav
+        "brand-nav-muted": "#cbd5e1", // Soft gray for muted nav text
+        "brand-surface": "#f1f5f9", // Light slate for card backgrounds
+        "brand-warm": "#fef3c7", // Warm yellow for highlights
+        "brand-cool": "#dbeafe", // Cool blue for alternate sections
+        "brand-success": "#059669", // Green for success states
+        "brand-warning": "#d97706", // Orange for warnings
+        "brand-error": "#dc2626", // Red for errors
+        "brand-purple": "#8b5cf6", // Purple for special elements
+        "brand-teal": "#0d9488", // Teal for variety
       },
       backgroundImage: {
         "grid-pattern":
           "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
         "hero-gradient":
-          "linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%)",
-        "warm-gradient": "linear-gradient(135deg, #fed7aa 0%, #fbb6ce 100%)",
-        "cool-gradient": "linear-gradient(135deg, #bee3f8 0%, #90cdf4 100%)",
-        "accent-gradient": "linear-gradient(135deg, #e67e22 0%, #d69e2e 100%)",
-        "dark-gradient": "linear-gradient(135deg, #2c2c2c 0%, #1a365d 100%)",
+          "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #3b82f6 100%)",
+        "warm-gradient": "linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%)",
+        "cool-gradient": "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
+        "accent-gradient": "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+        "dark-gradient": "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+        "success-gradient": "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+        "purple-gradient": "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
         "subtle-pattern":
           "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)",
       },

@@ -54,7 +54,7 @@ const Statistics = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-brand-nav via-brand-secondary to-brand-accent relative overflow-hidden">
+    <section className="py-16 md:py-20 bg-accent-gradient relative overflow-hidden">
       {/* Enhanced Background Pattern */}
       <div className="absolute inset-0 opacity-10 bg-subtle-pattern bg-pattern-size" />
 

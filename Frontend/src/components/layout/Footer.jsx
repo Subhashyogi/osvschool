@@ -38,7 +38,7 @@ const sitemapData = [
 
 const Footer = () => {
   return (
-    <footer className="bg-brand-nav text-brand-nav-muted border-t border-brand-surface/50">
+    <footer className="bg-brand-nav text-brand-nav-muted border-t border-brand-accent/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12">
           <div className="lg:col-span-1">
@@ -113,12 +113,12 @@ const Footer = () => {
             <input
               type="email"
               placeholder="your@email.com"
-              className="w-full text-sm px-4 py-3 bg-brand-surface/80 text-brand-light rounded-md focus:ring-2 focus:ring-brand-accent focus:outline-none placeholder:text-brand-nav-muted"
+              className="w-full text-sm px-4 py-3 bg-brand-surface text-brand-dark rounded-md focus:ring-2 focus:ring-brand-accent focus:outline-none placeholder:text-brand-muted"
               aria-label="Email for newsletter"
             />
             <button
               type="submit"
-              className="flex-shrink-0 px-4 py-3 bg-brand-accent text-brand-dark rounded-md hover:bg-opacity-90"
+              className="flex-shrink-0 px-4 py-3 bg-brand-accent text-white rounded-md hover:bg-brand-accent/90 transition-colors duration-300"
               aria-label="Subscribe"
             >
               <FaArrowRight size={16} />

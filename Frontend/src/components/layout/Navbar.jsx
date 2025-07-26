@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-brand-nav/80 backdrop-blur-lg shadow-lg border-b border-brand-surface/50">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-200/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20 ">
           {/* --- Logo --- */}
           <Link to="/" onClick={closeMenu} className="flex-shrink-0">
@@ -66,8 +66,10 @@ const Navbar = () => {
                 to={link.to}
                 end
                 className={({ isActive }) =>
-                  `relative font-medium cursor-pointer transition-colors hover:text-orange-400 flex items-center gap-2 ${
-                    isActive ? "text-orange-400" : "text-brand-nav-muted"
+                  `relative font-medium cursor-pointer transition-all duration-300 hover:text-brand-accent flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-brand-accent/10 ${
+                    isActive
+                      ? "text-brand-accent bg-brand-accent/10"
+                      : "text-gray-700"
                   }`
                 }
               >
@@ -92,7 +94,7 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               aria-label="Toggle menu"
-              className="text-brand-nav-text z-50 relative"
+              className="text-gray-700 z-50 relative"
             >
               <AnimatePresence mode="wait">
                 {isOpen ? (
@@ -128,7 +130,7 @@ const Navbar = () => {
             animate="open"
             exit="closed"
             variants={mobileMenuVariants}
-            className="fixed inset-0 bg-brand-nav z-40 md:hidden flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-brand-nav/98 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center"
             onClick={closeMenu}
           >
             {navLinks.map((link) => (
@@ -142,8 +144,10 @@ const Navbar = () => {
                   end
                   onClick={closeMenu}
                   className={({ isActive }) =>
-                    `text-3xl font-medium cursor-pointer transition-colors hover:text-brand-accent flex items-center gap-4 ${
-                      isActive ? "text-brand-accent" : "text-brand-nav-muted"
+                    `text-3xl font-medium cursor-pointer transition-all duration-300 hover:text-brand-accent flex items-center gap-4 px-6 py-3 rounded-xl hover:bg-brand-accent/10 ${
+                      isActive
+                        ? "text-brand-accent bg-brand-accent/10"
+                        : "text-brand-nav-text"
                     }`
                   }
                 >
