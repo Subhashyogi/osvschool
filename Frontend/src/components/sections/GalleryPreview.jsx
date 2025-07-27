@@ -43,7 +43,9 @@ const GalleryPreview = () => {
           setGalleryItems(transformedData);
           setActiveIndex(0);
         } else {
-          console.log("No gallery items found in API response, using default image");
+          console.log(
+            "No gallery items found in API response, using default image"
+          );
           // Set default image when no gallery items are available
           const defaultItem = {
             id: "default-1",
@@ -94,7 +96,7 @@ const GalleryPreview = () => {
       description: "Our esteemed Principal",
       mediaType: "image",
     };
-    
+
     // Set default item if not already set
     if (galleryItems.length === 0) {
       setGalleryItems([defaultItem]);
