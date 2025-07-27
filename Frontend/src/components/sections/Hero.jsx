@@ -55,7 +55,7 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col items-center p-4 text-center max-w-4xl w-full mx-auto">
         <motion.h1
           variants={titleVariants}
-          className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight uppercase text-brand-accent"
+          className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight uppercase text-brand-light"
           aria-label={title}
         >
           {title.split("").map((char, index) => (
@@ -91,12 +91,12 @@ const Hero = () => {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
         >
           <Link to="/about" className="w-full sm:w-auto">
-            <AnimatedButton className="w-full sm:w-auto">
+            <AnimatedButton className="w-full sm:w-auto text-brand-light">
               Learn More About Us
             </AnimatedButton>
           </Link>
           <Link to="/gallery" className="w-full sm:w-auto">
-            <AnimatedButton className="bg-transparent border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-brand-dark w-full sm:w-auto">
+            <AnimatedButton className="bg-transparent border-2 border-brand-accent text-brand-light hover:bg-brand-accent hover:text-brand-dark w-full sm:w-auto">
               Explore Our Campus
             </AnimatedButton>
           </Link>

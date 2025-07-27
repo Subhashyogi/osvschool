@@ -44,7 +44,7 @@ const AboutPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-extrabold text-brand-accent"
+            className="text-4xl md:text-6xl font-extrabold text-brand-light"
           >
             Our Story of Excellence
           </motion.h1>
@@ -223,9 +223,11 @@ const AboutPage = () => {
             Become a part of a community dedicated to shaping the future.
             Contact us to learn more about our programs.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 ">
             <Link to="/contact">
-              <AnimatedButton>Contact Us</AnimatedButton>
+              <AnimatedButton className={"text-brand-light"}>
+                Contact Us
+              </AnimatedButton>
             </Link>
           </div>
         </div>

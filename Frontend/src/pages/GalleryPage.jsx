@@ -140,7 +140,7 @@ const GalleryPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-extrabold text-brand-accent"
+            className="text-4xl md:text-5xl font-extrabold text-brand-light"
           >
             Campus Gallery
           </motion.h1>
@@ -184,22 +184,44 @@ const GalleryPage = () => {
         >
           <AnimatePresence>
             {filteredItems.length === 0 ? (
-              <div className="col-span-full text-center py-12">
-                <div className="text-gray-400 text-6xl mb-4">
-                  <FaImage />
+              <div className="col-span-full">
+                {/* Default image when gallery is empty */}
+                <div className="flex justify-center mb-8">
+                  <div className="group relative cursor-pointer overflow-hidden rounded-xl shadow-lg max-w-md">
+                    <img
+                      src="/principal.jpg"
+                      alt="OSVSR School"
+                      className="w-full h-auto object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                      onError={(e) => {
+                        e.target.src =
+                          "https://via.placeholder.com/400x300?text=OSVSR+School";
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <FaImage className="text-4xl mb-2" />
+                      <p className="font-bold text-center">OSVSR School</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-brand-dark mb-2">
-                  No{" "}
-                  {activeFilter === "All"
-                    ? "media"
-                    : activeFilter.toLowerCase()}{" "}
-                  found
-                </h3>
-                <p className="text-brand-muted">
-                  {activeFilter === "All"
-                    ? "The gallery is currently empty."
-                    : `No ${activeFilter.toLowerCase()} available at the moment.`}
-                </p>
+
+                <div className="text-center">
+                  <div className="text-gray-400 text-6xl mb-4">
+                    <FaImage />
+                  </div>
+                  <h3 className="text-xl font-semibold text-brand-dark mb-2">
+                    No{" "}
+                    {activeFilter === "All"
+                      ? "media"
+                      : activeFilter.toLowerCase()}{" "}
+                    found
+                  </h3>
+                  <p className="text-brand-muted">
+                    {activeFilter === "All"
+                      ? "More gallery items will be added soon."
+                      : `No ${activeFilter.toLowerCase()} available at the moment.`}
+                  </p>
+                </div>
               </div>
             ) : (
               filteredItems.map((item, index) => (

@@ -23,7 +23,7 @@ const HomePage = () => {
       {/* <Achievers /> */}
       <Testimonials />
       <GalleryPreview />
-      <NewsEvents />
+      {/* <NewsEvents /> */}
       {/* <InstagramFeed /> */}
     </>
   );

@@ -27,7 +27,7 @@ const ContactPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-6xl font-extrabold text-brand-accent"
+            className="text-4xl md:text-6xl font-extrabold text-brand-dark"
           >
             Contact Us
           </motion.h1>
@@ -57,7 +57,7 @@ const ContactPage = () => {
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="text-4xl text-brand-accent mb-4 inline-block">
+                <div className="text-4xl text-brand-light mb-4 inline-block">
                   {dept.icon}
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-brand-dark mb-6">
@@ -190,11 +190,11 @@ const ContactPage = () => {
           >
             <div className="relative inline-block">
               <div className="absolute -inset-2 rounded-full bg-brand-accent/50 animate-ping"></div>
-              <div className="relative w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-lg">
+              <div className="relative w-16 h-16 bg-brand-light rounded-full flex items-center justify-center shadow-lg">
                 <FaMapMarkerAlt className="text-3xl text-brand-dark" />
               </div>
             </div>
-            <h3 className="text-2xl md:text-3xl font-bold text-brand-accent mt-6">
+            <h3 className="text-2xl md:text-3xl font-bold text-brand-light mt-6">
               Visit Our Campus
             </h3>
             <p className="mt-2 text-brand-nav-muted">{schoolAddress}</p>
@@ -203,7 +203,9 @@ const ContactPage = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <AnimatedButton className="mt-6">Get Directions</AnimatedButton>
+              <AnimatedButton className="mt-6 text-brand-light">
+                Get Directions
+              </AnimatedButton>
             </a>
           </motion.div>
         </div>

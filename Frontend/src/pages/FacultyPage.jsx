@@ -151,7 +151,7 @@ const FacultyPage = () => {
       >
         <div className="absolute inset-0 bg-brand-dark/80"></div>
         <div className="relative container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-accent">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-light">
             Our Faculty
           </h1>
           <p className="mt-4 text-base md:text-lg max-w-2xl mx-auto text-brand-nav-muted">
@@ -302,7 +302,8 @@ const FacultyPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* --- Section Header (Matches website's gradient style) --- */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+            {/* <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"> */}
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-light">
               Our Guiding Stars
             </h2>
             <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">

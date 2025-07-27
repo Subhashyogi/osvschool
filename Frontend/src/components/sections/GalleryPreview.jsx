@@ -43,8 +43,19 @@ const GalleryPreview = () => {
           setGalleryItems(transformedData);
           setActiveIndex(0);
         } else {
-          console.log("No gallery items found in API response");
-          setGalleryItems([]);
+          console.log("No gallery items found in API response, using default image");
+          // Set default image when no gallery items are available
+          const defaultItem = {
+            id: "default-1",
+            src: "/principal.jpg",
+            thumbnail: "/principal.jpg",
+            poster: "/principal.jpg",
+            alt: "School Principal",
+            description: "Our esteemed Principal",
+            mediaType: "image",
+          };
+          setGalleryItems([defaultItem]);
+          setActiveIndex(0);
         }
 
         setError(null);
@@ -71,16 +82,33 @@ const GalleryPreview = () => {
     );
   }
 
-  // Return early if error or no items
-  if (error || galleryItems.length === 0) {
+  // Handle error - show default image instead of error message
+  if (error) {
+    console.log("Error occurred, using default image");
+    const defaultItem = {
+      id: "default-1",
+      src: "/principal.jpg",
+      thumbnail: "/principal.jpg",
+      poster: "/principal.jpg",
+      alt: "School Principal",
+      description: "Our esteemed Principal",
+      mediaType: "image",
+    };
+    
+    // Set default item if not already set
+    if (galleryItems.length === 0) {
+      setGalleryItems([defaultItem]);
+      setActiveIndex(0);
+      setError(null); // Clear error since we're showing default content
+    }
+  }
+
+  // Return early if no items (this should rarely happen now due to default fallback)
+  if (galleryItems.length === 0) {
     return (
       <section className="py-16 md:py-20 bg-gray-50 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-brand-muted">
-            {error
-              ? `Error: ${error}`
-              : "No gallery items available at the moment."}
-          </p>
+          <p className="text-brand-muted">Loading gallery content...</p>
         </div>
       </section>
     );
@@ -231,7 +259,7 @@ const GalleryPreview = () => {
         </div>
         <div className="text-center mt-12">
           <Link to="/gallery">
-            <AnimatedButton className="inline-flex items-center gap-2">
+            <AnimatedButton className="inline-flex items-center gap-2 text-brand-light">
               <span>Explore Full Gallery</span>
               <FaArrowRight />
             </AnimatedButton>

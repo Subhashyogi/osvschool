@@ -162,7 +162,7 @@ const Programs = () => {
           className="text-center"
         >
           <Link to="/academics">
-            <AnimatedButton className="inline-flex items-center gap-2">
+            <AnimatedButton className="inline-flex items-center gap-2 text-brand-light">
               <span>Explore All Programs</span>
               <FaBook />
             </AnimatedButton>
