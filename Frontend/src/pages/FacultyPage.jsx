@@ -151,7 +151,7 @@ const FacultyPage = () => {
       >
         <div className="absolute inset-0 bg-brand-dark/80"></div>
         <div className="relative container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-light">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-accent">
             Our Faculty
           </h1>
           <p className="mt-4 text-base md:text-lg max-w-2xl mx-auto text-brand-nav-muted">
@@ -241,7 +241,7 @@ const FacultyPage = () => {
       )} */}
       {/* <section className="py-16 md:py-24 bg-brand-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-light">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-accent">
             Meet Our Educators
           </h2>
           <div className="flex justify-center flex-wrap gap-2 md:gap-4 mb-12">
@@ -251,8 +251,8 @@ const FacultyPage = () => {
                 onClick={() => setActiveFilter(department.name)}
                 className={`flex items-center gap-2 px-4 py-2 text-sm md:text-md font-semibold rounded-full transition-colors duration-300 relative focus:outline-none ${
                   activeFilter === department.name
-                    ? "text-brand-light bg-brand-surface"
-                    : "text-brand-nav-muted hover:text-brand-light"
+                    ? "text-brand-accent bg-brand-surface"
+                    : "text-brand-nav-muted hover:text-brand-accent"
                 }`}
               >
                 {department.icon} <span>{department.name}</span>
@@ -275,7 +275,7 @@ const FacultyPage = () => {
                   <div className="text-gray-400 text-6xl mb-4">
                     <FaUser />
                   </div>
-                  <h3 className="text-xl font-semibold text-brand-light mb-2">
+                  <h3 className="text-xl font-semibold text-brand-accent mb-2">
                     No faculty members found
                   </h3>
                   <p className="text-brand-nav-muted">

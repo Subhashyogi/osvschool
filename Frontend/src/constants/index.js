@@ -358,12 +358,6 @@ export const departmentContacts = [
     phone: "+91-11-1234-5678",
   },
   {
-    name: "Admissions Office",
-    icon: FaUserGraduate,
-    email: "admissions@osvsr.edu",
-    phone: "+91-11-1234-5679",
-  },
-  {
     name: "Main Office",
     icon: FaBuilding,
     email: "office@osvsr.edu",

@@ -8,7 +8,6 @@ import AcademicsPage from "./pages/AcademicsPage";
 import FacultyPage from "./pages/FacultyPage";
 import GalleryPage from "./pages/GalleryPage";
 import ContactPage from "./pages/ContactPage";
-import AdmissionsPage from "./pages/AdmissionsPage";
 import AllAchieversPage from "./pages/AllAchieversPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -31,7 +30,6 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="academics" element={<AcademicsPage />} />
-          <Route path="admissions" element={<AdmissionsPage />} />
           <Route path="faculty" element={<FacultyPage />} />
           <Route path="gallery" element={<GalleryPage />} />
           <Route path="contact" element={<ContactPage />} />

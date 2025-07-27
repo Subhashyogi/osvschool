@@ -140,7 +140,7 @@ const GalleryPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-extrabold text-brand-light"
+            className="text-4xl md:text-5xl font-extrabold text-brand-accent"
           >
             Campus Gallery
           </motion.h1>
@@ -223,7 +223,7 @@ const GalleryPage = () => {
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-brand-light opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
                     <div className="text-2xl sm:text-4xl mb-2">
                       {item.type === "video" ? <FaPlay /> : <FaImage />}
                     </div>
@@ -231,7 +231,7 @@ const GalleryPage = () => {
                       {item.alt}
                     </p>
                     {item.description && (
-                      <p className="text-center text-xs text-brand-light/80 mt-1 line-clamp-1">
+                      <p className="text-center text-xs text-brand-accent/80 mt-1 line-clamp-1">
                         {item.description}
                       </p>
                     )}

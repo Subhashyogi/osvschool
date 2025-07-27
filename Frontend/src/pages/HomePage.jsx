@@ -10,7 +10,6 @@ import Testimonials from "../components/sections/Testimonials";
 import GalleryPreview from "../components/sections/GalleryPreview";
 import NewsEvents from "../components/sections/NewsEvents";
 import InstagramFeed from "../components/sections/InstagramFeed";
-import AdmissionsCTA from "../components/sections/AdmissionsCTA";
 
 const HomePage = () => {
   return (
@@ -25,8 +24,7 @@ const HomePage = () => {
       <Testimonials />
       <GalleryPreview />
       <NewsEvents />
-      <InstagramFeed />
-      <AdmissionsCTA />
+      {/* <InstagramFeed /> */}
     </>
   );
 };

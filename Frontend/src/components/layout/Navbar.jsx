@@ -7,7 +7,6 @@ import {
   FaHome,
   FaInfoCircle,
   FaBookOpen,
-  FaUniversity,
   FaUsers,
   FaImages,
   FaEnvelope,
@@ -20,7 +19,6 @@ const navLinks = [
   { title: "Home", to: "/", icon: <FaHome /> },
   { title: "About", to: "/about", icon: <FaInfoCircle /> },
   { title: "Academics", to: "/academics", icon: <FaBookOpen /> },
-  { title: "Admissions", to: "/admissions", icon: <FaUniversity /> },
   { title: "Faculty", to: "/faculty", icon: <FaUsers /> },
   { title: "Gallery", to: "/gallery", icon: <FaImages /> },
   { title: "Contact", to: "/contact", icon: <FaEnvelope /> },
@@ -48,13 +46,13 @@ const Navbar = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-200/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20 ">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 md:h-20 ">
           {/* --- Logo --- */}
           <Link to="/" onClick={closeMenu} className="flex-shrink-0">
             <img
               src={siteLogo}
               alt="OSVSR School Logo"
-              className="h-16 w-auto "
+              className="h-10 md:h-16 w-auto "
             />
           </Link>
 
@@ -130,7 +128,7 @@ const Navbar = () => {
             animate="open"
             exit="closed"
             variants={mobileMenuVariants}
-            className="fixed inset-0 bg-brand-nav/98 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-white/95 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center"
             onClick={closeMenu}
           >
             {navLinks.map((link) => (
@@ -147,7 +145,7 @@ const Navbar = () => {
                     `text-3xl font-medium cursor-pointer transition-all duration-300 hover:text-brand-accent flex items-center gap-4 px-6 py-3 rounded-xl hover:bg-brand-accent/10 ${
                       isActive
                         ? "text-brand-accent bg-brand-accent/10"
-                        : "text-brand-nav-text"
+                        : "text-gray-700"
                     }`
                   }
                 >

@@ -42,7 +42,7 @@
 //           <div className="absolute bottom-0 left-0 right-0 p-6">
 //             <div className="p-4 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10 transition-all duration-300 group-hover:bg-black/50">
 //               <div>
-//                 <h3 className="text-2xl font-bold text-brand-light">
+//                 <h3 className="text-2xl font-bold text-brand-accent">
 //                   {member.name}
 //                 </h3>
 //                 <p className="text-brand-accent font-medium mb-3">

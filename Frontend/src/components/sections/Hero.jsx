@@ -55,7 +55,7 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col items-center p-4 text-center max-w-4xl w-full mx-auto">
         <motion.h1
           variants={titleVariants}
-          className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight uppercase text-brand-light"
+          className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight uppercase text-brand-accent"
           aria-label={title}
         >
           {title.split("").map((char, index) => (
@@ -81,7 +81,7 @@ const Hero = () => {
           {heroPillars.map((mod) => (
             <div key={mod.title} className="bg-brand-surface/50 backdrop-blur-md p-6 rounded-lg text-center border border-brand-accent/20">
               <div className="text-4xl text-brand-accent mx-auto mb-3">{mod.icon}</div>
-              <h3 className="text-xl font-semibold text-brand-light">{mod.title}</h3>
+              <h3 className="text-xl font-semibold text-brand-accent">{mod.title}</h3>
             </div>
           ))}
         </motion.div> */}
@@ -90,9 +90,9 @@ const Hero = () => {
           variants={itemVariants}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
         >
-          <Link to="/admissions" className="w-full sm:w-auto">
+          <Link to="/about" className="w-full sm:w-auto">
             <AnimatedButton className="w-full sm:w-auto">
-              Begin Your Application
+              Learn More About Us
             </AnimatedButton>
           </Link>
           <Link to="/gallery" className="w-full sm:w-auto">

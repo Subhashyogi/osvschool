@@ -5,7 +5,6 @@ import {
   FaTwitter,
   FaInstagram,
   FaArrowRight,
-  FaUniversity,
   FaBookOpen,
   FaUserFriends,
   FaInfoCircle,
@@ -29,11 +28,6 @@ const sitemapData = [
       { label: "Campus Life", to: "/gallery" },
     ],
   },
-  {
-    title: "Admissions",
-    icon: <FaUniversity className="text-brand-accent" />,
-    links: [{ label: "How to Apply", to: "/admissions" }],
-  },
 ];
 
 const Footer = () => {
@@ -42,7 +36,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12">
           <div className="lg:col-span-1">
-            {/* <h2 className="text-xl md:text-2xl font-bold text-brand-light mb-2">OSVSR School</h2> */}
+            {/* <h2 className="text-xl md:text-2xl font-bold text-brand-accent mb-2">OSVSR School</h2> */}
             <img src="/src/assets/OSV-logo.svg" alt="" className="w-32 mb-3" />
             <p className="text-sm max-w-xs">
               Nurturing Tomorrow's Leaders with a blend of tradition and
@@ -73,8 +67,8 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="lg:col-span-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {sitemapData.map((section) => (
                 <div key={section.title}>
                   <h4 className="font-semibold text-orange-400 mb-4 flex items-center gap-2">
@@ -96,11 +90,27 @@ const Footer = () => {
               ))}
             </div>
           </div>
+
+          <div className="lg:col-span-1">
+            <h4 className="font-semibold text-orange-400 mb-4">Find Us</h4>
+            <div className="w-full h-48 rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2803.3289601920746!2d75.76235432171447!3d26.93600173748734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db30b15555555%3A0xdb1687a2da989b86!2sO.S.V.%20Senior%20Secondary%20School!5e0!3m2!1sen!2sin!4v1753614062124!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="O.S.V. Senior Secondary School Location"
+              ></iframe>
+            </div>
+          </div>
         </div>
 
-        <hr className="my-10 border-brand-surface/50" />
+        {/* <hr className="my-10 border-brand-surface/50" /> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
             <h4 className="font-semibold text-brand-accent flex items-center gap-2">
               <FaUserFriends className="text-brand-accent" /> Stay Connected
@@ -124,7 +134,7 @@ const Footer = () => {
               <FaArrowRight size={16} />
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
 
       <div className="border-t border-brand-surface/50">
