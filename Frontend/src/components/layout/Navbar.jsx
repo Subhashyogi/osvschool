@@ -13,7 +13,7 @@ const navLinks = [
     { title: 'Home', to: '/', icon: <FaHome /> },
     { title: 'About', to: '/about', icon: <FaInfoCircle /> },
     { title: 'Academics', to: '/academics', icon: <FaBookOpen /> },
-    { title: 'Admissions', to: '/admissions', icon: <FaUniversity /> },
+    // { title: 'Admissions', to: '/admissions', icon: <FaUniversity /> },
     { title: 'Faculty', to: '/faculty', icon: <FaUsers /> },
     { title: 'Gallery', to: '/gallery', icon: <FaImages /> },
     { title: 'Contact', to: '/contact', icon: <FaEnvelope /> },
