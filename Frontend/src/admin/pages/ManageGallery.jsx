@@ -21,13 +21,16 @@ const ManageGallery = () => {
     try {
       setLoading(true);
       const token = getToken();
-      const response = await fetch("http://localhost:4000/api/gallery", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://osvschool-backend.onrender.com/api/gallery",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -60,7 +63,7 @@ const ManageGallery = () => {
       try {
         const token = getToken();
         const response = await fetch(
-          `http://localhost:4000/api/gallery/${itemToDelete.id}`,
+          `https://osvschool-backend.onrender.com/api/gallery/${itemToDelete.id}`,
           {
             method: "DELETE",
             headers: {
@@ -87,8 +90,8 @@ const ManageGallery = () => {
       const token = getToken();
       const method = editingItem ? "PUT" : "POST";
       const url = editingItem
-        ? `http://localhost:4000/api/gallery/${editingItem.id}`
-        : "http://localhost:4000/api/gallery";
+        ? `https://osvschool-backend.onrender.com/api/gallery/${editingItem.id}`
+        : "https://osvschool-backend.onrender.com/api/gallery";
 
       // Check if itemData is FormData (contains file) or regular object
       const isFormData = itemData instanceof FormData;
@@ -159,7 +162,7 @@ const ManageGallery = () => {
             >
               <div className="relative">
                 <img
-                  src={`http://localhost:4000/${item.mediaUrl}`}
+                  src={`https://osvschool-backend.onrender.com/${item.mediaUrl}`}
                   alt={item.title}
                   className="h-48 w-full object-cover"
                 />
@@ -219,7 +222,9 @@ const GalleryForm = ({ item, onSave, onClose }) => {
   });
   const [selectedFile, setSelectedFile] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(
-    item?.mediaUrl ? `http://localhost:4000/${item.mediaUrl}` : ""
+    item?.mediaUrl
+      ? `https://osvschool-backend.onrender.com/${item.mediaUrl}`
+      : ""
   );
   const [uploading, setUploading] = useState(false);
 

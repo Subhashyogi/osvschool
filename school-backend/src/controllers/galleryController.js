@@ -48,21 +48,35 @@ class GalleryController {
       res.status(201).json(newGallery);
     } catch (error) {
       console.error("Error creating gallery entry:", error);
-      res
-        .status(500)
-        .json({
-          message: "Error creating gallery entry",
-          error: error.message,
-        });
+      res.status(500).json({
+        message: "Error creating gallery entry",
+        error: error.message,
+      });
     }
   }
 
   async getAllGalleries(req, res) {
     try {
       // By default, this will only return non-deleted galleries due to defaultScope
-      const galleries = await this.Gallery.findAll();
-      res.status(200).json(galleries);
+      const galleries = await this.Gallery.findAll({
+        order: [["createdAt", "DESC"]], // Show newest first
+      });
+
+      // Process galleries to include full media URLs
+      const processedGalleries = galleries.map((gallery) => {
+        const galleryData = gallery.toJSON();
+        if (galleryData.mediaUrl) {
+          // Add full URL if it's just a relative path
+          if (!galleryData.mediaUrl.startsWith("http")) {
+            galleryData.mediaUrl = `https://osvschool-backend.onrender.com/${galleryData.mediaUrl}`;
+          }
+        }
+        return galleryData;
+      });
+
+      res.status(200).json(processedGalleries);
     } catch (error) {
+      console.error("❌ Error getting galleries:", error);
       res.status(500).json({ message: "Error retrieving galleries", error });
     }
   }
@@ -91,13 +105,25 @@ class GalleryController {
 
   async getGalleryById(req, res) {
     try {
+      console.log(`📋 Getting gallery with ID: ${req.params.id}`);
+
       const { id } = req.params;
       const gallery = await this.Gallery.findByPk(id);
+
       if (!gallery) {
+        console.log("❌ Gallery not found");
         return res.status(404).json({ message: "Gallery not found" });
       }
-      res.status(200).json(gallery);
+
+      const galleryData = gallery.toJSON();
+      if (galleryData.mediaUrl && !galleryData.mediaUrl.startsWith("http")) {
+        galleryData.mediaUrl = `https://osvschool-backend.onrender.com/${galleryData.mediaUrl}`;
+      }
+
+      console.log("✅ Successfully retrieved gallery");
+      res.status(200).json(galleryData);
     } catch (error) {
+      console.error("❌ Error getting gallery:", error);
       res.status(500).json({ message: "Error retrieving gallery", error });
     }
   }

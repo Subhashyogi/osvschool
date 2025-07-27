@@ -233,7 +233,7 @@ const ManageTestimonials = () => {
 
       try {
         const response = await authenticatedFetch(
-          `http://localhost:4000/api/testimonials?page=${page}&limit=10&search=${search}&includeDeleted=${includeDeleted}`
+          `https://osvschool-backend.onrender.com/api/testimonials?page=${page}&limit=10&search=${search}&includeDeleted=${includeDeleted}`
         );
 
         if (!response.ok) {
@@ -330,8 +330,8 @@ const ManageTestimonials = () => {
 
     try {
       const url = editingTestimonial
-        ? `http://localhost:4000/api/testimonials/${editingTestimonial.id}`
-        : "http://localhost:4000/api/testimonials";
+        ? `https://osvschool-backend.onrender.com/api/testimonials/${editingTestimonial.id}`
+        : "https://osvschool-backend.onrender.com/api/testimonials";
       const method = editingTestimonial ? "PUT" : "POST";
 
       const response = await authenticatedFetch(url, {
@@ -381,7 +381,7 @@ const ManageTestimonials = () => {
 
   const handleDelete = (id) => {
     performAction(
-      `http://localhost:4000/api/testimonials/${id}`,
+      `https://osvschool-backend.onrender.com/api/testimonials/${id}`,
       "DELETE",
       "Are you sure you want to delete this testimonial?",
       () => fetchTestimonials(currentPage, debouncedSearchTerm, showDeleted)
@@ -390,7 +390,7 @@ const ManageTestimonials = () => {
 
   const handleRestore = (id) => {
     performAction(
-      `http://localhost:4000/api/testimonials/${id}/restore`,
+      `https://osvschool-backend.onrender.com/api/testimonials/${id}/restore`,
       "PUT",
       "Are you sure you want to restore this testimonial?",
       () => fetchTestimonials(currentPage, debouncedSearchTerm, showDeleted)

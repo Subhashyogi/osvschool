@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
           // Verify token is still valid
           try {
             const response = await fetch(
-              "http://localhost:4000/api/auth/verify",
+              "https://osvschool-backend.onrender.com/api/auth/verify",
               {
                 method: "GET",
                 headers: {

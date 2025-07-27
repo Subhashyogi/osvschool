@@ -51,7 +51,7 @@ class TestimonialController {
       const processedTestimonials = rows.map((testimonial) => {
         const testimonialData = testimonial.toJSON();
         if (testimonialData.avtar) {
-          testimonialData.avtar = `http://localhost:4000/uploads/testimonials/${testimonialData.avtar}`;
+          testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
         }
         return testimonialData;
       });
@@ -91,7 +91,7 @@ class TestimonialController {
 
       const testimonialData = testimonial.toJSON();
       if (testimonialData.avtar) {
-        testimonialData.avtar = `http://localhost:4000/uploads/testimonials/${testimonialData.avtar}`;
+        testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
       }
 
       console.log("✅ Successfully retrieved testimonial");
@@ -108,8 +108,6 @@ class TestimonialController {
   // Get all active testimonials for public display (no authentication required)
   getPublicTestimonials = async (req, res) => {
     try {
-      console.log("📋 Getting public testimonials...");
-
       // Get all active (non-deleted) testimonials, ordered by creation date
       const testimonials = await this.testimonialModel.findAll({
         where: {
@@ -118,20 +116,15 @@ class TestimonialController {
         order: [["created_at", "DESC"]],
       });
 
-      console.log(
-        `Found ${testimonials.length} active testimonials for public display`
-      );
-
       // Process testimonials to include full avatar URLs
       const processedTestimonials = testimonials.map((testimonial) => {
         const testimonialData = testimonial.toJSON();
         if (testimonialData.avtar) {
-          testimonialData.avtar = `http://localhost:4000/uploads/testimonials/${testimonialData.avtar}`;
+          testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
         }
         return testimonialData;
       });
 
-      console.log("✅ Successfully retrieved public testimonials");
       res.json(processedTestimonials);
     } catch (error) {
       console.error("❌ Error getting public testimonials:", error);
@@ -182,7 +175,7 @@ class TestimonialController {
 
       const responseData = testimonial.toJSON();
       if (responseData.avtar) {
-        responseData.avtar = `http://localhost:4000/uploads/testimonials/${responseData.avtar}`;
+        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
       }
 
       console.log(
@@ -278,7 +271,7 @@ class TestimonialController {
 
       const responseData = testimonial.toJSON();
       if (responseData.avtar) {
-        responseData.avtar = `http://localhost:4000/uploads/testimonials/${responseData.avtar}`;
+        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
       }
 
       console.log("✅ Testimonial updated successfully");
@@ -353,7 +346,7 @@ class TestimonialController {
 
       const responseData = testimonial.toJSON();
       if (responseData.avtar) {
-        responseData.avtar = `http://localhost:4000/uploads/testimonials/${responseData.avtar}`;
+        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
       }
 
       console.log("✅ Testimonial restored successfully");
