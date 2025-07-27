@@ -72,7 +72,7 @@ const Hero = () => {
 
         <motion.p
           variants={itemVariants}
-          className="mt-4 text-lg md:text-xl text-orange-400 max-w-2xl"
+          className="mt-6 md:mt-4 text-lg md:text-xl text-orange-400 max-w-2xl"
         >
           A Tradition of Excellence, A Future of Innovation.
         </motion.p>
@@ -88,7 +88,7 @@ const Hero = () => {
 
         <motion.div
           variants={itemVariants}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
+          className="mt-12 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-4 w-full"
         >
           <Link to="/about" className="w-full sm:w-auto">
             <AnimatedButton className="w-full sm:w-auto text-brand-light">
