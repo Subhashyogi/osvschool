@@ -49,7 +49,7 @@ const Hero = () => {
           <source src={campusVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-brand-dark/70"></div>
+        <div className="absolute inset-0 bg-brand-dark/10"></div>
       </div>
 
       <div className="relative z-10 flex flex-col items-center p-4 text-center max-w-4xl w-full mx-auto">
@@ -61,7 +61,7 @@ const Hero = () => {
         >
           {/* 1. The image is now a motion component AND it's INSIDE the h1 */}
           <motion.img
-            src="/school-O-letter.svg"
+            src="/src/assets/o-letter.svg"
             alt="O"
             // 2. Apply the same animation variants as the letters
             variants={letterVariants}
