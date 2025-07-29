@@ -80,16 +80,16 @@ export default {
         },
       },
     },
-    screens: {
-      xxs: "200px",
-      xs: "400px", // Extra small devices
-      sm: "640px", // Small devices
-      md: "768px", // Medium devices
-      lg: "1024px", // Large devices
-      xl: "1280px", // Extra large devices
-      "2xl": "1536px", // 2X Extra large devices
-      "3xl": "1920px", // Custom ultra-wide screens
-    },
+    // screens: {
+    //   xxs: "200px",
+    //   xs: "400px", // Extra small devices
+    //   sm: "640px", // Small devices
+    //   md: "768px", // Medium devices
+    //   lg: "1024px", // Large devices
+    //   xl: "1280px", // Extra large devices
+    //   "2xl": "1536px", // 2X Extra large devices
+    //   "3xl": "1920px", // Custom ultra-wide screens
+    // },
   },
   plugins: [
     function ({ addUtilities }) {
