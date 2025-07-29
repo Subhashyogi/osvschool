@@ -28,7 +28,7 @@ const itemVariants = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const title = "O.S.V. SCHOOL";
+const title = ".S.V. SR. SEC. SCHOOL";
 
 const Hero = () => {
   return (
@@ -53,11 +53,30 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 flex flex-col items-center p-4 text-center max-w-4xl w-full mx-auto">
+        {/* The outer div is no longer needed for flex, as the h1 will handle it */}
         <motion.h1
           variants={titleVariants}
-          className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight uppercase text-brand-light"
-          aria-label={title}
+          className="flex items-baseline justify-center xxs:text-lg xs:text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase text-brand-light"
+          aria-label={`O${title}`}
         >
+          {/* 1. The image is now a motion component AND it's INSIDE the h1 */}
+          <motion.img
+            src="/src/assets/ot.svg"
+            alt="O"
+            // 2. Apply the same animation variants as the letters
+            variants={letterVariants}
+            // 3. Use 'em' units for responsive sizing! This is better than fixed heights.
+            className="inline-block"
+            style={{
+              height: "0.80em",
+              width: "0.80em",
+              // Optional: fine-tune vertical alignment
+              position: "relative",
+              top: "0.08em",
+            }}
+          />
+
+          {/* The rest of your title mapping logic remains the same */}
           {title.split("").map((char, index) => (
             <motion.span
               key={index}
@@ -76,15 +95,6 @@ const Hero = () => {
         >
           A Tradition of Excellence, A Future of Innovation.
         </motion.p>
-
-        {/* <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mt-10">
-          {heroPillars.map((mod) => (
-            <div key={mod.title} className="bg-brand-surface/50 backdrop-blur-md p-6 rounded-lg text-center border border-brand-accent/20">
-              <div className="text-4xl text-brand-accent mx-auto mb-3">{mod.icon}</div>
-              <h3 className="text-xl font-semibold text-brand-accent">{mod.title}</h3>
-            </div>
-          ))}
-        </motion.div> */}
 
         <motion.div
           variants={itemVariants}
