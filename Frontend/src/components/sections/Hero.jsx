@@ -61,7 +61,7 @@ const Hero = () => {
         >
           {/* 1. The image is now a motion component AND it's INSIDE the h1 */}
           <motion.img
-            src="/src/assets/o-letter.svg"
+            src="/src/assets/school-O-letter.svg"
             alt="O"
             // 2. Apply the same animation variants as the letters
             variants={letterVariants}
