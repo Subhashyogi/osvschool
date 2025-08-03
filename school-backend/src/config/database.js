@@ -9,7 +9,7 @@ const sequelize = new Sequelize("osvschool", "osvschool", "oSvScH#15@14", {
   }
 });
 
-// Test database connection
+// Test database connection (non-blocking)
 const testConnection = async () => {
   try {
     await sequelize.authenticate();
@@ -19,7 +19,7 @@ const testConnection = async () => {
   }
 };
 
-// Call the test function
-testConnection();
+// Call the test function without blocking
+setTimeout(testConnection, 1000);
 
 export default sequelize;
