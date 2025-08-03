@@ -5,9 +5,7 @@ const sequelize = new Sequelize("osvschool", "osvschool", "oSvScH#15@14", {
   dialect: "mysql",
   logging: false,
   dialectOptions: {
-    connectTimeout: 60000,
-    acquireTimeout: 60000,
-    timeout: 60000
+    connectTimeout: 60000
   }
 });
 
