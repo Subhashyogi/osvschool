@@ -1,30 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  FaFootballBall,
-  FaTheaterMasks,
   FaFlask,
-  FaBookReader,
-  FaUsers,
-  FaBus,
+  FaLaptop,
 } from "react-icons/fa";
 
 const CampusLife = () => {
   const facilities = [
-    {
-      icon: FaFootballBall,
-      title: "Sports Complex",
-      description:
-        "State-of-the-art facilities for cricket, football, basketball, and indoor games.",
-      image: "/api/placeholder/400/300",
-    },
-    {
-      icon: FaTheaterMasks,
-      title: "Auditorium",
-      description:
-        "Modern auditorium for cultural events, performances, and assemblies.",
-      image: "/api/placeholder/400/300",
-    },
     {
       icon: FaFlask,
       title: "Science Labs",
@@ -33,36 +15,15 @@ const CampusLife = () => {
       image: "/api/placeholder/400/300",
     },
     {
-      icon: FaBookReader,
-      title: "Library",
+      icon: FaLaptop,
+      title: "Computer Labs",
       description:
-        "Extensive collection of books, digital resources, and quiet study spaces.",
+        "Advanced computer laboratories with latest hardware, software, and high-speed internet for programming, digital design, and technology education.",
       image: "/api/placeholder/400/300",
     },
   ];
 
-  const activities = [
-    {
-      icon: FaUsers,
-      title: "Student Council",
-      description: "Leadership opportunities and student governance",
-    },
-    {
-      icon: FaTheaterMasks,
-      title: "Drama Club",
-      description: "Theatre productions and acting workshops",
-    },
-    {
-      icon: FaFootballBall,
-      title: "Sports Teams",
-      description: "Inter-school competitions and tournaments",
-    },
-    {
-      icon: FaBus,
-      title: "Educational Trips",
-      description: "Field visits and educational excursions",
-    },
-  ];
+
 
   return (
     <section className="py-16 md:py-20 bg-white">
@@ -122,39 +83,7 @@ const CampusLife = () => {
           </div>
         </div>
 
-        {/* Activities Section */}
-        <div>
-          <motion.h3
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl font-bold text-brand-dark mb-8 text-center"
-          >
-            Student Activities & Clubs
-          </motion.h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {activities.map((activity, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="text-center p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
-              >
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-brand-accent/10 rounded-full mb-4">
-                  <activity.icon className="text-2xl text-brand-accent" />
-                </div>
-                <h4 className="text-lg font-semibold text-brand-dark mb-2">
-                  {activity.title}
-                </h4>
-                <p className="text-sm text-brand-muted">
-                  {activity.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+
 
         {/* Call to Action */}
         {/* <motion.div

@@ -9,6 +9,8 @@ import {
   FaBuilding,
   FaUserGraduate,
   FaQuestionCircle,
+  FaGraduationCap,
+  FaChartLine,
 } from "react-icons/fa";
 
 export const testimonials = [
@@ -161,14 +163,14 @@ export const heroPillars = [
 
 export const academicPrograms = [
   {
-    title: "Science & Robotics",
+    title: "Science & Technology",
     description:
-      "Explore the frontiers of science, from robotics to environmental studies.",
+      "Cutting-edge laboratories and research opportunities in Physics, Chemistry, Biology, and Computer Science.",
     icon: FaFlask,
     outcomes: [
-      "Critical thinking & problem-solving",
-      "Hands-on lab experience",
-      "Preparation for STEM careers",
+      "Modern Labs",
+      "Research Projects", 
+      "Tech Integration",
     ],
     departmentHead: {
       name: "Mr. Rajesh Kumar",
@@ -177,30 +179,14 @@ export const academicPrograms = [
     },
   },
   {
-    title: "Fine Arts",
+    title: "Mathematics",
     description:
-      "Unleash your creativity in our studios for painting, music, and drama.",
-    icon: FaPaintBrush,
+      "Comprehensive mathematical education from basic arithmetic to advanced calculus and statistics.",
+    icon: FaCalculator,
     outcomes: [
-      "Portfolio development",
-      "Public performance and exhibition",
-      "Creative expression",
-    ],
-    departmentHead: {
-      name: "Mrs. Sunita Devi",
-      image:
-        "https://images.pexels.com/photos/8617973/pexels-photo-8617973.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-  },
-  {
-    title: "Computer Science",
-    description:
-      "Dive into algorithms, data structures, and software development.",
-    icon: FaCode,
-    outcomes: [
-      "Proficiency in Python and Java",
-      "Software development lifecycle understanding",
-      "Algorithmic thinking",
+      "Problem Solving",
+      "Logical Thinking",
+      "Real Applications",
     ],
     departmentHead: {
       name: "Mr. Vikram Singh",
@@ -209,18 +195,35 @@ export const academicPrograms = [
     },
   },
   {
-    title: "Humanities & Literature",
-    description: "Dive deep into history, literature, and philosophy.",
-    icon: FaBook,
+    title: "Arts",
+    description:
+      "Comprehensive arts education covering humanities, literature, and creative expression.",
+    icon: FaGraduationCap,
     outcomes: [
-      "Advanced research and writing skills",
-      "Cultural and historical awareness",
-      "Analytical reasoning",
+      "Humanities",
+      "Literature",
+      "Creative Expression",
     ],
     departmentHead: {
       name: "Mrs. Sunita Devi",
       image:
         "https://images.pexels.com/photos/8617973/pexels-photo-8617973.jpeg?auto=compress&cs=tinysrgb&w=400",
+    },
+  },
+  {
+    title: "Commerce",
+    description:
+      "Business and commerce education preparing students for the corporate world and entrepreneurship.",
+    icon: FaChartLine,
+    outcomes: [
+      "Business Studies",
+      "Economics",
+      "Accountancy",
+    ],
+    departmentHead: {
+      name: "Mr. Arjun Reddy",
+      image:
+        "https://images.pexels.com/photos/8090137/pexels-photo-8090137.jpeg?auto=compress&cs=tinysrgb&w=400",
     },
   },
 ];

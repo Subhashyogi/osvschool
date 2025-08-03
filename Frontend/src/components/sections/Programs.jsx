@@ -4,9 +4,8 @@ import {
   FaFlask,
   FaCalculator,
   FaBook,
-  FaGlobe,
-  FaPalette,
-  FaMusic,
+  FaGraduationCap,
+  FaChartLine,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AnimatedButton from "../common/AnimatedButton";
@@ -17,49 +16,34 @@ const Programs = () => {
       icon: FaFlask,
       title: "Science & Technology",
       description:
-        "Cutting-edge laboratories and research opportunities in Physics, Chemistry, Biology, and Computer Science.",
-      features: ["Modern Labs", "Research Projects", "Tech Integration"],
+        "Comprehensive scientific education with state-of-the-art laboratories and hands-on research opportunities across multiple disciplines.",
+      features: ["Physics & Chemistry", "Biology & Computer Science", "Research Projects"],
       color: "from-blue-500 to-blue-600",
     },
     {
       icon: FaCalculator,
       title: "Mathematics",
       description:
-        "Comprehensive mathematical education from basic arithmetic to advanced calculus and statistics.",
-      features: ["Problem Solving", "Logical Thinking", "Real Applications"],
+        "Advanced mathematical education from foundational concepts to complex problem-solving and analytical thinking.",
+      features: ["Algebra & Calculus", "Statistics & Geometry", "Problem Solving"],
       color: "from-green-500 to-green-600",
     },
+
     {
-      icon: FaBook,
-      title: "Languages & Literature",
+      icon: FaGraduationCap,
+      title: "Arts & Humanities",
       description:
-        "Master communication skills through English, Hindi, and regional languages with rich literature studies.",
-      features: ["Creative Writing", "Public Speaking", "Cultural Studies"],
-      color: "from-purple-500 to-purple-600",
-    },
-    {
-      icon: FaGlobe,
-      title: "Social Sciences",
-      description:
-        "Understanding society, history, geography, and civics to become responsible global citizens.",
-      features: ["Historical Analysis", "Geography", "Civic Responsibility"],
+        "Comprehensive arts and humanities education fostering critical thinking, creativity, and cultural understanding.",
+      features: ["Literature & History", "Geography & Political Science", "Cultural Studies"],
       color: "from-orange-500 to-orange-600",
     },
     {
-      icon: FaPalette,
-      title: "Arts & Crafts",
+      icon: FaChartLine,
+      title: "Commerce & Business",
       description:
-        "Nurture creativity through visual arts, crafts, and design thinking workshops.",
-      features: ["Visual Arts", "Handicrafts", "Design Thinking"],
+        "Comprehensive business education preparing students for corporate leadership, entrepreneurship, and economic analysis.",
+      features: ["Business Studies & Economics", "Accountancy & Finance", "Entrepreneurship"],
       color: "from-pink-500 to-pink-600",
-    },
-    {
-      icon: FaMusic,
-      title: "Performing Arts",
-      description:
-        "Express yourself through music, dance, drama, and other performing arts programs.",
-      features: ["Music Theory", "Dance Forms", "Theatre Arts"],
-      color: "from-indigo-500 to-indigo-600",
     },
   ];
 
