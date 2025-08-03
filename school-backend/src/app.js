@@ -14,8 +14,42 @@ dotenv.config({ quiet: true });
 
 const app = express();
 
-// Middleware
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://osvschool.netlify.app", // replace with your real Netlify URL
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like curl, Postman)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        console.error("Blocked by CORS:", origin);
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+app.options(
+  "*",
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+app.set("trust proxy", true);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -39,9 +73,9 @@ app.use(
 
 // Health check endpoint
 app.get("/", (req, res) => {
-  res.json({ 
-    status: "Server is running", 
-    timestamp: new Date().toISOString() 
+  res.json({
+    status: "Server is running",
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -54,7 +88,7 @@ app.use("/api/testimonials", testimonialRoutes);
 // Sync database and start server
 const startServer = async () => {
   const PORT = process.env.PORT || 5000;
-  
+
   try {
     await sequelize.sync(); // Sync database
     console.log("Database synchronized successfully");
