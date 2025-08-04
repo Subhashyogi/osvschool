@@ -42,15 +42,18 @@ const AllAchieversPage = () => {
 
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://osvschool.com/achievers" />
+                <meta property="og:url" content="https://osvschool.netlify.app/achievers" />
                 <meta property="og:title" content="Our Achievers - OSV School | Celebrating Student Excellence" />
                 <meta property="og:description" content="Celebrate the outstanding achievements of OSV School students. Discover our academic champions, sports stars, and talented individuals who have excelled in various competitions and platforms." />
                 <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
                 <meta property="og:site_name" content="OSV School" />
+                <meta property="og:locale" content="en_US" />
 
                 {/* Twitter */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="https://osvschool.com/achievers" />
+                <meta property="twitter:url" content="https://osvschool.netlify.app/achievers" />
                 <meta property="twitter:title" content="Our Achievers - OSV School | Celebrating Student Excellence" />
                 <meta property="twitter:description" content="Celebrate the outstanding achievements of OSV School students. Discover our academic champions, sports stars, and talented individuals who have excelled in various competitions and platforms." />
                 <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
@@ -58,7 +61,7 @@ const AllAchieversPage = () => {
                 {/* Additional SEO */}
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta name="theme-color" content="#3B82F6" />
-                <link rel="canonical" href="https://osvschool.com/achievers" />
+                <link rel="canonical" href="https://osvschool.netlify.app/achievers" />
             </Helmet>
             <header className="pt-32 pb-16 bg-gray-50 text-center px-4">
                 <motion.h1 

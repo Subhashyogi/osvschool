@@ -137,15 +137,18 @@ const GalleryPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.com/gallery" />
+        <meta property="og:url" content="https://osvschool.netlify.app/gallery" />
         <meta property="og:title" content="School Gallery - OSV School | Campus Life & Events" />
         <meta property="og:description" content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment." />
         <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-gallery.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
+        <meta property="og:locale" content="en_US" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.com/gallery" />
+        <meta property="twitter:url" content="https://osvschool.netlify.app/gallery" />
         <meta property="twitter:title" content="School Gallery - OSV School | Campus Life & Events" />
         <meta property="twitter:description" content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment." />
         <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-gallery.png" />
@@ -153,7 +156,7 @@ const GalleryPage = () => {
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.com/gallery" />
+        <link rel="canonical" href="https://osvschool.netlify.app/gallery" />
       </Helmet>
       <div
         className="relative pt-32 md:pt-40 pb-20 md:pb-24 text-center bg-cover bg-center"

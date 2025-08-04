@@ -13,15 +13,18 @@ const AdmissionsPage = () => {
 
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://osvschool.com/admissions" />
+                <meta property="og:url" content="https://osvschool.netlify.app/admissions" />
                 <meta property="og:title" content="Admissions - OSV School | Join Our Academic Excellence" />
                 <meta property="og:description" content="Apply for admission to OSV School. Discover our admission process, requirements, and how to join our community of academic excellence. Start your educational journey with us." />
                 <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-academics.png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
                 <meta property="og:site_name" content="OSV School" />
+                <meta property="og:locale" content="en_US" />
 
                 {/* Twitter */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="https://osvschool.com/admissions" />
+                <meta property="twitter:url" content="https://osvschool.netlify.app/admissions" />
                 <meta property="twitter:title" content="Admissions - OSV School | Join Our Academic Excellence" />
                 <meta property="twitter:description" content="Apply for admission to OSV School. Discover our admission process, requirements, and how to join our community of academic excellence. Start your educational journey with us." />
                 <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-academics.png" />
@@ -29,7 +32,7 @@ const AdmissionsPage = () => {
                 {/* Additional SEO */}
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta name="theme-color" content="#3B82F6" />
-                <link rel="canonical" href="https://osvschool.com/admissions" />
+                <link rel="canonical" href="https://osvschool.netlify.app/admissions" />
             </Helmet>
 
             <div className="min-h-screen flex items-center justify-center bg-brand-light">

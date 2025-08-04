@@ -152,15 +152,18 @@ const FacultyPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.com/faculty" />
+        <meta property="og:url" content="https://osvschool.netlify.app/faculty" />
         <meta property="og:title" content="Our Faculty - OSV School | Expert Educators & Academic Excellence" />
         <meta property="og:description" content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development." />
         <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-faculty.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
+        <meta property="og:locale" content="en_US" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.com/faculty" />
+        <meta property="twitter:url" content="https://osvschool.netlify.app/faculty" />
         <meta property="twitter:title" content="Our Faculty - OSV School | Expert Educators & Academic Excellence" />
         <meta property="twitter:description" content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development." />
         <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-faculty.png" />
@@ -168,7 +171,7 @@ const FacultyPage = () => {
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.com/faculty" />
+        <link rel="canonical" href="https://osvschool.netlify.app/faculty" />
       </Helmet>
       <div
         className="relative pt-32 md:pt-40 pb-20 md:pb-24 text-center bg-cover bg-center"

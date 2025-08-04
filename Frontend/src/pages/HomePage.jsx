@@ -24,15 +24,18 @@ const HomePage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.com/" />
+        <meta property="og:url" content="https://osvschool.netlify.app/" />
         <meta property="og:title" content="OSV School - Excellence in Education Since 1985" />
         <meta property="og:description" content="OSV School offers comprehensive education from kindergarten to higher secondary. Discover our academic programs, world-class facilities, and commitment to nurturing future leaders." />
         <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-home.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
+        <meta property="og:locale" content="en_US" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.com/" />
+        <meta property="twitter:url" content="https://osvschool.netlify.app/" />
         <meta property="twitter:title" content="OSV School - Excellence in Education Since 1985" />
         <meta property="twitter:description" content="OSV School offers comprehensive education from kindergarten to higher secondary. Discover our academic programs, world-class facilities, and commitment to nurturing future leaders." />
         <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-home.png" />
@@ -40,7 +43,7 @@ const HomePage = () => {
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.com/" />
+        <link rel="canonical" href="https://osvschool.netlify.app/" />
       </Helmet>
 
       <Hero />
