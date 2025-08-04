@@ -40,7 +40,7 @@ const AboutPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.com/about" />
+        <meta property="og:url" content="https://osvschool.netlify.app/about" />
         <meta property="og:title" content="About OSV School - Our Story of Excellence Since 1985" />
         <meta property="og:description" content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development." />
         <meta property="og:image" content="/src/assets/og-images/og-about.png" />
@@ -48,7 +48,7 @@ const AboutPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.com/about" />
+        <meta property="twitter:url" content="https://osvschool.netlify.app/about" />
         <meta property="twitter:title" content="About OSV School - Our Story of Excellence Since 1985" />
         <meta property="twitter:description" content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development." />
         <meta property="twitter:image" content="/src/assets/og-images/og-about.png" />
@@ -56,7 +56,7 @@ const AboutPage = () => {
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.com/about" />
+        <link rel="canonical" href="https://osvschool.netlify.app/about" />
       </Helmet>
 
       <header ref={headerRef} className="relative h-[60vh] overflow-hidden">
