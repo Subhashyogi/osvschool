@@ -44,7 +44,7 @@ const AcademicsPage = () => {
                 <meta property="og:url" content="https://osvschool.com/academics" />
                 <meta property="og:title" content="Academic Programs - OSV School | Science, Mathematics, Arts & Commerce" />
                 <meta property="og:description" content="Explore our comprehensive academic programs at OSV School. From Science & Technology to Mathematics, Arts & Humanities, and Commerce & Business. Expert faculty and modern facilities." />
-                <meta property="og:image" content="/src/assets/og-images/og-academics.png" />
+                <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-academics.png" />
                 <meta property="og:site_name" content="OSV School" />
 
                 {/* Twitter */}
@@ -52,7 +52,7 @@ const AcademicsPage = () => {
                 <meta property="twitter:url" content="https://osvschool.com/academics" />
                 <meta property="twitter:title" content="Academic Programs - OSV School | Science, Mathematics, Arts & Commerce" />
                 <meta property="twitter:description" content="Explore our comprehensive academic programs at OSV School. From Science & Technology to Mathematics, Arts & Humanities, and Commerce & Business. Expert faculty and modern facilities." />
-                <meta property="twitter:image" content="/src/assets/og-images/og-academics.png" />
+                <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-academics.png" />
 
                 {/* Additional SEO */}
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

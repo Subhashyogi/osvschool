@@ -45,7 +45,7 @@ const AllAchieversPage = () => {
                 <meta property="og:url" content="https://osvschool.com/achievers" />
                 <meta property="og:title" content="Our Achievers - OSV School | Celebrating Student Excellence" />
                 <meta property="og:description" content="Celebrate the outstanding achievements of OSV School students. Discover our academic champions, sports stars, and talented individuals who have excelled in various competitions and platforms." />
-                <meta property="og:image" content="/src/assets/og-images/og-about.png" />
+                <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
                 <meta property="og:site_name" content="OSV School" />
 
                 {/* Twitter */}
@@ -53,7 +53,7 @@ const AllAchieversPage = () => {
                 <meta property="twitter:url" content="https://osvschool.com/achievers" />
                 <meta property="twitter:title" content="Our Achievers - OSV School | Celebrating Student Excellence" />
                 <meta property="twitter:description" content="Celebrate the outstanding achievements of OSV School students. Discover our academic champions, sports stars, and talented individuals who have excelled in various competitions and platforms." />
-                <meta property="twitter:image" content="/src/assets/og-images/og-about.png" />
+                <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
 
                 {/* Additional SEO */}
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

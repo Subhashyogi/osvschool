@@ -16,7 +16,7 @@ const AdmissionsPage = () => {
                 <meta property="og:url" content="https://osvschool.com/admissions" />
                 <meta property="og:title" content="Admissions - OSV School | Join Our Academic Excellence" />
                 <meta property="og:description" content="Apply for admission to OSV School. Discover our admission process, requirements, and how to join our community of academic excellence. Start your educational journey with us." />
-                <meta property="og:image" content="/src/assets/og-images/og-academics.png" />
+                <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-academics.png" />
                 <meta property="og:site_name" content="OSV School" />
 
                 {/* Twitter */}
@@ -24,7 +24,7 @@ const AdmissionsPage = () => {
                 <meta property="twitter:url" content="https://osvschool.com/admissions" />
                 <meta property="twitter:title" content="Admissions - OSV School | Join Our Academic Excellence" />
                 <meta property="twitter:description" content="Apply for admission to OSV School. Discover our admission process, requirements, and how to join our community of academic excellence. Start your educational journey with us." />
-                <meta property="twitter:image" content="/src/assets/og-images/og-academics.png" />
+                <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-academics.png" />
 
                 {/* Additional SEO */}
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

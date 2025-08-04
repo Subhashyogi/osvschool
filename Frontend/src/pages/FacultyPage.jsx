@@ -155,7 +155,7 @@ const FacultyPage = () => {
         <meta property="og:url" content="https://osvschool.com/faculty" />
         <meta property="og:title" content="Our Faculty - OSV School | Expert Educators & Academic Excellence" />
         <meta property="og:description" content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development." />
-        <meta property="og:image" content="/src/assets/og-images/og-faculty.png" />
+        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-faculty.png" />
         <meta property="og:site_name" content="OSV School" />
 
         {/* Twitter */}
@@ -163,7 +163,7 @@ const FacultyPage = () => {
         <meta property="twitter:url" content="https://osvschool.com/faculty" />
         <meta property="twitter:title" content="Our Faculty - OSV School | Expert Educators & Academic Excellence" />
         <meta property="twitter:description" content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development." />
-        <meta property="twitter:image" content="/src/assets/og-images/og-faculty.png" />
+        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-faculty.png" />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

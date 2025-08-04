@@ -27,7 +27,7 @@ const HomePage = () => {
         <meta property="og:url" content="https://osvschool.com/" />
         <meta property="og:title" content="OSV School - Excellence in Education Since 1985" />
         <meta property="og:description" content="OSV School offers comprehensive education from kindergarten to higher secondary. Discover our academic programs, world-class facilities, and commitment to nurturing future leaders." />
-        <meta property="og:image" content="/src/assets/og-images/og-home.png" />
+        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-home.png" />
         <meta property="og:site_name" content="OSV School" />
 
         {/* Twitter */}
@@ -35,7 +35,7 @@ const HomePage = () => {
         <meta property="twitter:url" content="https://osvschool.com/" />
         <meta property="twitter:title" content="OSV School - Excellence in Education Since 1985" />
         <meta property="twitter:description" content="OSV School offers comprehensive education from kindergarten to higher secondary. Discover our academic programs, world-class facilities, and commitment to nurturing future leaders." />
-        <meta property="twitter:image" content="/src/assets/og-images/og-home.png" />
+        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-home.png" />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

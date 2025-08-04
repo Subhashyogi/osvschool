@@ -19,7 +19,7 @@ const NotFoundPage = () => {
         <meta property="og:url" content="https://osvschool.com/404" />
         <meta property="og:title" content="404 - Page Not Found | OSV School" />
         <meta property="og:description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
-        <meta property="og:image" content="/src/assets/og-images/og-pagenotfound.png" />
+        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png" />
         <meta property="og:site_name" content="OSV School" />
 
         {/* Twitter */}
@@ -27,7 +27,7 @@ const NotFoundPage = () => {
         <meta property="twitter:url" content="https://osvschool.com/404" />
         <meta property="twitter:title" content="404 - Page Not Found | OSV School" />
         <meta property="twitter:description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
-        <meta property="twitter:image" content="/src/assets/og-images/og-pagenotfound.png" />
+        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png" />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -43,7 +43,7 @@ const AboutPage = () => {
         <meta property="og:url" content="https://osvschool.netlify.app/about" />
         <meta property="og:title" content="About OSV School - Our Story of Excellence Since 1985" />
         <meta property="og:description" content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development." />
-        <meta property="og:image" content="/src/assets/og-images/og-about.png" />
+        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
         <meta property="og:site_name" content="OSV School" />
 
         {/* Twitter */}
@@ -51,7 +51,7 @@ const AboutPage = () => {
         <meta property="twitter:url" content="https://osvschool.netlify.app/about" />
         <meta property="twitter:title" content="About OSV School - Our Story of Excellence Since 1985" />
         <meta property="twitter:description" content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development." />
-        <meta property="twitter:image" content="/src/assets/og-images/og-about.png" />
+        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

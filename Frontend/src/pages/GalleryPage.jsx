@@ -140,7 +140,7 @@ const GalleryPage = () => {
         <meta property="og:url" content="https://osvschool.com/gallery" />
         <meta property="og:title" content="School Gallery - OSV School | Campus Life & Events" />
         <meta property="og:description" content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment." />
-        <meta property="og:image" content="/src/assets/og-images/og-gallery.png" />
+        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-gallery.png" />
         <meta property="og:site_name" content="OSV School" />
 
         {/* Twitter */}
@@ -148,7 +148,7 @@ const GalleryPage = () => {
         <meta property="twitter:url" content="https://osvschool.com/gallery" />
         <meta property="twitter:title" content="School Gallery - OSV School | Campus Life & Events" />
         <meta property="twitter:description" content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment." />
-        <meta property="twitter:image" content="/src/assets/og-images/og-gallery.png" />
+        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-gallery.png" />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

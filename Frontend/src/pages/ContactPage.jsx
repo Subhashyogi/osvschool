@@ -35,7 +35,7 @@ const ContactPage = () => {
         <meta property="og:url" content="https://osvschool.com/contact" />
         <meta property="og:title" content="Contact Us - OSV School | Get in Touch for Admissions & Inquiries" />
         <meta property="og:description" content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information." />
-        <meta property="og:image" content="/src/assets/og-images/og-contact.png" />
+        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-contact.png" />
         <meta property="og:site_name" content="OSV School" />
 
         {/* Twitter */}
@@ -43,7 +43,7 @@ const ContactPage = () => {
         <meta property="twitter:url" content="https://osvschool.com/contact" />
         <meta property="twitter:title" content="Contact Us - OSV School | Get in Touch for Admissions & Inquiries" />
         <meta property="twitter:description" content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information." />
-        <meta property="twitter:image" content="/src/assets/og-images/og-contact.png" />
+        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-contact.png" />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
