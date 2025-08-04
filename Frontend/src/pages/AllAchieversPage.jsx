@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet";
 import { achievers } from '../constants';
-import { FaTrophy } from 'react-icons/fa';
+import { FaTrophy, FaMedal, FaStar, FaAward } from "react-icons/fa";
 
 // A self-contained, reusable card for displaying an achiever.
 const AchieverCard = ({ achiever }) => {
@@ -32,6 +33,33 @@ const AchieverCard = ({ achiever }) => {
 const AllAchieversPage = () => {
     return (
         <div className="bg-brand-light">
+            <Helmet>
+                <title>Our Achievers - OSV School | Celebrating Student Excellence</title>
+                <meta name="description" content="Celebrate the outstanding achievements of OSV School students. Discover our academic champions, sports stars, and talented individuals who have excelled in various competitions and platforms." />
+                <meta name="keywords" content="OSV School achievers, student achievements, academic excellence, sports champions, school awards, student success, academic competitions, school achievements" />
+                <meta name="author" content="OSV School" />
+                <meta name="robots" content="index, follow" />
+
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://osvschool.com/achievers" />
+                <meta property="og:title" content="Our Achievers - OSV School | Celebrating Student Excellence" />
+                <meta property="og:description" content="Celebrate the outstanding achievements of OSV School students. Discover our academic champions, sports stars, and talented individuals who have excelled in various competitions and platforms." />
+                <meta property="og:image" content="/src/assets/og-images/og-about.png" />
+                <meta property="og:site_name" content="OSV School" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content="https://osvschool.com/achievers" />
+                <meta property="twitter:title" content="Our Achievers - OSV School | Celebrating Student Excellence" />
+                <meta property="twitter:description" content="Celebrate the outstanding achievements of OSV School students. Discover our academic champions, sports stars, and talented individuals who have excelled in various competitions and platforms." />
+                <meta property="twitter:image" content="/src/assets/og-images/og-about.png" />
+
+                {/* Additional SEO */}
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="theme-color" content="#3B82F6" />
+                <link rel="canonical" href="https://osvschool.com/achievers" />
+            </Helmet>
             <header className="pt-32 pb-16 bg-gray-50 text-center px-4">
                 <motion.h1 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} 

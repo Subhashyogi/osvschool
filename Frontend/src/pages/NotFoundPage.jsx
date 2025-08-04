@@ -1,13 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Make sure to have react-router-dom installed
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import { FaHome, FaArrowLeft } from "react-icons/fa";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 
 const NotFoundPage = () => {
   return (
     <>
+      <Helmet>
+        <title>404 - Page Not Found | OSV School</title>
+        <meta name="description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
+        <meta name="robots" content="noindex, nofollow" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://osvschool.com/404" />
+        <meta property="og:title" content="404 - Page Not Found | OSV School" />
+        <meta property="og:description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
+        <meta property="og:image" content="/src/assets/og-images/og-pagenotfound.png" />
+        <meta property="og:site_name" content="OSV School" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://osvschool.com/404" />
+        <meta property="twitter:title" content="404 - Page Not Found | OSV School" />
+        <meta property="twitter:description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
+        <meta property="twitter:image" content="/src/assets/og-images/og-pagenotfound.png" />
+
+        {/* Additional SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#3B82F6" />
+        <link rel="canonical" href="https://osvschool.com/404" />
+      </Helmet>
+
       <Navbar />
-      <div className="bg-gray-100 h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-brand-light flex items-center justify-center px-4">
         <div className="text-center">
           <div className="relative inline-block">
             <h1 className="text-9xl font-extrabold text-gray-800 tracking-widest">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { academicPrograms } from '../constants';
 import { FaCheck, FaGraduationCap, FaUsers, FaTrophy, FaBookOpen, FaLaptop, FaMicroscope, FaChartLine } from 'react-icons/fa';
@@ -31,6 +32,34 @@ const AcademicsPage = () => {
 
     return (
         <div className="bg-brand-light">
+            <Helmet>
+                <title>Academic Programs - OSV School | Science, Mathematics, Arts & Commerce</title>
+                <meta name="description" content="Explore our comprehensive academic programs at OSV School. From Science & Technology to Mathematics, Arts & Humanities, and Commerce & Business. Expert faculty and modern facilities." />
+                <meta name="keywords" content="academic programs, science programs, mathematics education, arts and humanities, commerce education, school curriculum, academic excellence, expert faculty, modern facilities" />
+                <meta name="author" content="OSV School" />
+                <meta name="robots" content="index, follow" />
+
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://osvschool.com/academics" />
+                <meta property="og:title" content="Academic Programs - OSV School | Science, Mathematics, Arts & Commerce" />
+                <meta property="og:description" content="Explore our comprehensive academic programs at OSV School. From Science & Technology to Mathematics, Arts & Humanities, and Commerce & Business. Expert faculty and modern facilities." />
+                <meta property="og:image" content="/src/assets/og-images/og-academics.png" />
+                <meta property="og:site_name" content="OSV School" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content="https://osvschool.com/academics" />
+                <meta property="twitter:title" content="Academic Programs - OSV School | Science, Mathematics, Arts & Commerce" />
+                <meta property="twitter:description" content="Explore our comprehensive academic programs at OSV School. From Science & Technology to Mathematics, Arts & Humanities, and Commerce & Business. Expert faculty and modern facilities." />
+                <meta property="twitter:image" content="/src/assets/og-images/og-academics.png" />
+
+                {/* Additional SEO */}
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="theme-color" content="#3B82F6" />
+                <link rel="canonical" href="https://osvschool.com/academics" />
+            </Helmet>
+
             {/* Hero Section */}
             <header className="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-indigo-100 text-center px-4">
                 <motion.h1
