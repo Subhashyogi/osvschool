@@ -40,17 +40,40 @@ const FacultyPage = () => {
         setLoading(true);
         const res = await fetch(`${API}/faculty?limit=100`);
         if (!res.ok) throw new Error("Failed to fetch faculty");
-        const data = await res.json();
-        // Normalize image URLs
-        const normalized = data.map((member) => ({
+        const json = await res.json();
+
+        // Normalize various possible response shapes to an array
+        const list = Array.isArray(json)
+          ? json
+          : Array.isArray(json?.faculty)
+            ? json.faculty
+            : Array.isArray(json?.faculties)
+              ? json.faculties
+              : Array.isArray(json?.rows)
+                ? json.rows
+                : Array.isArray(json?.data)
+                  ? json.data
+                  : Array.isArray(json?.items)
+                    ? json.items
+                    : [];
+
+        if (!Array.isArray(list)) {
+          throw new Error("Invalid faculty response format");
+        }
+
+        const normalized = list.map((member) => ({
           ...member,
-          image: member.image && !member.image.startsWith("http")
-            ? `${BASE}${member.image}`
-            : member.image || null,
+          image:
+            member?.image && typeof member.image === "string" && !member.image.startsWith("http")
+              ? `${BASE}${member.image}`
+              : member?.image || null,
         }));
+
         setFaculty(normalized);
+        setError(null);
       } catch (e) {
-        setError(e.message);
+        setError(e.message || "Failed to load faculty");
+        setFaculty([]);
       } finally {
         setLoading(false);
       }
