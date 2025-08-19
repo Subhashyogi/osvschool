@@ -33,17 +33,32 @@ const AboutPage = () => {
     <div className="bg-brand-light text-brand-dark">
       <Helmet>
         <title>About OSV School - Our Story of Excellence Since 1985</title>
-        <meta name="description" content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development." />
-        <meta name="keywords" content="OSV School history, about OSV School, school philosophy, academic excellence, character development, school vision, school mission, education since 1985" />
+        <meta
+          name="description"
+          content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development."
+        />
+        <meta
+          name="keywords"
+          content="OSV School history, about OSV School, school philosophy, academic excellence, character development, school vision, school mission, education since 1985"
+        />
         <meta name="author" content="OSV School" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://osvschool.netlify.app/about" />
-        <meta property="og:title" content="About OSV School - Our Story of Excellence Since 1985" />
-        <meta property="og:description" content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development." />
-        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
+        <meta
+          property="og:title"
+          content="About OSV School - Our Story of Excellence Since 1985"
+        />
+        <meta
+          property="og:description"
+          content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development."
+        />
+        <meta
+          property="og:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-about.png"
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
@@ -51,10 +66,22 @@ const AboutPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.netlify.app/about" />
-        <meta property="twitter:title" content="About OSV School - Our Story of Excellence Since 1985" />
-        <meta property="twitter:description" content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development." />
-        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-about.png" />
+        <meta
+          property="twitter:url"
+          content="https://osvschool.netlify.app/about"
+        />
+        <meta
+          property="twitter:title"
+          content="About OSV School - Our Story of Excellence Since 1985"
+        />
+        <meta
+          property="twitter:description"
+          content="Discover the rich history and philosophy of OSV School. Learn about our journey since 1985, our vision, mission, and commitment to academic excellence and character development."
+        />
+        <meta
+          property="twitter:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-about.png"
+        />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,7 +94,9 @@ const AboutPage = () => {
           className="absolute inset-0 z-0 bg-cover bg-center"
           style={{
             y: parallaxY,
-            backgroundImage: `url('https://images.pexels.com/photos/8617830/pexels-photo-8617830.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
+            // backgroundImage: `url('https://images.pexels.com/photos/8617830/pexels-photo-8617830.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
+            backgroundImage: `url('/assets/1.png')`,
+            backgroundPosition: "top",
           }}
         />
         <div className="absolute inset-0 bg-brand-dark/60 z-10" />
@@ -101,7 +130,8 @@ const AboutPage = () => {
             className="w-full h-80 rounded-2xl overflow-hidden shadow-xl"
           >
             <img
-              src="https://images.pexels.com/photos/8617805/pexels-photo-8617805.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              // src="https://images.pexels.com/photos/8617805/pexels-photo-8617805.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src="/assets/our_philosophy.png"
               alt="Our Philosophy"
               className="w-full h-full object-cover"
             />
@@ -204,20 +234,23 @@ const AboutPage = () => {
               {
                 icon: <FaBookReader />,
                 value: "Excellence",
-                image:
-                  "https://images.pexels.com/photos/8946726/pexels-photo-8946726.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                // image:
+                //   "https://images.pexels.com/photos/8946726/pexels-photo-8946726.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                image: "/assets/VAI1.jpg",
               },
               {
                 icon: <FaUsers />,
                 value: "Community",
-                image:
-                  "https://images.pexels.com/photos/8617923/pexels-photo-8617923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                // image:
+                //   "https://images.pexels.com/photos/8617923/pexels-photo-8617923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                image: "/assets/VAI2.jpg",
               },
               {
                 icon: <FaAward />,
                 value: "Integrity",
-                image:
-                  "https://images.pexels.com/photos/1720184/pexels-photo-1720184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                // image:
+                //   "https://images.pexels.com/photos/1720184/pexels-photo-1720184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                image: "/assets/VAI3.jpg",
               },
             ].map((item, index) => (
               <motion.div
@@ -238,7 +271,9 @@ const AboutPage = () => {
                   <div className="text-4xl mb-2 text-brand-accent">
                     {item.icon}
                   </div>
-                  <h3 className="text-2xl font-bold">{item.value}</h3>
+                  <h3 className="text-2xl font-bold text-brand-light">
+                    {item.value}
+                  </h3>
                 </div>
               </motion.div>
             ))}

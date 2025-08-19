@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
+
 import {
   FaMapMarkerAlt,
   FaPhone,
@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import AnimatedButton from "../components/common/AnimatedButton";
 import { departmentContacts } from "../constants";
+import { Helmet } from "react-helmet";
 
 const schoolAddress =
   "Near, Lane No.-11, Brahmaputra Marg, Kumawat Colony, Kailash Nagar, Jhotwara, Jaipur, Rajasthan 302012";
@@ -24,18 +25,38 @@ const ContactPage = () => {
   return (
     <div className="bg-brand-light text-brand-dark">
       <Helmet>
-        <title>Contact Us - OSV School | Get in Touch for Admissions & Inquiries</title>
-        <meta name="description" content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information." />
-        <meta name="keywords" content="OSV School contact, school admissions, contact information, school inquiries, academic programs, school location, contact details" />
+        <title>
+          Contact Us - OSV School | Get in Touch for Admissions & Inquiries
+        </title>
+        <meta
+          name="description"
+          content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information."
+        />
+        <meta
+          name="keywords"
+          content="OSV School contact, school admissions, contact information, school inquiries, academic programs, school location, contact details"
+        />
         <meta name="author" content="OSV School" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.netlify.app/contact" />
-        <meta property="og:title" content="Contact Us - OSV School | Get in Touch for Admissions & Inquiries" />
-        <meta property="og:description" content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information." />
-        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-contact.png" />
+        <meta
+          property="og:url"
+          content="https://osvschool.netlify.app/contact"
+        />
+        <meta
+          property="og:title"
+          content="Contact Us - OSV School | Get in Touch for Admissions & Inquiries"
+        />
+        <meta
+          property="og:description"
+          content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information."
+        />
+        <meta
+          property="og:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-contact.png"
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
@@ -43,17 +64,34 @@ const ContactPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.netlify.app/contact" />
-        <meta property="twitter:title" content="Contact Us - OSV School | Get in Touch for Admissions & Inquiries" />
-        <meta property="twitter:description" content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information." />
-        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-contact.png" />
+        <meta
+          property="twitter:url"
+          content="https://osvschool.netlify.app/contact"
+        />
+        <meta
+          property="twitter:title"
+          content="Contact Us - OSV School | Get in Touch for Admissions & Inquiries"
+        />
+        <meta
+          property="twitter:description"
+          content="Contact OSV School for admissions, inquiries, or to learn more about our academic programs. Reach out to our dedicated team for personalized assistance and school information."
+        />
+        <meta
+          property="twitter:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-contact.png"
+        />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
         <link rel="canonical" href="https://osvschool.netlify.app/contact" />
       </Helmet>
-      <section className="relative pt-32 md:pt-40 pb-20 md:pb-24 text-center overflow-hidden bg-brand-surface">
+      <section
+        className="relative pt-32 md:pt-40 pb-20 md:pb-24 text-center overflow-hidden bg-brand-surface"
+        style={{
+          background: `url('/assets/contact.png') center / cover no-repeat`,
+        }}
+      >
         <div className="relative container mx-auto px-4">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}

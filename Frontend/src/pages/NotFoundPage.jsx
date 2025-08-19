@@ -1,25 +1,35 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
+
 import { Link } from "react-router-dom";
 import { FaHome, FaArrowLeft } from "react-icons/fa";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+import { Helmet } from "react-helmet";
 
 const NotFoundPage = () => {
   return (
     <>
       <Helmet>
         <title>404 - Page Not Found | OSV School</title>
-        <meta name="description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
+        <meta
+          name="description"
+          content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities."
+        />
         <meta name="robots" content="noindex, nofollow" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://osvschool.netlify.app/404" />
         <meta property="og:title" content="404 - Page Not Found | OSV School" />
-        <meta property="og:description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
-        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png" />
+        <meta
+          property="og:description"
+          content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities."
+        />
+        <meta
+          property="og:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png"
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
@@ -27,10 +37,22 @@ const NotFoundPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.netlify.app/404" />
-        <meta property="twitter:title" content="404 - Page Not Found | OSV School" />
-        <meta property="twitter:description" content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities." />
-        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png" />
+        <meta
+          property="twitter:url"
+          content="https://osvschool.netlify.app/404"
+        />
+        <meta
+          property="twitter:title"
+          content="404 - Page Not Found | OSV School"
+        />
+        <meta
+          property="twitter:description"
+          content="The page you're looking for doesn't exist. Return to OSV School homepage to explore our academic programs and facilities."
+        />
+        <meta
+          property="twitter:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png"
+        />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
