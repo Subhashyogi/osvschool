@@ -4,6 +4,12 @@ import { FaEdit, FaTrash, FaPlus, FaImage, FaVideo } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 
+const API = "http://31.97.235.15/api";
+const BASE = "http://31.97.235.15";
+
+// Use API for all fetch calls: `${API}/gallery` etc.
+// For media URLs, prefix with BASE when not absolute: `${BASE}/${item.mediaUrl}`
+
 const ManageGallery = () => {
   const [items, setItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +28,7 @@ const ManageGallery = () => {
       setLoading(true);
       const token = getToken();
       const response = await fetch(
-        "https://osvschool-backend.onrender.com/api/gallery",
+        `${API}/gallery`,
         {
           method: "GET",
           headers: {
@@ -63,7 +69,7 @@ const ManageGallery = () => {
       try {
         const token = getToken();
         const response = await fetch(
-          `https://osvschool-backend.onrender.com/api/gallery/${itemToDelete.id}`,
+          `${API}/gallery/${itemToDelete.id}`,
           {
             method: "DELETE",
             headers: {
@@ -90,8 +96,8 @@ const ManageGallery = () => {
       const token = getToken();
       const method = editingItem ? "PUT" : "POST";
       const url = editingItem
-        ? `https://osvschool-backend.onrender.com/api/gallery/${editingItem.id}`
-        : "https://osvschool-backend.onrender.com/api/gallery";
+        ? `${API}/gallery/${editingItem.id}`
+        : `${API}/gallery`;
 
       // Check if itemData is FormData (contains file) or regular object
       const isFormData = itemData instanceof FormData;
@@ -162,7 +168,7 @@ const ManageGallery = () => {
             >
               <div className="relative">
                 <img
-                  src={`https://osvschool-backend.onrender.com/${item.mediaUrl}`}
+                  src={`${BASE}/${item.mediaUrl}`}
                   alt={item.title}
                   className="h-48 w-full object-cover"
                 />
@@ -223,7 +229,7 @@ const GalleryForm = ({ item, onSave, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(
     item?.mediaUrl
-      ? `https://osvschool-backend.onrender.com/${item.mediaUrl}`
+      ? `${BASE}/${item.mediaUrl}`
       : ""
   );
   const [uploading, setUploading] = useState(false);

@@ -16,14 +16,13 @@ const Testimonials = () => {
         console.log("Fetching testimonials from API...");
 
         const response = await fetch(
-          "https://osvschool-backend.onrender.com/api/testimonials/public",
-          {
-            method: "GET",
-            credentials: "include",
-          }
+          "/api/testimonials/public"
         );
 
         if (!response.ok) {
+          if (response.status === 503) {
+            throw new Error("Database temporarily unavailable. Please try again later.");
+          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 

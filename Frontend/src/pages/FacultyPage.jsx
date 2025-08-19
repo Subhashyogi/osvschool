@@ -15,6 +15,9 @@ const StatCard = ({ number, suffix, label }) => (
   </div>
 );
 
+const API = "/api";
+const BASE = typeof window !== "undefined" ? window.location.origin : "";
+
 const FacultyPage = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [facultyMembers, setFacultyMembers] = useState([]);
@@ -28,77 +31,31 @@ const FacultyPage = () => {
   const [featuredFaculty, setFeaturedFaculty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
+  const [faculty, setFaculty] = useState([]);
 
-  // Fetch faculty data from API
   useEffect(() => {
-    const fetchFacultyData = async () => {
+    const fetchFaculty = async () => {
       try {
         setLoading(true);
-
-        // Fetch all faculty members
-        const facultyResponse = await fetch(
-          "https://osvschool-backend.onrender.com/api/faculty?limit=100"
-        );
-        if (!facultyResponse.ok) {
-          throw new Error("Failed to fetch faculty members");
-        }
-
-        const facultyData = await facultyResponse.json();
-        const members = facultyData.data || [];
-
-        // Transform faculty data to include full image URLs
-        const transformedMembers = members.map((member) => ({
+        const res = await fetch(`${API}/faculty?limit=100`);
+        if (!res.ok) throw new Error("Failed to fetch faculty");
+        const data = await res.json();
+        // Normalize image URLs
+        const normalized = data.map((member) => ({
           ...member,
-          image: member.image ? `http://localhost:4000${member.image}` : null,
+          image: member.image && !member.image.startsWith("http")
+            ? `${BASE}${member.image}`
+            : member.image || null,
         }));
-
-        setFacultyMembers(transformedMembers);
-
-        // Calculate departments from faculty data
-        const uniqueDepartments = [
-          ...new Set(
-            members.map((member) => member.department).filter(Boolean)
-          ),
-        ];
-        const departmentList = [
-          { name: "All", icon: <FaGraduationCap /> },
-          ...uniqueDepartments.map((dept) => ({
-            name: dept,
-            icon: <FaUser />,
-          })),
-        ];
-        setDepartments(departmentList);
-
-        // Calculate stats
-        const stats = {
-          totalFaculty: members.length,
-          departments: uniqueDepartments.length,
-          experience: 15, // Static for now
-          qualifications: 95, // Static for now
-        };
-        setFacultyStats(stats);
-
-        // Set featured faculty (first member or random)
-        if (members.length > 0) {
-          const featured = members[0];
-          setFeaturedFaculty({
-            ...featured,
-            image: featured.image
-              ? `http://localhost:4000${featured.image}`
-              : null,
-            quote:
-              "Education is the most powerful weapon which you can use to change the world.",
-          });
-        }
-      } catch (err) {
-        setError(err.message);
-        console.error("Error fetching faculty:", err);
+        setFaculty(normalized);
+      } catch (e) {
+        setError(e.message);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchFacultyData();
+    fetchFaculty();
   }, []);
 
   const filteredFaculty = useMemo(() => {

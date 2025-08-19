@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet";
-import { FaPlay, FaImage, FaSpinner, FaTimes, FaDownload, FaEye } from "react-icons/fa";
+import { FaPlay, FaImage, FaSpinner } from "react-icons/fa";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Video from "yet-another-react-lightbox/plugins/video";
@@ -22,7 +22,7 @@ const GalleryPage = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://osvschool-backend.onrender.com/api/gallery"
+          "/api/gallery"
         );
 
         if (!response.ok) {
@@ -32,11 +32,11 @@ const GalleryPage = () => {
         const data = await response.json();
 
         // Transform API data to match lightbox format
+        const origin = window.location.origin;
         const transformedItems = data.map((item) => {
-          const baseUrl = "https://osvschool-backend.onrender.com/";
           const fullMediaUrl = item.mediaUrl.startsWith("http")
             ? item.mediaUrl
-            : `${baseUrl}${item.mediaUrl}`;
+            : `${origin}/${item.mediaUrl}`;
 
           if (item.mediaType === "image") {
             return {
@@ -44,10 +44,9 @@ const GalleryPage = () => {
               alt: item.title,
               description: item.description,
               type: "image",
-              thumbnail: fullMediaUrl, // Use same image as thumbnail
+              thumbnail: fullMediaUrl,
             };
           } else {
-            // For videos, create video source object
             return {
               type: "video",
               sources: [
@@ -56,8 +55,8 @@ const GalleryPage = () => {
                   type: "video/mp4",
                 },
               ],
-              poster: videoThumb, // Use dedicated video thumbnail
-              thumbnail: videoThumb, // Use dedicated video thumbnail
+              poster: videoThumb,
+              thumbnail: videoThumb,
               alt: item.title,
               description: item.description,
             };
@@ -244,7 +243,7 @@ const GalleryPage = () => {
                     No{" "}
                     {activeFilter === "All"
                       ? "media"
-                      : activeFilter.toLowerCase()}{" "}
+                      : activeFilter.toLowerCase()} {" "}
                     found
                   </h3>
                   <p className="text-brand-muted">
