@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import AnimatedButton from "../common/AnimatedButton";
 import { FaArrowRight, FaSpinner } from "react-icons/fa";
 
+const API = "http://31.97.235.15/api";
+const BASE = "http://31.97.235.15";
+
 const GalleryPreview = () => {
   const [galleryItems, setGalleryItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,9 +20,7 @@ const GalleryPreview = () => {
         setLoading(true);
         console.log("Fetching gallery items from API...");
 
-        const response = await fetch(
-          "https://osvschool-backend.onrender.com/api/gallery"
-        );
+        const response = await fetch(`${API}/gallery`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,9 +32,18 @@ const GalleryPreview = () => {
         // Transform API data to match component expectations
         const transformedData = data.map((item) => ({
           id: item.id,
-          src: item.mediaUrl,
-          thumbnail: item.mediaUrl,
-          poster: item.mediaUrl,
+          src:
+            item.mediaUrl && !item.mediaUrl.startsWith("http")
+              ? `${BASE}/${item.mediaUrl}`
+              : item.mediaUrl,
+          thumbnail:
+            item.mediaUrl && !item.mediaUrl.startsWith("http")
+              ? `${BASE}/${item.mediaUrl}`
+              : item.mediaUrl,
+          poster:
+            item.mediaUrl && !item.mediaUrl.startsWith("http")
+              ? `${BASE}/${item.mediaUrl}`
+              : item.mediaUrl,
           alt: item.title,
           description: item.description,
           mediaType: item.mediaType,

@@ -3,6 +3,8 @@ import { useAuth } from "../context/AuthContext";
 import { FaSchool, FaEye, FaEyeSlash, FaInfoCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
+const API = "http://31.97.235.15/api";
+
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -76,19 +78,16 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "https://osvschool-backend.onrender.com/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
-        }
-      );
+      const response = await fetch(`${API}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
 
       const data = await response.json();
 

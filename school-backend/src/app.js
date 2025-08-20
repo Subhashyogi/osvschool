@@ -179,7 +179,12 @@ app.options(
   })
 );
 
-app.set("trust proxy", true);
+// Trust proxy only in production (behind Nginx); disable in local dev to satisfy express-rate-limit
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+} else {
+  app.set("trust proxy", false);
+}
 
 app.use(express.json());
 app.use(cookieParser());

@@ -10,6 +10,11 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 
+const API = "http://31.97.235.15/api";
+const BASE = "http://31.97.235.15";
+
+// Use API for all faculty endpoints, and BASE for image/media URLs
+
 const ManageFaculty = () => {
   const [faculty, setFaculty] = useState([]);
   const [departments, setDepartments] = useState([]);
@@ -50,7 +55,7 @@ const ManageFaculty = () => {
       }
 
       const response = await authenticatedFetch(
-        `https://osvschool-backend.onrender.com/api/faculty?${queryParams}`
+        `${API}/faculty?${queryParams}`
       );
 
       if (response.ok) {
@@ -76,9 +81,7 @@ const ManageFaculty = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await authenticatedFetch(
-        "https://osvschool-backend.onrender.com/api/faculty/departments"
-      );
+      const response = await authenticatedFetch(`${API}/faculty/departments`);
 
       if (response.ok) {
         const data = await response.json();
@@ -107,7 +110,7 @@ const ManageFaculty = () => {
     ) {
       try {
         const response = await authenticatedFetch(
-          `https://osvschool-backend.onrender.com/api/faculty/${facultyToDelete.id}`,
+          `${API}/faculty/${facultyToDelete.id}`,
           {
             method: "DELETE",
           }
@@ -129,8 +132,8 @@ const ManageFaculty = () => {
     try {
       const method = editingFaculty ? "PUT" : "POST";
       const url = editingFaculty
-        ? `https://osvschool-backend.onrender.com/api/faculty/${editingFaculty.id}`
-        : "https://osvschool-backend.onrender.com/api/faculty";
+        ? `${API}/faculty/${editingFaculty.id}`
+        : `${API}/faculty`;
 
       // Determine if we're sending FormData or regular JSON
       const isFormData = facultyData instanceof FormData;
@@ -291,7 +294,7 @@ const ManageFaculty = () => {
                         <div className="flex-shrink-0 h-10 w-10">
                           {member.image ? (
                             <img
-                              src={`http://localhost:4000${member.image}`}
+                              src={`${BASE}${member.image}`}
                               alt={member.name}
                               className="h-10 w-10 rounded-full object-cover"
                               onError={(e) => {
@@ -568,7 +571,7 @@ const FacultyModal = ({ facultyMember, onSave, onClose, departments }) => {
                     src={
                       imagePreview.startsWith("data:")
                         ? imagePreview
-                        : `http://localhost:4000${imagePreview}`
+                        : `${BASE}${imagePreview}`
                     }
                     alt="Preview"
                     className="w-24 h-24 object-cover rounded-lg border"
