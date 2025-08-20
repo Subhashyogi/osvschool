@@ -4,8 +4,7 @@ import { FaEdit, FaTrash, FaPlus, FaImage, FaVideo } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 
-const API = "http://31.97.235.15/api";
-const BASE = "http://31.97.235.15";
+const API = "/api";
 
 // Use API for all fetch calls: `${API}/gallery` etc.
 // For media URLs, prefix with BASE when not absolute: `${BASE}/${item.mediaUrl}`
@@ -168,7 +167,11 @@ const ManageGallery = () => {
             >
               <div className="relative">
                 <img
-                  src={`${BASE}/${item.mediaUrl}`}
+                  src={
+                    item.mediaUrl && !/^https?:\/\//.test(item.mediaUrl)
+                      ? `/${item.mediaUrl.replace(/^\/?/, "")}`
+                      : item.mediaUrl
+                  }
                   alt={item.title}
                   className="h-48 w-full object-cover"
                 />
@@ -229,7 +232,9 @@ const GalleryForm = ({ item, onSave, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(
     item?.mediaUrl
-      ? `${BASE}/${item.mediaUrl}`
+      ? (/^https?:\/\//.test(item.mediaUrl)
+          ? item.mediaUrl
+          : `/${item.mediaUrl.replace(/^\/?/, "")}`)
       : ""
   );
   const [uploading, setUploading] = useState(false);

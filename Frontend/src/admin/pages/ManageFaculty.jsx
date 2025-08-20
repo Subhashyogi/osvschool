@@ -10,8 +10,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 
-const API = "http://31.97.235.15/api";
-const BASE = "http://31.97.235.15";
+const API = "/api";
 
 // Use API for all faculty endpoints, and BASE for image/media URLs
 
@@ -296,7 +295,13 @@ const ManageFaculty = () => {
                         <div className="flex-shrink-0 h-10 w-10">
                           {member.image ? (
                             <img
-                              src={`${BASE}${member.image}`}
+                              src={
+                                /^https?:\/\//.test(member.image)
+                                  ? member.image
+                                  : member.image.startsWith("/")
+                                  ? member.image
+                                  : `/${member.image}`
+                              }
                               alt={member.name}
                               className="h-10 w-10 rounded-full object-cover"
                               onError={(e) => {
@@ -571,9 +576,15 @@ const FacultyModal = ({ facultyMember, onSave, onClose, departments }) => {
                 <div className="relative inline-block">
                   <img
                     src={
-                      imagePreview.startsWith("data:")
+                      imagePreview?.startsWith("data:")
                         ? imagePreview
-                        : `${BASE}${imagePreview}`
+                        : imagePreview
+                        ? (/^https?:\/\//.test(imagePreview)
+                            ? imagePreview
+                            : imagePreview.startsWith("/")
+                            ? imagePreview
+                            : `/${imagePreview}`)
+                        : ""
                     }
                     alt="Preview"
                     className="w-24 h-24 object-cover rounded-lg border"

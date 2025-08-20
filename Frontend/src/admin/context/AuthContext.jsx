@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
           // Verify token is still valid
           try {
             const response = await fetch(
-              "http://31.97.235.15/api/auth/verify",
+              "/api/auth/verify",
               {
                 method: "GET",
                 headers: {

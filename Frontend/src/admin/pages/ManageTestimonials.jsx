@@ -14,7 +14,7 @@ import { useAuth } from "../context/AuthContext";
 // Make sure to import useAuth from your context file path
 // import { useAuth } from "../context/AuthContext";
 
-const API = "http://31.97.235.15/api";
+const API = "/api";
 
 // --- TestimonialModal Component (Standalone) ---
 const TestimonialModal = ({
