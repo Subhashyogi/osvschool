@@ -1,13 +1,20 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
+dotenv.config({ quiet: true });
 
-const sequelize = new Sequelize("osvschool", "osvschool", "oSvScH#15@14", {
-  host: "148.66.138.203",
-  dialect: "mysql",
-  logging: false,
-  dialectOptions: {
-    connectTimeout: 60000
+const sequelize = new Sequelize(
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQL_USERNAME,
+  process.env.MYSQL_PASSWORD,
+  {
+    host: process.env.MYSQL_HOST,
+    dialect: "mysql",
+    logging: false,
+    dialectOptions: {
+      connectTimeout: 60000,
+    },
   }
-});
+);
 
 // Test database connection (non-blocking)
 const testConnection = async () => {
