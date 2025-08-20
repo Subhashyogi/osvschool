@@ -2,7 +2,14 @@ import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CountUp from "react-countup";
 import { Helmet } from "react-helmet";
-import { FaSpinner, FaUser, FaGraduationCap, FaAward, FaBookOpen, FaUsers } from "react-icons/fa";
+import {
+  FaSpinner,
+  FaUser,
+  FaGraduationCap,
+  FaAward,
+  FaBookOpen,
+  FaUsers,
+} from "react-icons/fa";
 import FacultyCard from "../components/common/FacultyCard";
 
 const StatCard = ({ number, suffix, label }) => (
@@ -20,9 +27,7 @@ const BASE = typeof window !== "undefined" ? window.location.origin : "";
 // Resolve the origin where the backend serves assets
 const API_ORIGIN = (() => {
   try {
-    return /^https?:\/\//.test(API)
-      ? new URL(API).origin
-      : BASE; // when proxying to local backend
+    return /^https?:\/\//.test(API) ? new URL(API).origin : BASE; // when proxying to local backend
   } catch {
     return BASE;
   }
@@ -52,12 +57,18 @@ const FacultyPage = () => {
         if (!res.ok) throw new Error("Failed to fetch faculty");
         const data = await res.json();
         // Support either an array or an object with { data: [...] }
-        const list = Array.isArray(data) ? data : Array.isArray(data?.data) ? data.data : [];
+        const list = Array.isArray(data)
+          ? data
+          : Array.isArray(data?.data)
+          ? data.data
+          : [];
         // Normalize image URLs
         const normalized = list.map((member) => {
           let image = member.image || null;
           if (image && !/^https?:\/\//.test(image)) {
-            const withLeadingSlash = image.startsWith("/") ? image : `/${image}`;
+            const withLeadingSlash = image.startsWith("/")
+              ? image
+              : `/${image}`;
             image = `${API_ORIGIN}${withLeadingSlash}`;
           }
           return {
@@ -118,18 +129,38 @@ const FacultyPage = () => {
   return (
     <div className="bg-brand-light text-brand-dark">
       <Helmet>
-        <title>Our Faculty - OSV School | Expert Educators & Academic Excellence</title>
-        <meta name="description" content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development." />
-        <meta name="keywords" content="OSV School faculty, expert educators, qualified teachers, academic excellence, experienced faculty, school teachers, education professionals" />
+        <title>
+          Our Faculty - OSV School | Expert Educators & Academic Excellence
+        </title>
+        <meta
+          name="description"
+          content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development."
+        />
+        <meta
+          name="keywords"
+          content="OSV School faculty, expert educators, qualified teachers, academic excellence, experienced faculty, school teachers, education professionals"
+        />
         <meta name="author" content="OSV School" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.netlify.app/faculty" />
-        <meta property="og:title" content="Our Faculty - OSV School | Expert Educators & Academic Excellence" />
-        <meta property="og:description" content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development." />
-        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-faculty.png" />
+        <meta
+          property="og:url"
+          content="https://osvschool.netlify.app/faculty"
+        />
+        <meta
+          property="og:title"
+          content="Our Faculty - OSV School | Expert Educators & Academic Excellence"
+        />
+        <meta
+          property="og:description"
+          content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development."
+        />
+        <meta
+          property="og:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-faculty.png"
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
@@ -137,10 +168,22 @@ const FacultyPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.netlify.app/faculty" />
-        <meta property="twitter:title" content="Our Faculty - OSV School | Expert Educators & Academic Excellence" />
-        <meta property="twitter:description" content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development." />
-        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-faculty.png" />
+        <meta
+          property="twitter:url"
+          content="https://osvschool.netlify.app/faculty"
+        />
+        <meta
+          property="twitter:title"
+          content="Our Faculty - OSV School | Expert Educators & Academic Excellence"
+        />
+        <meta
+          property="twitter:description"
+          content="Meet our dedicated faculty members at OSV School. Our expert educators bring years of experience and passion for teaching, committed to nurturing academic excellence and character development."
+        />
+        <meta
+          property="twitter:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-faculty.png"
+        />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

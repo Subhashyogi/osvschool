@@ -26,16 +26,13 @@ const ManageGallery = () => {
     try {
       setLoading(true);
       const token = getToken();
-      const response = await fetch(
-        `${API}/gallery`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${API}/gallery`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -67,16 +64,13 @@ const ManageGallery = () => {
     ) {
       try {
         const token = getToken();
-        const response = await fetch(
-          `${API}/gallery/${itemToDelete.id}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${API}/gallery/${itemToDelete.id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         if (response.ok) {
           setItems(items.filter((item) => item.id !== itemToDelete.id));

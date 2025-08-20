@@ -80,9 +80,7 @@ const ManageFaculty = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await authenticatedFetch(
-        `${API}/faculty/departments`
-      );
+      const response = await authenticatedFetch(`${API}/faculty/departments`);
 
       if (response.ok) {
         const data = await response.json();

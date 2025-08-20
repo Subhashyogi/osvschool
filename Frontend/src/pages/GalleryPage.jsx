@@ -21,9 +21,7 @@ const GalleryPage = () => {
     const fetchGalleryItems = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "/api/gallery"
-        );
+        const response = await fetch("/api/gallery");
 
         if (!response.ok) {
           throw new Error("Failed to fetch gallery items");
@@ -129,17 +127,35 @@ const GalleryPage = () => {
     <div className="bg-brand-light">
       <Helmet>
         <title>School Gallery - OSV School | Campus Life & Events</title>
-        <meta name="description" content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment." />
-        <meta name="keywords" content="OSV School gallery, campus photos, school events, academic activities, cultural celebrations, school life, campus events, student activities" />
+        <meta
+          name="description"
+          content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment."
+        />
+        <meta
+          name="keywords"
+          content="OSV School gallery, campus photos, school events, academic activities, cultural celebrations, school life, campus events, student activities"
+        />
         <meta name="author" content="OSV School" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.netlify.app/gallery" />
-        <meta property="og:title" content="School Gallery - OSV School | Campus Life & Events" />
-        <meta property="og:description" content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment." />
-        <meta property="og:image" content="https://osvschool.netlify.app/assets/og-images/og-gallery.png" />
+        <meta
+          property="og:url"
+          content="https://osvschool.netlify.app/gallery"
+        />
+        <meta
+          property="og:title"
+          content="School Gallery - OSV School | Campus Life & Events"
+        />
+        <meta
+          property="og:description"
+          content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment."
+        />
+        <meta
+          property="og:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-gallery.png"
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="OSV School" />
@@ -147,10 +163,22 @@ const GalleryPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://osvschool.netlify.app/gallery" />
-        <meta property="twitter:title" content="School Gallery - OSV School | Campus Life & Events" />
-        <meta property="twitter:description" content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment." />
-        <meta property="twitter:image" content="https://osvschool.netlify.app/assets/og-images/og-gallery.png" />
+        <meta
+          property="twitter:url"
+          content="https://osvschool.netlify.app/gallery"
+        />
+        <meta
+          property="twitter:title"
+          content="School Gallery - OSV School | Campus Life & Events"
+        />
+        <meta
+          property="twitter:description"
+          content="Explore our vibrant school gallery showcasing campus life, academic events, cultural celebrations, and memorable moments at OSV School. View photos and videos of our dynamic learning environment."
+        />
+        <meta
+          property="twitter:image"
+          content="https://osvschool.netlify.app/assets/og-images/og-gallery.png"
+        />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -243,7 +271,7 @@ const GalleryPage = () => {
                     No{" "}
                     {activeFilter === "All"
                       ? "media"
-                      : activeFilter.toLowerCase()} {" "}
+                      : activeFilter.toLowerCase()}{" "}
                     found
                   </h3>
                   <p className="text-brand-muted">

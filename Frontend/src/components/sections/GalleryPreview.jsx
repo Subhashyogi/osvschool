@@ -20,6 +20,7 @@ const GalleryPreview = () => {
         console.log("Fetching gallery items from API...");
 
         const response = await fetch(`${API}/gallery`);
+        const response = await fetch(`${API}/gallery`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
