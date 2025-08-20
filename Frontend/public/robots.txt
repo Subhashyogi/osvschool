@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/login
+Disallow: /admin/faculty
+Disallow: /admin/gallery
+Disallow: /admin/achievements
+Disallow: /admin/testimonials
+
+Sitemap: https://osvschool.in/sitemap.xml

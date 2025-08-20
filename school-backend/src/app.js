@@ -16,7 +16,9 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://osvschool.netlify.app", // replace with your real Netlify URL
+  "https://osvschool.netlify.app", // legacy preview URL
+  "https://osvschool.in",
+  "https://www.osvschool.in",
 ];
 
 app.use(
