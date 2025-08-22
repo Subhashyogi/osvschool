@@ -14,8 +14,6 @@ import { useAuth } from "../context/AuthContext";
 // Make sure to import useAuth from your context file path
 // import { useAuth } from "../context/AuthContext";
 
-const API = "http://31.97.235.15/api";
-
 // --- TestimonialModal Component (Standalone) ---
 const TestimonialModal = ({
   showModal,
@@ -235,7 +233,7 @@ const ManageTestimonials = () => {
 
       try {
         const response = await authenticatedFetch(
-          `${API}/testimonials?page=${page}&limit=10&search=${search}&includeDeleted=${includeDeleted}`
+          `/api/testimonials?page=${page}&limit=10&search=${search}&includeDeleted=${includeDeleted}`
         );
 
         if (!response.ok) {
@@ -332,8 +330,8 @@ const ManageTestimonials = () => {
 
     try {
       const url = editingTestimonial
-        ? `${API}/testimonials/${editingTestimonial.id}`
-        : `${API}/testimonials`;
+        ? `/api/testimonials/${editingTestimonial.id}`
+        : `/api/testimonials`;
       const method = editingTestimonial ? "PUT" : "POST";
 
       const response = await authenticatedFetch(url, {
@@ -383,7 +381,7 @@ const ManageTestimonials = () => {
 
   const handleDelete = (id) => {
     performAction(
-      `${API}/testimonials/${id}`,
+      `/api/testimonials/${id}`,
       "DELETE",
       "Are you sure you want to delete this testimonial?",
       () => fetchTestimonials(currentPage, debouncedSearchTerm, showDeleted)
@@ -392,7 +390,7 @@ const ManageTestimonials = () => {
 
   const handleRestore = (id) => {
     performAction(
-      `${API}/testimonials/${id}/restore`,
+      `/api/testimonials/${id}/restore`,
       "PUT",
       "Are you sure you want to restore this testimonial?",
       () => fetchTestimonials(currentPage, debouncedSearchTerm, showDeleted)

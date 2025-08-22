@@ -74,16 +74,13 @@ export const AuthProvider = ({ children }) => {
         if (token && userData) {
           // Verify token is still valid
           try {
-            const response = await fetch(
-              "http://31.97.235.15/api/auth/verify",
-              {
-                method: "GET",
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
+            const response = await fetch("/api/auth/verify", {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            });
 
             if (response.ok) {
               const parsedUser = JSON.parse(userData);

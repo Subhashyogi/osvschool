@@ -140,10 +140,7 @@ const GalleryPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://osvschool.netlify.app/gallery"
-        />
+        <meta property="og:url" content="https://osvschool.in/gallery" />
         <meta
           property="og:title"
           content="School Gallery - OSV School | Campus Life & Events"
@@ -154,7 +151,7 @@ const GalleryPage = () => {
         />
         <meta
           property="og:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-gallery.png"
+          content="https://osvschool.in/assets/og-images/og-gallery.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -163,10 +160,7 @@ const GalleryPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://osvschool.netlify.app/gallery"
-        />
+        <meta property="twitter:url" content="https://osvschool.in/gallery" />
         <meta
           property="twitter:title"
           content="School Gallery - OSV School | Campus Life & Events"
@@ -177,13 +171,13 @@ const GalleryPage = () => {
         />
         <meta
           property="twitter:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-gallery.png"
+          content="https://osvschool.in/assets/og-images/og-gallery.png"
         />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.netlify.app/gallery" />
+        <link rel="canonical" href="https://osvschool.in/gallery" />
       </Helmet>
       <div
         className="relative pt-32 md:pt-40 pb-20 md:pb-24 text-center bg-cover bg-center"

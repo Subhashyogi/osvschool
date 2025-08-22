@@ -4,11 +4,7 @@ import { FaEdit, FaTrash, FaPlus, FaImage, FaVideo } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 
-const API = "http://31.97.235.15/api";
-const BASE = "http://31.97.235.15";
-
-// Use API for all fetch calls: `${API}/gallery` etc.
-// For media URLs, prefix with BASE when not absolute: `${BASE}/${item.mediaUrl}`
+// Use relative paths for API endpoints
 
 const ManageGallery = () => {
   const [items, setItems] = useState([]);
@@ -27,7 +23,7 @@ const ManageGallery = () => {
     try {
       setLoading(true);
       const token = getToken();
-      const response = await fetch(`${API}/gallery`, {
+      const response = await fetch(`/api/gallery`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,7 +61,7 @@ const ManageGallery = () => {
     ) {
       try {
         const token = getToken();
-        const response = await fetch(`${API}/gallery/${itemToDelete.id}`, {
+        const response = await fetch(`/api/gallery/${itemToDelete.id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,8 +86,8 @@ const ManageGallery = () => {
       const token = getToken();
       const method = editingItem ? "PUT" : "POST";
       const url = editingItem
-        ? `${API}/gallery/${editingItem.id}`
-        : `${API}/gallery`;
+        ? `/api/gallery/${editingItem.id}`
+        : `/api/gallery`;
 
       // Check if itemData is FormData (contains file) or regular object
       const isFormData = itemData instanceof FormData;
@@ -162,7 +158,7 @@ const ManageGallery = () => {
             >
               <div className="relative">
                 <img
-                  src={`${BASE}/${item.mediaUrl}`}
+                  src={item.mediaUrl}
                   alt={item.title}
                   className="h-48 w-full object-cover"
                 />
@@ -221,9 +217,7 @@ const GalleryForm = ({ item, onSave, onClose }) => {
     mediaType: item?.mediaType || "image",
   });
   const [selectedFile, setSelectedFile] = useState(null);
-  const [mediaPreview, setMediaPreview] = useState(
-    item?.mediaUrl ? `${BASE}/${item.mediaUrl}` : ""
-  );
+  const [mediaPreview, setMediaPreview] = useState(item?.mediaUrl || "");
   const [uploading, setUploading] = useState(false);
 
   const handleChange = (e) => {

@@ -22,16 +22,7 @@ const StatCard = ({ number, suffix, label }) => (
   </div>
 );
 
-const API = import.meta.env?.VITE_API_BASE || "/api";
-const BASE = typeof window !== "undefined" ? window.location.origin : "";
-// Resolve the origin where the backend serves assets
-const API_ORIGIN = (() => {
-  try {
-    return /^https?:\/\//.test(API) ? new URL(API).origin : BASE; // when proxying to local backend
-  } catch {
-    return BASE;
-  }
-})();
+const API = "/api";
 
 const FacultyPage = () => {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -43,11 +34,8 @@ const FacultyPage = () => {
     experience: 15,
     qualifications: 95,
   });
-  const [featuredFaculty, setFeaturedFaculty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [search, setSearch] = useState("");
-  const [faculty, setFaculty] = useState([]);
 
   useEffect(() => {
     const fetchFaculty = async () => {
@@ -62,21 +50,8 @@ const FacultyPage = () => {
           : Array.isArray(data?.data)
           ? data.data
           : [];
-        // Normalize image URLs
-        const normalized = list.map((member) => {
-          let image = member.image || null;
-          if (image && !/^https?:\/\//.test(image)) {
-            const withLeadingSlash = image.startsWith("/")
-              ? image
-              : `/${image}`;
-            image = `${API_ORIGIN}${withLeadingSlash}`;
-          }
-          return {
-            ...member,
-            image,
-          };
-        });
-        setFacultyMembers(normalized);
+        // Set faculty members directly as API should return proper URLs
+        setFacultyMembers(list);
       } catch (e) {
         setError(e.message);
       } finally {
@@ -145,10 +120,7 @@ const FacultyPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://osvschool.netlify.app/faculty"
-        />
+        <meta property="og:url" content="https://osvschool.in/faculty" />
         <meta
           property="og:title"
           content="Our Faculty - OSV School | Expert Educators & Academic Excellence"
@@ -159,7 +131,7 @@ const FacultyPage = () => {
         />
         <meta
           property="og:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-faculty.png"
+          content="https://osvschool.in/assets/og-images/og-faculty.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -168,10 +140,7 @@ const FacultyPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://osvschool.netlify.app/faculty"
-        />
+        <meta property="twitter:url" content="https://osvschool.in/faculty" />
         <meta
           property="twitter:title"
           content="Our Faculty - OSV School | Expert Educators & Academic Excellence"
@@ -182,13 +151,13 @@ const FacultyPage = () => {
         />
         <meta
           property="twitter:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-faculty.png"
+          content="https://osvschool.in/assets/og-images/og-faculty.png"
         />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.netlify.app/faculty" />
+        <link rel="canonical" href="https://osvschool.in/faculty" />
       </Helmet>
       <div
         className="relative pt-32 md:pt-40 pb-20 md:pb-24 text-center bg-cover bg-center"

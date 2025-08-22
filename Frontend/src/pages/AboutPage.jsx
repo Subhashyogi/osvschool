@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Helmet } from "react-helmet";
 import { timelineEvents } from "../constants";
@@ -46,7 +46,7 @@ const AboutPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.netlify.app/about" />
+        <meta property="og:url" content="https://osvschool.in/about" />
         <meta
           property="og:title"
           content="About OSV School - Our Story of Excellence Since 1985"
@@ -57,7 +57,7 @@ const AboutPage = () => {
         />
         <meta
           property="og:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-about.png"
+          content="https://osvschool.in/assets/og-images/og-about.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -66,10 +66,7 @@ const AboutPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://osvschool.netlify.app/about"
-        />
+        <meta property="twitter:url" content="https://osvschool.in/about" />
         <meta
           property="twitter:title"
           content="About OSV School - Our Story of Excellence Since 1985"
@@ -80,13 +77,13 @@ const AboutPage = () => {
         />
         <meta
           property="twitter:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-about.png"
+          content="https://osvschool.in/assets/og-images/og-about.png"
         />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.netlify.app/about" />
+        <link rel="canonical" href="https://osvschool.in/about" />
       </Helmet>
 
       <header ref={headerRef} className="relative h-[60vh] overflow-hidden">
