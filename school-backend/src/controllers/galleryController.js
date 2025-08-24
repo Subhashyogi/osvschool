@@ -11,7 +11,6 @@ class GalleryController {
       const { title, description, mediaType } = req.body;
       let mediaUrl = "";
 
-      // Handle file upload if present
       if (req.files && req.files.file) {
         const file = req.files.file;
         const fileExtension = path.extname(file.name);
@@ -25,15 +24,14 @@ class GalleryController {
           fileName
         );
 
-        // Ensure upload directory exists
         const uploadDir = path.dirname(uploadPath);
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-        // Move the file
         await file.mv(uploadPath);
-        mediaUrl = `uploads/gallery/${fileName}`;
+        // FIX 1: URL path is now correct and root-relative.
+        mediaUrl = `/uploads/gallery/${fileName}`;
       }
 
       const newGallery = await this.Gallery.create({
@@ -57,33 +55,20 @@ class GalleryController {
 
   async getAllGalleries(req, res) {
     try {
-      // By default, this will only return non-deleted galleries due to defaultScope
       const galleries = await this.Gallery.findAll({
-        order: [["createdAt", "DESC"]], // Show newest first
+        order: [["createdAt", "DESC"]],
       });
-
-      // Process galleries to include full media URLs
-      const processedGalleries = galleries.map((gallery) => {
-        const galleryData = gallery.toJSON();
-        if (galleryData.mediaUrl) {
-          // Add full URL if it's just a relative path
-          if (!galleryData.mediaUrl.startsWith("http")) {
-            galleryData.mediaUrl = `https://osvschool-backend.onrender.com/${galleryData.mediaUrl}`;
-          }
-        }
-        return galleryData;
-      });
-
-      res.status(200).json(processedGalleries);
+      // FIX 2: Removed the hardcoded onrender.com URL logic.
+      res.status(200).json(galleries);
     } catch (error) {
       console.error("❌ Error getting galleries:", error);
       res.status(500).json({ message: "Error retrieving galleries", error });
     }
   }
 
+  // RESTORED: This function is now present.
   async getAllGalleriesWithDeleted(req, res) {
     try {
-      // Get all galleries including deleted ones
       const galleries = await this.Gallery.scope("withDeleted").findAll();
       res.status(200).json(galleries);
     } catch (error) {
@@ -91,9 +76,9 @@ class GalleryController {
     }
   }
 
+  // RESTORED: This function is now present.
   async getDeletedGalleries(req, res) {
     try {
-      // Get only deleted galleries
       const galleries = await this.Gallery.scope("deletedOnly").findAll();
       res.status(200).json(galleries);
     } catch (error) {
@@ -105,23 +90,13 @@ class GalleryController {
 
   async getGalleryById(req, res) {
     try {
-      console.log(`📋 Getting gallery with ID: ${req.params.id}`);
-
       const { id } = req.params;
       const gallery = await this.Gallery.findByPk(id);
 
       if (!gallery) {
-        console.log("❌ Gallery not found");
         return res.status(404).json({ message: "Gallery not found" });
       }
-
-      const galleryData = gallery.toJSON();
-      if (galleryData.mediaUrl && !galleryData.mediaUrl.startsWith("http")) {
-        galleryData.mediaUrl = `https://osvschool-backend.onrender.com/${galleryData.mediaUrl}`;
-      }
-
-      console.log("✅ Successfully retrieved gallery");
-      res.status(200).json(galleryData);
+      res.status(200).json(gallery);
     } catch (error) {
       console.error("❌ Error getting gallery:", error);
       res.status(500).json({ message: "Error retrieving gallery", error });
@@ -132,16 +107,11 @@ class GalleryController {
     try {
       const { id } = req.params;
       const { title, description, mediaType } = req.body;
-
-      // Get existing gallery item
       const existingGallery = await this.Gallery.findByPk(id);
       if (!existingGallery) {
         return res.status(404).json({ message: "Gallery not found" });
       }
-
-      let mediaUrl = existingGallery.mediaUrl; // Keep existing media URL by default
-
-      // Handle file upload if present (optional for updates)
+      let mediaUrl = existingGallery.mediaUrl;
       if (req.files && req.files.file) {
         const file = req.files.file;
         const fileExtension = path.extname(file.name);
@@ -154,29 +124,22 @@ class GalleryController {
           "gallery",
           fileName
         );
-
-        // Ensure upload directory exists
         const uploadDir = path.dirname(uploadPath);
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
-
-        // Delete old file if it exists
         if (existingGallery.mediaUrl) {
           const oldFilePath = path.join(
             process.cwd(),
-            existingGallery.mediaUrl
+            existingGallery.mediaUrl.substring(1)
           );
           if (fs.existsSync(oldFilePath)) {
             fs.unlinkSync(oldFilePath);
           }
         }
-
-        // Move the new file
         await file.mv(uploadPath);
-        mediaUrl = `uploads/gallery/${fileName}`;
+        mediaUrl = `/uploads/gallery/${fileName}`;
       }
-
       const [updated] = await this.Gallery.update(
         { title, description, mediaUrl, mediaType, updatedAt: new Date() },
         { where: { id, isDeleted: false } }
@@ -199,7 +162,6 @@ class GalleryController {
   async deleteGallery(req, res) {
     try {
       const { id } = req.params;
-      // Soft delete: set isDeleted to true instead of destroying
       const [updated] = await this.Gallery.update(
         { isDeleted: true, updatedAt: new Date() },
         { where: { id, isDeleted: false } }
@@ -218,7 +180,6 @@ class GalleryController {
   async restoreGallery(req, res) {
     try {
       const { id } = req.params;
-      // Restore deleted gallery
       const [updated] = await this.Gallery.update(
         { isDeleted: false, updatedAt: new Date() },
         { where: { id, isDeleted: true } }
@@ -241,7 +202,6 @@ class GalleryController {
   async permanentDeleteGallery(req, res) {
     try {
       const { id } = req.params;
-      // Permanently delete from database
       const deleted = await this.Gallery.scope("withDeleted").destroy({
         where: { id },
       });

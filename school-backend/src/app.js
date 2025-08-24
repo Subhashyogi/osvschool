@@ -9,58 +9,48 @@ import authRoutes from "./routes/auth.js";
 import galleryRoutes from "./routes/gallery.js";
 import facultyRoutes from "./routes/faculty.js";
 import testimonialRoutes from "./routes/testimonials.js";
-
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-import dotenv from "dotenv";
 if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: path.resolve(__dirname, "../.env") });
 }
 
 const app = express();
 
+// --- CORRECT CORS CONFIGURATION START ---
+
 const allowedOrigins = [
-  "http://localhost:5173",
-  // "https://osvschool.netlify.app", // replace with your real Netlify URL
-  "http://osvschool.in/",
-  "https://osvschool.in/",
-  "https://osvschool.in",
-  "http://osvschool.in",
+  "http://localhost:5173", // For your local development
+  "https://osvschool.in", // For your live production site
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like curl, Postman)
+      // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
+
       if (allowedOrigins.includes(origin)) {
+        // If the origin is in our whitelist, allow it
         return callback(null, true);
       } else {
-        console.error("Blocked by CORS:", origin);
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
-app.options(
-  "*",
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("Not allowed by CORS"));
+        // Otherwise, block it
+        console.error(`CORS Error: The origin '${origin}' was blocked.`);
+        return callback(
+          new Error("This origin is not allowed by CORS policy.")
+        );
       }
     },
     credentials: true,
   })
 );
 
-// Trust proxy only in production (behind Nginx); disable in local dev to satisfy express-rate-limit
+// --- CORRECT CORS CONFIGURATION END ---
+
 if (process.env.NODE_ENV === "production") {
   app.set("trust proxy", 1);
 } else {
@@ -78,17 +68,15 @@ app.use(
   })
 );
 
-// Serve static files from uploads directory
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use(
   rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
+    windowMs: 15 * 60 * 1000,
+    max: 100,
   })
 );
 
-// Health check endpoint
 app.get("/", (req, res) => {
   res.json({
     status: "Server is running",
@@ -96,25 +84,20 @@ app.get("/", (req, res) => {
   });
 });
 
-// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/testimonials", testimonialRoutes);
 
-// Sync database and start server
 const startServer = async () => {
   const PORT = process.env.PORT || 5000;
-
   try {
-    await sequelize.sync(); // Sync database
+    await sequelize.sync();
     console.log("Database synchronized successfully");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
     console.log("Starting server without database connection...");
   }
-
-  // Start server regardless of database connection
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     if (!sequelize.authenticate) {

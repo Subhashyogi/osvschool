@@ -34,6 +34,20 @@ export const AuthProvider = ({ children }) => {
       throw new Error("No authentication token");
     }
 
+    // Auto-prefix '/api' for relative admin requests missing it
+    // - Leave absolute URLs (http/https) untouched
+    // - Leave already-correct '/api/...' paths untouched
+    // - If given like '/faculty', turn into '/api/faculty'
+    // - If given like 'faculty', turn into '/api/faculty'
+    if (typeof url === "string") {
+      const isAbsolute = /^https?:\/\//i.test(url);
+      const hasApiPrefix = url.startsWith("/api/");
+      if (!isAbsolute && !hasApiPrefix) {
+        const needsSlash = !url.startsWith("/");
+        url = `/api${needsSlash ? "/" : ""}${url}`;
+      }
+    }
+
     const headers = {
       ...options.headers,
       Authorization: `Bearer ${token}`,
