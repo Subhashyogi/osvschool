@@ -15,7 +15,7 @@ const GalleryPreview = () => {
     const fetchGalleryItems = async () => {
       try {
         setLoading(true);
-        console.log("Fetching gallery items from API...");
+        // console.log("Fetching gallery items from API...");
 
         const response = await fetch(`/api/gallery`);
 
@@ -24,7 +24,7 @@ const GalleryPreview = () => {
         }
 
         const data = await response.json();
-        console.log("Gallery data received:", data);
+        // console.log("Gallery data received:", data);
 
         // Transform API data to match component expectations
         const transformedData = data.map((item) => ({

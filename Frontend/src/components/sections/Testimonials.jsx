@@ -13,7 +13,7 @@ const Testimonials = () => {
     const fetchTestimonials = async () => {
       try {
         setLoading(true);
-        console.log("Fetching testimonials from API...");
+        // console.log("Fetching testimonials from API...");
 
         const response = await fetch("/api/testimonials/public");
 
@@ -27,14 +27,14 @@ const Testimonials = () => {
         }
 
         const data = await response.json();
-        console.log("Testimonials data received:", data);
+        // console.log("Testimonials data received:", data);
 
         // Ensure we have an array of testimonials
         if (Array.isArray(data) && data.length > 0) {
           setTestimonials(data);
           setActiveIndex(0); // Reset to first testimonial
         } else {
-          console.log("No testimonials found in API response");
+          // console.log("No testimonials found in API response");
           setTestimonials([]);
         }
 

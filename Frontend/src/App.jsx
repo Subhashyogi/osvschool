@@ -18,7 +18,7 @@ import AdminLayout from "./admin/components/AdminLayout";
 import AdminDashboard from "./admin/pages/AdminDashboard";
 import ManageFaculty from "./admin/pages/ManageFaculty";
 import ManageGallery from "./admin/pages/ManageGallery";
-import ManageAchievements from "./admin/pages/ManageAchievements";
+// import ManageAchievements from "./admin/pages/ManageAchievements";
 import ManageTestimonials from "./admin/pages/ManageTestimonials";
 
 const App = () => {
@@ -42,7 +42,7 @@ const App = () => {
           <Route path="" element={<AdminDashboard />} />
           <Route path="faculty" element={<ManageFaculty />} />
           <Route path="gallery" element={<ManageGallery />} />
-          <Route path="achievements" element={<ManageAchievements />} />
+          {/* <Route path="achievements" element={<ManageAchievements />} /> */}
           <Route path="testimonials" element={<ManageTestimonials />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />

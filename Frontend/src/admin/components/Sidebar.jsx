@@ -6,7 +6,7 @@ import {
   FaImages,
   FaSignOutAlt,
   FaSchool,
-  FaTrophy,
+  // FaTrophy,
   FaCommentAlt,
 } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
@@ -81,7 +81,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
             <FaImages className="w-5 h-5" />
             <span className="mx-4 font-medium">Gallery</span>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/admin/achievements"
             className={({ isActive }) =>
               `${baseLinkClass} ${
@@ -92,7 +92,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
           >
             <FaTrophy className="w-5 h-5" />
             <span className="mx-4 font-medium">Achievements</span>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/admin/testimonials"
             className={({ isActive }) =>
