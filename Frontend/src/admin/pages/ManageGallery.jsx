@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
+import { compressImage, compressImages } from "../../utils/compressImage";
 
 const ManageGallery = () => {
   const [items, setItems] = useState([]);
@@ -17,19 +18,22 @@ const ManageGallery = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [previewItem, setPreviewItem] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const itemsPerPage = 18;
   const { getToken } = useAuth();
 
   useEffect(() => {
-    fetchGalleryItems();
-  }, []);
+    fetchGalleryItems(currentPage);
+  }, [currentPage]);
 
-  const fetchGalleryItems = async () => {
+  const fetchGalleryItems = async (page = 1) => {
     try {
       setLoading(true);
       setError(null);
       const token = getToken();
-      // Use the public endpoint to fetch, as it's simpler
-      const response = await fetch(`/api/gallery`, {
+      const response = await fetch(`/api/gallery?page=${page}&limit=${itemsPerPage}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,11 +41,16 @@ const ManageGallery = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Sort by creation date, newest first
-        const sortedData = data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        setItems(sortedData);
+        if (data.pagination) {
+          setItems(data.data);
+          setTotalPages(data.pagination.totalPages);
+          setTotalItems(data.pagination.total);
+        } else {
+          // Backward compatible: plain array
+          setItems(data);
+          setTotalPages(1);
+          setTotalItems(data.length);
+        }
       } else {
         throw new Error("Failed to fetch gallery items");
       }
@@ -74,9 +83,7 @@ const ManageGallery = () => {
         });
 
         if (response.ok) {
-          setItems((prevItems) =>
-            prevItems.filter((item) => item.id !== itemToDelete.id)
-          );
+          fetchGalleryItems(currentPage);
         } else {
           throw new Error("Failed to delete item.");
         }
@@ -98,7 +105,6 @@ const ManageGallery = () => {
         method,
         headers: {
           Authorization: `Bearer ${token}`,
-          // Let the browser set the Content-Type for FormData
         },
         body: formData,
       });
@@ -108,25 +114,15 @@ const ManageGallery = () => {
         throw new Error(errorData.message || "Save operation failed");
       }
 
-      const resultData = await response.json();
-
-      if (isEditing) {
-        // Replace the edited item in the list
-        setItems((prevItems) =>
-          prevItems.map((item) =>
-            item.id === editingItem.id ? resultData : item
-          )
-        );
-      } else {
-        // Add new items to the top of the list
-        const newItems = Array.isArray(resultData.data)
-          ? resultData.data
-          : [resultData.data];
-        setItems((prevItems) => [...newItems, ...prevItems]);
-      }
-
       setIsModalOpen(false);
       setError(null);
+      // Refresh data with pagination
+      if (isEditing) {
+        fetchGalleryItems(currentPage);
+      } else {
+        setCurrentPage(1);
+        fetchGalleryItems(1);
+      }
     } catch (err) {
       setError(err.message || "Error saving gallery item");
     }
@@ -155,65 +151,116 @@ const ManageGallery = () => {
           Loading...
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-          {items.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-lg shadow group overflow-hidden"
-            >
+        <>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {items.map((item) => (
               <div
-                className="relative aspect-[4/3] bg-gray-100 cursor-zoom-in"
-                onClick={() => setPreviewItem(item)}
-                title="Click to preview"
+                key={item.id}
+                className="bg-white rounded-lg shadow group overflow-hidden"
               >
-                {item.mediaType === "video" ? (
-                  <video
-                    src={item.mediaUrl}
-                    className="h-full w-full object-cover"
-                    preload="metadata"
-                    muted
-                    playsInline
-                  />
-                ) : (
-                  <img
-                    src={item.mediaUrl}
-                    alt={`Gallery item ${item.id}`}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                )}
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center space-x-4">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleEdit(item);
-                    }}
-                    title="Replace"
-                    className="p-3 bg-white/80 rounded-full text-blue-600 opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"
-                  >
-                    <FaEdit size={18} />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDelete(item);
-                    }}
-                    title="Delete"
-                    className="p-3 bg-white/80 rounded-full text-red-600 opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300 delay-100"
-                  >
-                    <FaTrash size={18} />
-                  </button>
+                <div
+                  className="relative aspect-[4/3] bg-gray-100 cursor-zoom-in"
+                  onClick={() => setPreviewItem(item)}
+                  title="Click to preview"
+                >
+                  {item.mediaType === "video" ? (
+                    <video
+                      src={item.mediaUrl}
+                      className="h-full w-full object-cover"
+                      preload="metadata"
+                      muted
+                      playsInline
+                    />
+                  ) : (
+                    <img
+                      src={item.mediaUrl}
+                      alt={`Gallery item ${item.id}`}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center space-x-4">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEdit(item);
+                      }}
+                      title="Replace"
+                      className="p-3 bg-white/80 rounded-full text-blue-600 opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"
+                    >
+                      <FaEdit size={18} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(item);
+                      }}
+                      title="Delete"
+                      className="p-3 bg-white/80 rounded-full text-red-600 opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300 delay-100"
+                    >
+                      <FaTrash size={18} />
+                    </button>
+                  </div>
+                </div>
+                <div className="p-3">
+                  <p className="text-xs text-gray-500 capitalize flex items-center gap-2">
+                    {item.mediaType === "image" ? <FaImage /> : <FaVideo />}
+                    {item.mediaType}
+                  </p>
                 </div>
               </div>
-              <div className="p-3">
-                <p className="text-xs text-gray-500 capitalize flex items-center gap-2">
-                  {item.mediaType === "image" ? <FaImage /> : <FaVideo />}
-                  {item.mediaType}
-                </p>
+            ))}
+          </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between mt-8 px-2">
+              <p className="text-sm text-gray-600">
+                Showing {(currentPage - 1) * itemsPerPage + 1}–{Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} items
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1.5 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Previous
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((p) => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1)
+                  .reduce((acc, p, idx, arr) => {
+                    if (idx > 0 && p - arr[idx - 1] > 1) acc.push("...");
+                    acc.push(p);
+                    return acc;
+                  }, [])
+                  .map((p, i) =>
+                    p === "..." ? (
+                      <span key={`ellipsis-${i}`} className="px-2 text-gray-400">…</span>
+                    ) : (
+                      <button
+                        key={p}
+                        onClick={() => setCurrentPage(p)}
+                        className={`px-3 py-1.5 text-sm rounded-md border ${
+                          currentPage === p
+                            ? "bg-brand-dark text-white border-brand-dark"
+                            : "bg-white border-gray-300 hover:bg-gray-50"
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    )
+                  )}
+                <button
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1.5 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Next
+                </button>
               </div>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
 
       <AnimatePresence>
@@ -265,19 +312,25 @@ const MediaUploadModal = ({ item, onSave, onClose }) => {
     }
 
     setIsUploading(true);
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
 
-    if (item) {
-      // Editing a single file
-      formData.append("file", selectedFiles[0]);
-    } else {
-      // Bulk uploading new files
-      selectedFiles.forEach((file) => {
-        formData.append("files", file);
-      });
+      if (item) {
+        // Editing a single file - compress if image
+        const compressed = await compressImage(selectedFiles[0]);
+        formData.append("file", compressed);
+      } else {
+        // Bulk uploading new files - compress all images
+        const compressed = await compressImages(selectedFiles);
+        compressed.forEach((file) => {
+          formData.append("files", file);
+        });
+      }
+
+      await onSave(formData);
+    } catch (err) {
+      console.error("Compression error:", err);
     }
-
-    await onSave(formData);
     setIsUploading(false);
   };
 

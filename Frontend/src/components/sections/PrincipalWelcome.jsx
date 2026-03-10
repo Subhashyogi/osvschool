@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { principal } from '../../constants';
+import { principal as defaultPrincipal } from '../../constants';
 
 const staggerContainer = {
     hidden: { opacity: 0 },
@@ -16,6 +16,28 @@ const PrincipalWelcome = () => {
     const sectionRef = useRef(null);
     const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
     const parallaxY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
+
+    const [principal, setPrincipal] = useState(defaultPrincipal);
+
+    useEffect(() => {
+        const fetchPrincipal = async () => {
+            try {
+                const response = await fetch('/api/principal-message');
+                if (response.ok) {
+                    const data = await response.json();
+                    setPrincipal({
+                        name: data.name,
+                        title: data.title || '',
+                        image: data.imageUrl || defaultPrincipal.image,
+                        welcomeMessage: data.welcomeMessage,
+                    });
+                }
+            } catch {
+                // Fallback to constants on error
+            }
+        };
+        fetchPrincipal();
+    }, []);
 
     return (
         <section ref={sectionRef} className="py-16 md:py-20 bg-gray-50 relative overflow-hidden">

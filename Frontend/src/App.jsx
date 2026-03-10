@@ -20,6 +20,8 @@ import ManageFaculty from "./admin/pages/ManageFaculty";
 import ManageGallery from "./admin/pages/ManageGallery";
 // import ManageAchievements from "./admin/pages/ManageAchievements";
 import ManageTestimonials from "./admin/pages/ManageTestimonials";
+import ManagePrincipal from "./admin/pages/ManagePrincipal";
+import AdminSettings from "./admin/pages/AdminSettings";
 
 const App = () => {
   return (
@@ -44,6 +46,8 @@ const App = () => {
           <Route path="gallery" element={<ManageGallery />} />
           {/* <Route path="achievements" element={<ManageAchievements />} /> */}
           <Route path="testimonials" element={<ManageTestimonials />} />
+          <Route path="principal" element={<ManagePrincipal />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

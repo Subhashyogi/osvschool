@@ -86,6 +86,29 @@ class GalleryController {
 
   async getAllGalleries(req, res) {
     try {
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 0; // 0 means no limit (return all)
+
+      if (limit > 0) {
+        const offset = (page - 1) * limit;
+        const { count, rows } = await this.Gallery.findAndCountAll({
+          order: [["createdAt", "DESC"]],
+          limit,
+          offset,
+        });
+
+        return res.status(200).json({
+          data: rows,
+          pagination: {
+            total: count,
+            page,
+            limit,
+            totalPages: Math.ceil(count / limit),
+          },
+        });
+      }
+
+      // No pagination — return all (backward compatible)
       const galleries = await this.Gallery.findAll({
         order: [["createdAt", "DESC"]],
       });

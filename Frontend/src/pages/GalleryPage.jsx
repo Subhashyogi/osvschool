@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet";
 import { FaPlay, FaImage, FaSpinner } from "react-icons/fa";
@@ -8,72 +8,95 @@ import Video from "yet-another-react-lightbox/plugins/video";
 import videoThumb from "../assets/videoThumb.png";
 
 const filters = ["All", "Photos", "Videos"];
+const ITEMS_PER_PAGE = 24;
 
 const GalleryPage = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState(-1);
   const [galleryItems, setGalleryItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-  // Fetch gallery items from API
+  const transformItems = useCallback((data) => {
+    const origin = window.location.origin;
+    return data.map((item, index) => {
+      const fullMediaUrl = item.mediaUrl.startsWith("http")
+        ? item.mediaUrl
+        : `${origin}${item.mediaUrl}`;
+
+      if (item.mediaType === "image") {
+        return {
+          src: fullMediaUrl,
+          alt: `Gallery Image ${index + 1}`,
+          type: "image",
+          thumbnail: fullMediaUrl,
+        };
+      } else {
+        return {
+          type: "video",
+          sources: [{ src: fullMediaUrl, type: "video/mp4" }],
+          poster: videoThumb,
+          thumbnail: videoThumb,
+          alt: `Gallery Video ${index + 1}`,
+        };
+      }
+    });
+  }, []);
+
+  // Fetch first page
   useEffect(() => {
     const fetchGalleryItems = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/gallery");
+        const response = await fetch(`/api/gallery?page=1&limit=${ITEMS_PER_PAGE}`);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch gallery items");
-        }
+        if (!response.ok) throw new Error("Failed to fetch gallery items");
 
         const data = await response.json();
 
-        // --- MODIFICATION START ---
-        // Transform API data to match lightbox format.
-        // Removed references to `item.title` and `item.description`.
-        // Added generic alt tags for accessibility.
-        const origin = window.location.origin;
-        const transformedItems = data.map((item, index) => {
-          const fullMediaUrl = item.mediaUrl.startsWith("http")
-            ? item.mediaUrl
-            : `${origin}${item.mediaUrl}`;
-
-          if (item.mediaType === "image") {
-            return {
-              src: fullMediaUrl,
-              alt: `Gallery Image ${index + 1}`, // Generic alt text
-              type: "image",
-              thumbnail: fullMediaUrl,
-            };
-          } else {
-            return {
-              type: "video",
-              sources: [
-                {
-                  src: fullMediaUrl,
-                  type: "video/mp4",
-                },
-              ],
-              poster: videoThumb,
-              thumbnail: videoThumb,
-              alt: `Gallery Video ${index + 1}`, // Generic alt text
-            };
-          }
-        });
-        // --- MODIFICATION END ---
-
-        setGalleryItems(transformedItems);
+        if (data.pagination) {
+          setGalleryItems(transformItems(data.data));
+          setHasMore(data.pagination.page < data.pagination.totalPages);
+          setCurrentPage(1);
+        } else {
+          // Backward compatible: plain array
+          setGalleryItems(transformItems(data));
+          setHasMore(false);
+        }
       } catch (err) {
         setError(err.message);
-        console.error("Error fetching gallery:", err);
       } finally {
         setLoading(false);
       }
     };
 
     fetchGalleryItems();
-  }, []);
+  }, [transformItems]);
+
+  const loadMore = async () => {
+    try {
+      setLoadingMore(true);
+      const nextPage = currentPage + 1;
+      const response = await fetch(`/api/gallery?page=${nextPage}&limit=${ITEMS_PER_PAGE}`);
+
+      if (!response.ok) throw new Error("Failed to load more items");
+
+      const data = await response.json();
+
+      if (data.pagination) {
+        setGalleryItems((prev) => [...prev, ...transformItems(data.data)]);
+        setHasMore(data.pagination.page < data.pagination.totalPages);
+        setCurrentPage(nextPage);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoadingMore(false);
+    }
+  };
 
   const filteredItems = useMemo(() => {
     if (activeFilter === "All") return galleryItems;
@@ -239,6 +262,25 @@ const GalleryPage = () => {
             )}
           </AnimatePresence>
         </motion.div>
+
+        {/* Load More Button */}
+        {hasMore && !loading && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={loadMore}
+              disabled={loadingMore}
+              className="px-8 py-3 bg-brand-accent text-white font-semibold rounded-lg hover:bg-brand-accent/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+            >
+              {loadingMore ? (
+                <>
+                  <FaSpinner className="animate-spin" /> Loading...
+                </>
+              ) : (
+                "Load More"
+              )}
+            </button>
+          </div>
+        )}
       </div>
 
       <Lightbox

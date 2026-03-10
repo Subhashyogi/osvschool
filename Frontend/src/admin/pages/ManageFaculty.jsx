@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
+import { compressImage } from "../../utils/compressImage";
 
 // Use relative paths for API endpoints BASE for image/media URLs
 
@@ -457,27 +458,33 @@ const FacultyModal = ({ facultyMember, onSave, onClose, departments }) => {
     });
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
         alert("Please select a valid image file");
         return;
       }
-      if (file.size > 5 * 1024 * 1024) {
-        // 5MB limit
-        alert("Image file size should be less than 5MB");
-        return;
+
+      try {
+        const compressed = await compressImage(file);
+        setSelectedImage(compressed);
+
+        // Create preview
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setImagePreview(e.target.result);
+        };
+        reader.readAsDataURL(compressed);
+      } catch (err) {
+        console.error("Compression error:", err);
+        setSelectedImage(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setImagePreview(e.target.result);
+        };
+        reader.readAsDataURL(file);
       }
-
-      setSelectedImage(file);
-
-      // Create preview
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target.result);
-      };
-      reader.readAsDataURL(file);
     }
   };
 

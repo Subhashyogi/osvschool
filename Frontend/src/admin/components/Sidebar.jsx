@@ -8,6 +8,8 @@ import {
   FaSchool,
   // FaTrophy,
   FaCommentAlt,
+  FaUserTie,
+  FaCog,
 } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 
@@ -104,6 +106,30 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
           >
             <FaCommentAlt className="w-5 h-5" />
             <span className="mx-4 font-medium">Testimonials</span>
+          </NavLink>
+          <NavLink
+            to="/admin/principal"
+            className={({ isActive }) =>
+              `${baseLinkClass} ${
+                isActive ? activeLinkClass : inactiveLinkClass
+              }`
+            }
+            onClick={handleLinkClick}
+          >
+            <FaUserTie className="w-5 h-5" />
+            <span className="mx-4 font-medium">Principal</span>
+          </NavLink>
+          <NavLink
+            to="/admin/settings"
+            className={({ isActive }) =>
+              `${baseLinkClass} ${
+                isActive ? activeLinkClass : inactiveLinkClass
+              }`
+            }
+            onClick={handleLinkClick}
+          >
+            <FaCog className="w-5 h-5" />
+            <span className="mx-4 font-medium">Settings</span>
           </NavLink>
         </nav>
         <div className="px-2 py-4 border-t border-gray-700">

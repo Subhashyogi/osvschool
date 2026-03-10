@@ -9,6 +9,7 @@ import authRoutes from "./routes/auth.js";
 import galleryRoutes from "./routes/gallery.js";
 import facultyRoutes from "./routes/faculty.js";
 import testimonialRoutes from "./routes/testimonials.js";
+import principalMessageRoutes from "./routes/principalMessage.js";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
@@ -88,6 +89,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/testimonials", testimonialRoutes);
+app.use("/api/principal-message", principalMessageRoutes);
 
 const startServer = async () => {
   const PORT = process.env.PORT || 5000;

@@ -4,6 +4,7 @@ import {
   validateRegistration,
   validateLogin,
 } from "../middleware/validation.js";
+import { authenticate } from "../middleware/auth.js";
 import rateLimiter from "../middleware/rateLimiter.js";
 import models from "../models/index.js";
 
@@ -25,5 +26,11 @@ router.post(
 );
 
 router.get("/verify", authController.verify.bind(authController));
+
+router.post(
+  "/change-password",
+  authenticate,
+  authController.changePassword.bind(authController)
+);
 
 export default router;
