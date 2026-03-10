@@ -22,7 +22,7 @@
     "react-router-dom": "^7.6.3",
     "react-scroll": "^1.9.3",
     "react-vanilla-tilt": "^1.0.0",
-    "swiper": "^11.2.10",
+    "swiper": "^12.1.2",
     "three": "^0.178.0",
     "yet-another-react-lightbox": "^3.24.0"
   },

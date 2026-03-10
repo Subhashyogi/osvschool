@@ -10,9 +10,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 
-const API = "/api";
-
-// Use API for all faculty endpoints, and BASE for image/media URLs
+// Use relative paths for API endpoints BASE for image/media URLs
 
 const ManageFaculty = () => {
   const [faculty, setFaculty] = useState([]);
@@ -53,9 +51,7 @@ const ManageFaculty = () => {
         queryParams.append("department", selectedDepartment);
       }
 
-      const response = await authenticatedFetch(
-        `${API}/faculty?${queryParams}`
-      );
+      const response = await authenticatedFetch(`/api/faculty?${queryParams}`);
 
       if (response.ok) {
         const data = await response.json();
@@ -80,7 +76,7 @@ const ManageFaculty = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await authenticatedFetch(`${API}/faculty/departments`);
+      const response = await authenticatedFetch(`/api/faculty/departments`);
 
       if (response.ok) {
         const data = await response.json();
@@ -109,7 +105,7 @@ const ManageFaculty = () => {
     ) {
       try {
         const response = await authenticatedFetch(
-          `${API}/faculty/${facultyToDelete.id}`,
+          `/api/faculty/${facultyToDelete.id}`,
           {
             method: "DELETE",
           }
@@ -131,8 +127,8 @@ const ManageFaculty = () => {
     try {
       const method = editingFaculty ? "PUT" : "POST";
       const url = editingFaculty
-        ? `${API}/faculty/${editingFaculty.id}`
-        : `${API}/faculty`;
+        ? `/api/faculty/${editingFaculty.id}`
+        : `/api/faculty`;
 
       // Determine if we're sending FormData or regular JSON
       const isFormData = facultyData instanceof FormData;
@@ -293,13 +289,7 @@ const ManageFaculty = () => {
                         <div className="flex-shrink-0 h-10 w-10">
                           {member.image ? (
                             <img
-                              src={
-                                /^https?:\/\//.test(member.image)
-                                  ? member.image
-                                  : member.image.startsWith("/")
-                                  ? member.image
-                                  : `/${member.image}`
-                              }
+                              src={member.image}
                               alt={member.name}
                               className="h-10 w-10 rounded-full object-cover"
                               onError={(e) => {
@@ -577,12 +567,6 @@ const FacultyModal = ({ facultyMember, onSave, onClose, departments }) => {
                       imagePreview?.startsWith("data:")
                         ? imagePreview
                         : imagePreview
-                        ? (/^https?:\/\//.test(imagePreview)
-                            ? imagePreview
-                            : imagePreview.startsWith("/")
-                            ? imagePreview
-                            : `/${imagePreview}`)
-                        : ""
                     }
                     alt="Preview"
                     className="w-24 h-24 object-cover rounded-lg border"

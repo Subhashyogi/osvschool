@@ -10,9 +10,6 @@ class TestimonialController {
   // Get all testimonials with pagination, search, and filter
   getAllTestimonials = async (req, res) => {
     try {
-      console.log("📋 Getting all testimonials...");
-      console.log("Query params:", req.query);
-
       const {
         page = 1,
         limit = 10,
@@ -33,7 +30,6 @@ class TestimonialController {
           }
         : {};
 
-      // Use appropriate scope based on includeDeleted parameter
       const scope = includeDeleted === "true" ? "withDeleted" : "defaultScope";
 
       const { count, rows } = await this.testimonialModel
@@ -45,19 +41,9 @@ class TestimonialController {
           offset: parseInt(offset),
         });
 
-      console.log(`Found ${count} testimonials in database`);
-
-      // Process testimonials to include full avatar URLs
-      const processedTestimonials = rows.map((testimonial) => {
-        const testimonialData = testimonial.toJSON();
-        if (testimonialData.avtar) {
-          testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
-        }
-        return testimonialData;
-      });
-
+      // CHANGE 1: Removed the logic that added the old render.com URL.
       const response = {
-        testimonials: processedTestimonials,
+        testimonials: rows,
         pagination: {
           currentPage: parseInt(page),
           totalPages: Math.ceil(count / limit),
@@ -66,7 +52,6 @@ class TestimonialController {
         },
       };
 
-      console.log("✅ Successfully retrieved testimonials");
       res.json(response);
     } catch (error) {
       console.error("❌ Error getting testimonials:", error);
@@ -80,22 +65,14 @@ class TestimonialController {
   // Get a specific testimonial by ID
   getTestimonialById = async (req, res) => {
     try {
-      console.log(`📋 Getting testimonial with ID: ${req.params.id}`);
-
       const testimonial = await this.testimonialModel.findByPk(req.params.id);
 
       if (!testimonial) {
-        console.log("❌ Testimonial not found");
         return res.status(404).json({ error: "Testimonial not found" });
       }
 
-      const testimonialData = testimonial.toJSON();
-      if (testimonialData.avtar) {
-        testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
-      }
-
-      console.log("✅ Successfully retrieved testimonial");
-      res.json(testimonialData);
+      // CHANGE 2: Removed the logic that added the old render.com URL.
+      res.json(testimonial);
     } catch (error) {
       console.error("❌ Error getting testimonial:", error);
       res.status(500).json({
@@ -105,10 +82,9 @@ class TestimonialController {
     }
   };
 
-  // Get all active testimonials for public display (no authentication required)
+  // Get all active testimonials for public display
   getPublicTestimonials = async (req, res) => {
     try {
-      // Get all active (non-deleted) testimonials, ordered by creation date
       const testimonials = await this.testimonialModel.findAll({
         where: {
           is_deleted: false,
@@ -116,16 +92,8 @@ class TestimonialController {
         order: [["created_at", "DESC"]],
       });
 
-      // Process testimonials to include full avatar URLs
-      const processedTestimonials = testimonials.map((testimonial) => {
-        const testimonialData = testimonial.toJSON();
-        if (testimonialData.avtar) {
-          testimonialData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${testimonialData.avtar}`;
-        }
-        return testimonialData;
-      });
-
-      res.json(processedTestimonials);
+      // CHANGE 3: Removed the logic that added the old render.com URL.
+      res.json(testimonials);
     } catch (error) {
       console.error("❌ Error getting public testimonials:", error);
       res.status(500).json({
@@ -138,58 +106,37 @@ class TestimonialController {
   // Create a new testimonial
   createTestimonial = async (req, res) => {
     try {
-      console.log("📝 Creating new testimonial...");
-      console.log("Request body:", req.body);
-      console.log("Files:", req.files);
-
       let testimonialData = { ...req.body };
       let avatarFileName = null;
 
-      // Handle file upload if present
       if (req.files && req.files.avtar) {
         const avatarFile = req.files.avtar;
-        console.log("Processing avatar file:", avatarFile.name);
-
-        // Create unique filename
         const fileExtension = path.extname(avatarFile.name);
         avatarFileName = `${Date.now()}_${Math.random()
           .toString(36)
           .substr(2, 9)}${fileExtension}`;
 
-        // Ensure upload directory exists
         const uploadDir = path.join(process.cwd(), "uploads", "testimonials");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-        // Save file
         const filePath = path.join(uploadDir, avatarFileName);
         await avatarFile.mv(filePath);
 
-        testimonialData.avtar = avatarFileName;
-        console.log("✅ Avatar uploaded successfully:", avatarFileName);
+        // CHANGE 4: Saving the full, correct relative path to the database.
+        testimonialData.avtar = `/uploads/testimonials/${avatarFileName}`;
       }
 
-      // Create testimonial in database
       const testimonial = await this.testimonialModel.create(testimonialData);
 
-      const responseData = testimonial.toJSON();
-      if (responseData.avtar) {
-        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
-      }
-
-      console.log(
-        "✅ Testimonial created successfully with ID:",
-        testimonial.id
-      );
+      // CHANGE 5: Removed the logic that added the old render.com URL to the response.
       res.status(201).json({
         message: "Testimonial created successfully",
-        testimonial: responseData,
+        testimonial: testimonial,
       });
     } catch (error) {
       console.error("❌ Error creating testimonial:", error);
-
-      // Clean up uploaded file if testimonial creation failed
       if (req.files && req.files.avtar && avatarFileName) {
         const filePath = path.join(
           process.cwd(),
@@ -199,10 +146,8 @@ class TestimonialController {
         );
         if (fs.existsSync(filePath)) {
           fs.unlinkSync(filePath);
-          console.log("🧹 Cleaned up uploaded file due to creation failure");
         }
       }
-
       res.status(500).json({
         error: "Failed to create testimonial",
         details: error.message,
@@ -213,71 +158,47 @@ class TestimonialController {
   // Update a testimonial
   updateTestimonial = async (req, res) => {
     try {
-      console.log(`📝 Updating testimonial with ID: ${req.params.id}`);
-      console.log("Request body:", req.body);
-      console.log("Files:", req.files);
-
       const testimonial = await this.testimonialModel.findByPk(req.params.id);
-
       if (!testimonial) {
-        console.log("❌ Testimonial not found");
         return res.status(404).json({ error: "Testimonial not found" });
       }
-
       let updateData = { ...req.body };
       let oldAvatarFileName = testimonial.avtar;
 
-      // Handle file upload if present
       if (req.files && req.files.avtar) {
         const avatarFile = req.files.avtar;
-        console.log("Processing new avatar file:", avatarFile.name);
-
-        // Create unique filename
         const fileExtension = path.extname(avatarFile.name);
         const newAvatarFileName = `${Date.now()}_${Math.random()
           .toString(36)
           .substr(2, 9)}${fileExtension}`;
-
-        // Ensure upload directory exists
         const uploadDir = path.join(process.cwd(), "uploads", "testimonials");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
-
-        // Save new file
         const filePath = path.join(uploadDir, newAvatarFileName);
         await avatarFile.mv(filePath);
 
-        updateData.avtar = newAvatarFileName;
-        console.log("✅ New avatar uploaded successfully:", newAvatarFileName);
+        // CHANGE 6: Saving the full, correct relative path.
+        updateData.avtar = `/uploads/testimonials/${newAvatarFileName}`;
       }
 
-      // Update testimonial in database
       await testimonial.update(updateData);
 
-      // Delete old avatar file if a new one was uploaded
       if (req.files && req.files.avtar && oldAvatarFileName) {
+        // Remove leading slash for local file system path
         const oldFilePath = path.join(
           process.cwd(),
-          "uploads",
-          "testimonials",
-          oldAvatarFileName
+          oldAvatarFileName.substring(1)
         );
         if (fs.existsSync(oldFilePath)) {
           fs.unlinkSync(oldFilePath);
-          console.log("🗑️ Deleted old avatar file:", oldAvatarFileName);
         }
       }
 
-      const responseData = testimonial.toJSON();
-      if (responseData.avtar) {
-        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
-      }
-
-      console.log("✅ Testimonial updated successfully");
+      // CHANGE 7: Removed the logic that added the old render.com URL to the response.
       res.json({
         message: "Testimonial updated successfully",
-        testimonial: responseData,
+        testimonial: testimonial,
       });
     } catch (error) {
       console.error("❌ Error updating testimonial:", error);
@@ -288,28 +209,19 @@ class TestimonialController {
     }
   };
 
-  // Soft delete a testimonial
+  // Your original delete and restore functions are preserved below.
   deleteTestimonial = async (req, res) => {
     try {
-      console.log(`🗑️ Soft deleting testimonial with ID: ${req.params.id}`);
-
       const testimonial = await this.testimonialModel
         .scope("withDeleted")
         .findByPk(req.params.id);
-
       if (!testimonial) {
-        console.log("❌ Testimonial not found");
         return res.status(404).json({ error: "Testimonial not found" });
       }
-
       if (testimonial.isDeleted) {
-        console.log("⚠️ Testimonial already deleted");
         return res.status(400).json({ error: "Testimonial already deleted" });
       }
-
       await testimonial.update({ isDeleted: true });
-
-      console.log("✅ Testimonial soft deleted successfully");
       res.json({
         message: "Testimonial deleted successfully",
         testimonial: testimonial.toJSON(),
@@ -323,36 +235,23 @@ class TestimonialController {
     }
   };
 
-  // Restore a soft-deleted testimonial
   restoreTestimonial = async (req, res) => {
     try {
-      console.log(`♻️ Restoring testimonial with ID: ${req.params.id}`);
-
       const testimonial = await this.testimonialModel
         .scope("withDeleted")
         .findByPk(req.params.id);
-
       if (!testimonial) {
-        console.log("❌ Testimonial not found");
         return res.status(404).json({ error: "Testimonial not found" });
       }
-
       if (!testimonial.isDeleted) {
-        console.log("⚠️ Testimonial is not deleted");
         return res.status(400).json({ error: "Testimonial is not deleted" });
       }
-
       await testimonial.update({ isDeleted: false });
 
-      const responseData = testimonial.toJSON();
-      if (responseData.avtar) {
-        responseData.avtar = `https://osvschool-backend.onrender.com/uploads/testimonials/${responseData.avtar}`;
-      }
-
-      console.log("✅ Testimonial restored successfully");
+      // CHANGE 8: Removed the logic that added the old render.com URL to the response.
       res.json({
         message: "Testimonial restored successfully",
-        testimonial: responseData,
+        testimonial: testimonial,
       });
     } catch (error) {
       console.error("❌ Error restoring testimonial:", error);

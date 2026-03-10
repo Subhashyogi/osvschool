@@ -1,9 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
-import {
-  FaFlask,
-  FaLaptop,
-} from "react-icons/fa";
+import { FaFlask, FaLaptop } from "react-icons/fa";
 
 const CampusLife = () => {
   const facilities = [
@@ -22,8 +18,6 @@ const CampusLife = () => {
       image: "/api/placeholder/400/300",
     },
   ];
-
-
 
   return (
     <section className="py-16 md:py-20 bg-white">
@@ -82,8 +76,6 @@ const CampusLife = () => {
             ))}
           </div>
         </div>
-
-
 
         {/* Call to Action */}
         {/* <motion.div

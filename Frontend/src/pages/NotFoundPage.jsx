@@ -1,8 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 import { Link } from "react-router-dom";
-import { FaHome, FaArrowLeft } from "react-icons/fa";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { Helmet } from "react-helmet";
@@ -20,7 +18,7 @@ const NotFoundPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://osvschool.netlify.app/404" />
+        <meta property="og:url" content="https://osvschool.in/404" />
         <meta property="og:title" content="404 - Page Not Found | OSV School" />
         <meta
           property="og:description"
@@ -28,7 +26,7 @@ const NotFoundPage = () => {
         />
         <meta
           property="og:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png"
+          content="https://osvschool.in/assets/og-images/og-pagenotfound.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -37,10 +35,7 @@ const NotFoundPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://osvschool.netlify.app/404"
-        />
+        <meta property="twitter:url" content="https://osvschool.in/404" />
         <meta
           property="twitter:title"
           content="404 - Page Not Found | OSV School"
@@ -51,13 +46,13 @@ const NotFoundPage = () => {
         />
         <meta
           property="twitter:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-pagenotfound.png"
+          content="https://osvschool.in/assets/og-images/og-pagenotfound.png"
         />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.netlify.app/404" />
+        <link rel="canonical" href="https://osvschool.in/404" />
       </Helmet>
 
       <Navbar />

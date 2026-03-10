@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -58,10 +57,7 @@ const AcademicsPage = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://osvschool.netlify.app/academics"
-        />
+        <meta property="og:url" content="https://osvschool.in/academics" />
         <meta
           property="og:title"
           content="Academic Programs - OSV School | Science, Mathematics, Arts & Commerce"
@@ -72,7 +68,7 @@ const AcademicsPage = () => {
         />
         <meta
           property="og:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-academics.png"
+          content="https://osvschool.in/assets/og-images/og-academics.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -81,10 +77,7 @@ const AcademicsPage = () => {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://osvschool.netlify.app/academics"
-        />
+        <meta property="twitter:url" content="https://osvschool.in/academics" />
         <meta
           property="twitter:title"
           content="Academic Programs - OSV School | Science, Mathematics, Arts & Commerce"
@@ -95,13 +88,13 @@ const AcademicsPage = () => {
         />
         <meta
           property="twitter:image"
-          content="https://osvschool.netlify.app/assets/og-images/og-academics.png"
+          content="https://osvschool.in/assets/og-images/og-academics.png"
         />
 
         {/* Additional SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
-        <link rel="canonical" href="https://osvschool.netlify.app/academics" />
+        <link rel="canonical" href="https://osvschool.in/academics" />
       </Helmet>
 
       {/* Hero Section */}
